@@ -5,19 +5,19 @@ using UnityEngine;
 
 public class TaskFindTarget : Node
 {
-    private HeroData _heroData;
+    private Hero _hero;
     
-    public TaskFindTarget(HeroData heroData)
+    public TaskFindTarget(Hero hero)
     {
-        this._heroData = heroData;
+        this._hero = hero;
     }
     
     public override NodeState Evaluate()
     {
-        List<HeroData> enemyTeam;
-        if (_heroData.Target == null)
+        List<Hero> enemyTeam;
+        if (_hero.Target == null)
         {
-            if (_heroData.TeamID == TeamID.Blue)
+            if (_hero.TeamID == TeamID.Blue)
             {
                 enemyTeam = BoardManager.instance._teamB;
             }
@@ -33,7 +33,7 @@ public class TaskFindTarget : Node
 
             foreach (var enemy in enemyTeam)
             {
-                this._heroData.Target = enemy;
+                this._hero.Target = enemy;
                 return NodeState.SUCCESS;
                 
             }

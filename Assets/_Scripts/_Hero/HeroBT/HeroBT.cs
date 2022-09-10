@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using BehaviorTree;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Tree = BehaviorTree.Tree;
 
 public class HeroBT : Tree
 {
-    [SerializeField] private HeroData _heroData;
+    [FormerlySerializedAs("_heroData")] [SerializeField] private Hero hero;
     
     protected override Node SetupTree()
     {
@@ -26,7 +27,7 @@ public class HeroBT : Tree
 
         Node root = new Sequence(new List<Node>
         {
-            new TaskFindTarget(_heroData),
+            new TaskFindTarget(hero),
             // new Selector(new List<Node>
             // {
             //     new Sequence(new List<Node>(

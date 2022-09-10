@@ -5,17 +5,10 @@ using UnityEngine;
 public enum EventID
 {
     None = 0,
-    SetupBoard,	
-    OnBoardSwap,	
-    OnViewSwap,
-    OnViewSwapBack,
-    OnBoardFindMatchWhenSwap,
-    OnBoardContinueFindMatches,
-    OnViewSimulate,	
-    OnMoveSuccessful,
-    OnEndLevel,
-    OnDestroyDot,
-    OnBombExplode,
-    OnCombo,
+    OnGamePlayStart,
+    OnWaveStart,
+    OnSelectCardPhaseStart,
+    OnSelectPositionPhaseStart,
+    OnFightStart,
 	
 }

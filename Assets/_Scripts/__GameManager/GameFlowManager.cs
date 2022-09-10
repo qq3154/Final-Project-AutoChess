@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameFlowManager : MonoSingleton<GameFlowManager>
 {
     public GameState gameState;
-    public GamePlayState GamePlayState;
+    [FormerlySerializedAs("GamePlayState")] public GamePlayState gamePlayState;
+
+    public int waveID;
 }
 
 public enum GameState
