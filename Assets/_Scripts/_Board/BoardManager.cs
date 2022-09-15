@@ -10,7 +10,7 @@ public class BoardManager : MonoSingleton<BoardManager>
     public int _X;
     public int _Y;
 
-    [FormerlySerializedAs("_heroPositions")] public  List<Hero> _allHeros;
+    public  List<Hero> _allHeros;
     public  List<Hero> _teamA;
     public  List<Hero> _teamB;
     public  List<Hero> _benchA;

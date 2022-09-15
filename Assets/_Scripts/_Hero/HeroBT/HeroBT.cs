@@ -6,53 +6,52 @@ using Tree = BehaviorTree.Tree;
 
 public class HeroBT : Tree
 {
-    [FormerlySerializedAs("_heroData")] [SerializeField] private Hero hero;
+    [SerializeField] private Hero hero;
     
     protected override Node SetupTree()
     {
-        // Node root = new Selector(new List<Node>
-        // {
-        //     new Sequence(new List<Node>
-        //     {
-        //         new CheckEnemyInAttackRange(transform),
-        //         new TaskAttack(transform),
-        //     }),
-        //     new Sequence(new List<Node>
-        //     {
-        //         new CheckEnemyInFOVRange(transform),
-        //         new TaskGoToTarget(transform),
-        //     }),
-        //     new TaskPatrol(transform, waypoints),
-        // });
-
         Node root = new Sequence(new List<Node>
         {
             new TaskFindTarget(hero),
+            new Selector( new List<Node>
+            {
+                new Sequence(new List<Node>
+                {
+                    new IsAttackInRange(hero),
+                    new TaskNormalAttack(hero)
+                }),
+                new TaskMovetoTarget(hero),
+            })
+            
+           
             // new Selector(new List<Node>
             // {
-            //     new Sequence(new List<Node>(
-            //     {
-            //         new IsUltimateReady(),
-            //         new Selector(new List<Node>(
-            //         {
-            //             new Selector(new List<Node>(
-            //             {
-            //                 new IsInUltimateRange(),
-            //                 new TaskUseUltimate(),
-            //             }),
-            //             new TaskMovetoTarget(),
-            //         })
-            //     }),
-            //     new Sequence(new List<Node>(
-            //     {
-            //         new IsInAttackRange(),
-            //         new TaskNormalAttack(),
-            //     }),
-            //     new Sequence(new List<Node>(
-            //     {
-            //         new IsNotInAttackRange(),
-            //         new TaskMovetoTarget(),
-            //     }),
+                // new Sequence(new List<Node>
+                // {
+                //     new IsUltimateReady(),
+                //     new Selector(new List<Node>
+                //     {
+                //         new Sequence(new List<Node>
+                //         {
+                //             new IsUltimateInRange(),
+                //             new TaskUseUltimate(),
+                //         }),
+                //        // new TaskMovetoTarget(hero),
+                //     })
+                // }),
+                
+              
+                
+                // new Sequence(new List<Node>(
+                // {
+                //     new IsInAttackRange(),
+                //     new TaskNormalAttack(),
+                // }),
+                // new Sequence(new List<Node>(
+                // {
+                //     new IsNotInAttackRange(),
+                //     new TaskMovetoTarget(),
+                // }),
             // })
         });
     

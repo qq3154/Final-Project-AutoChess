@@ -18,9 +18,10 @@ public class Hero : MonoBehaviour
     [SerializeField] public Hero Target;
 
     [Header("Stats")]
-    [SerializeField] private float Dmg;
+    [SerializeField] public float Dmg;
     [SerializeField] public float Hp;
     [SerializeField] public float AtkSpeed;
+    [SerializeField] public float AtkRange;
     [SerializeField] public float MoveSpeed;
 
 
@@ -36,6 +37,34 @@ public class Hero : MonoBehaviour
         this.TeamID = teamID;
         this.HeroID = heroID;
         this.Level = level;
+    }
+
+
+    public void OnDamage(float dmg)
+    {
+        Hp -= dmg;
+        if (Hp <= 0)
+        {
+            Dead();
+        }
+    }
+    
+    private void Dead()
+    {
+        BoardManager.instance._allHeros.Remove(this);
+        if (this.TeamID == TeamID.Blue)
+        {  
+            BoardManager.instance._teamA.Remove(this);
+        }
+        else
+        {
+            BoardManager.instance._teamB.Remove(this);
+        }
+      
+        Destroy(this.gameObject);
+       
+       
+        
     }
 }
 

@@ -84,15 +84,15 @@ using UnityEngine;
                     //We found the destination and we can be sure (Because the the OrderBy above)
                     //That it's the most low cost option. 
                     var tile = checkTile;
-                    Debug.Log("Retracing steps backwards...");
+                    // Debug.Log("Retracing steps backwards...");
                     while(true)
                     {
                         distance++;
                         //Debug.Log($"{tile.X} : {tile.Y}");
                         nextMoveX = startX;
                         nextMoveY = startY;
-                        startX = tile.X;
-                        startY = tile.Y;
+                        startY = tile.X;
+                        startX = tile.Y;
                         if(map[tile.Y][tile.X] == ' ')
                         {
                             var newMapRow = map[tile.Y].ToCharArray();
@@ -102,7 +102,7 @@ using UnityEngine;
                         tile = tile.Parent;
                         if(tile == null)
                         {
-                            Debug.Log(nextMoveX + " " + nextMoveY);
+                            //Debug.Log(nextMoveX + " " + nextMoveY);
                             return;
                         }
                     }

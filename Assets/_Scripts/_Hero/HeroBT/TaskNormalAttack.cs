@@ -6,15 +6,21 @@ using BehaviorTree;
 
 public class TaskNormalAttack : Node
 {
-    private float _attackTime = 1f;
+    private Hero _hero;
     private float _attackCounter = 0f;
+
+    public TaskNormalAttack(Hero hero)
+    {
+        _hero = hero;
+    }
     
     public override NodeState Evaluate()
     {
         _attackCounter += Time.deltaTime;
-        if (_attackCounter >= _attackTime)
+        if (_attackCounter >= 1 / _hero.AtkSpeed)
         {
             Debug.Log("attack");
+            _hero.Target.OnDamage(_hero.Dmg);
             _attackCounter = 0f;
         }
         
