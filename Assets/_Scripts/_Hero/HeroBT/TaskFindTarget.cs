@@ -15,6 +15,7 @@ public class TaskFindTarget : Node
     public override NodeState Evaluate()
     {
         List<Hero> enemyTeam;
+        int distance = BoardManager.instance._X * BoardManager.instance._Y;
         if (_hero.Target == null)
         {
             if (_hero.TeamID == TeamID.Blue)
@@ -31,15 +32,22 @@ public class TaskFindTarget : Node
                 return NodeState.FAILURE;
             }
 
+            state = NodeState.FAILURE;
+
             foreach (var enemy in enemyTeam)
             {
-                this._hero.Target = enemy;
-                return NodeState.SUCCESS;
-                
+                var findPath = new FindShortestPath();
+                findPath.Setup(_hero, enemy);
+                if (findPath.distance < distance)
+                {
+                    distance = findPath.distance;
+                    Debug.Log(findPath.distance);
+                    _hero.Target = enemy;
+                    state = NodeState.SUCCESS;
+                }
             }
-            
         }
-        
+
         return state;
     }
 }

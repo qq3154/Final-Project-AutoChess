@@ -1,32 +1,64 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using UnityEngine;
 
 //A* Search Pathfinding Example from : https://dotnetcoretutorials.com/2020/07/25/a-search-pathfinding-algorithm-in-c/ 
 
-    class FindShortestPath :MonoBehaviour
+    class FindShortestPath
     {
-        private int startX, startY, nextMoveX, nextMoveY;
-        private void Start()
+        public int nextMoveX, nextMoveY;
+        public int distance = 0;
+        private int startX, startY;
+        private List<string> map = new List<string>();
+        
+        private void SetupMap(Hero heroA, Hero heroB)
         {
-            
-            List<string> map = new List<string>
+            List<StringBuilder> str = new List<StringBuilder>();
+            for (int i = 0; i < BoardManager.instance._X; i++)
             {
-                "A  *        ",
-                "   *        ",
-                "   *        ",
-                "   *        ",
-                "   *        ",
-                "           B"
-                
-                // "A          ",
-                // "--| |------",
-                // "  |        ",
-                // "   |-----| ",
-                // "   |     | ",
-                // "---|     |B"
-            };
+                str.Add( new StringBuilder());
+                for (int j = 0; j < BoardManager.instance._Y; j++)
+                {
+                    str[i].Append(' ');
+                }
+            }
+
+            foreach (var hero in BoardManager.instance._allHeros)
+            {
+                str[hero.PosX][hero.PosY] = '*';
+            }
+            
+            str[heroA.PosX][heroA.PosY] = 'A';
+            str[heroB.PosX][heroB.PosY] = 'B';
+
+            foreach (var line in str)
+            {
+                map.Add(line.ToString());
+            }
+        }
+
+        public void Setup(Hero heroA, Hero heroB)
+        {
+            SetupMap(heroA, heroB);
+            
+            // map = new List<string>
+            // {
+            //     "   *        ",
+            //     "   *        ",
+            //     "   *        ",
+            //     "   *        ",
+            //     "   *        ",
+            //     "          AB"
+            //     
+            //     // "A          ",
+            //     // "--| |------",
+            //     // "  |        ",
+            //     // "   |-----| ",
+            //     // "   |     | ",
+            //     // "---|     |B"
+            // };
 
             var start = new Tile();
             start.Y = map.FindIndex(x => x.Contains("A"));
@@ -55,6 +87,7 @@ using UnityEngine;
                     Debug.Log("Retracing steps backwards...");
                     while(true)
                     {
+                        distance++;
                         //Debug.Log($"{tile.X} : {tile.Y}");
                         nextMoveX = startX;
                         nextMoveY = startY;
@@ -103,6 +136,7 @@ using UnityEngine;
                 }
             }
 
+            distance = -1;
             Debug.Log("No Path Found!");
         }
 

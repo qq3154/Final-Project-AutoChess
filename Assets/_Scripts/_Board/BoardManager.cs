@@ -7,8 +7,8 @@ using UnityEngine.Serialization;
 
 public class BoardManager : MonoSingleton<BoardManager>
 {
-    [SerializeField] private int _column;
-    [SerializeField] private int _row;
+    public int _X;
+    public int _Y;
 
     [FormerlySerializedAs("_heroPositions")] public  List<Hero> _allHeros;
     public  List<Hero> _teamA;
