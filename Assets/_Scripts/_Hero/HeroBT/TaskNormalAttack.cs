@@ -19,7 +19,7 @@ public class TaskNormalAttack : Node
         _attackCounter += Time.deltaTime;
         if (_attackCounter >= 1 / _hero.AtkSpeed)
         {
-            Debug.Log("attack");
+            Debug.Log( _hero.name + " attack " + _hero.Target.name);
             _hero.Target.OnDamage(_hero.Dmg);
             _attackCounter = 0f;
         }

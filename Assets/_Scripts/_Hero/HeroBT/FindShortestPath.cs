@@ -13,7 +13,7 @@ using UnityEngine;
         private int startX, startY;
         private List<string> map = new List<string>();
         
-        private void SetupMap(Hero heroA, Hero heroB)
+        private void SetupMap(int startX, int startY, int endX, int endY)
         {
             List<StringBuilder> str = new List<StringBuilder>();
             for (int i = 0; i < BoardManager.instance._X; i++)
@@ -30,8 +30,8 @@ using UnityEngine;
                 str[hero.PosX][hero.PosY] = '*';
             }
             
-            str[heroA.PosX][heroA.PosY] = 'A';
-            str[heroB.PosX][heroB.PosY] = 'B';
+            str[startX][startY] = 'A';
+            str[endX][endY] = 'B';
 
             foreach (var line in str)
             {
@@ -39,9 +39,9 @@ using UnityEngine;
             }
         }
 
-        public void Setup(Hero heroA, Hero heroB)
+        public void Setup(int startX, int startY, int endX, int endY)
         {
-            SetupMap(heroA, heroB);
+            SetupMap(startX, startY, endX, endY);
             
             // map = new List<string>
             // {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BehaviorTree;
+using Unity.VisualScripting;
 
 public class IsAttackInRange : Node
 {
@@ -15,15 +16,17 @@ public class IsAttackInRange : Node
 
     public override NodeState Evaluate()
     {
-        if (_target == null)
-        {
-            _target = _hero.Target;
-            return NodeState.FAILURE;
-        }
+        
+        _target = _hero.Target;
+            
+        
 
-        float distance = Mathf.Sqrt(
-                                    Mathf.Pow(Mathf.Abs(_hero.PosX - _target.PosX), 2) +
-                                    Mathf.Pow(Mathf.Abs(_hero.PosY - _target.PosY), 2)) ;
+        // float distance = Mathf.Sqrt(
+        //                             Mathf.Pow(Mathf.Abs(_hero.PosX - _target.PosX), 2) +
+        //                             Mathf.Pow(Mathf.Abs(_hero.PosY - _target.PosY), 2)) ;
+
+        float distance = Mathf.Max(Mathf.Abs(_hero.PosX - _target.PosX), Mathf.Abs(_hero.PosY - _target.PosY));
+        
         if (distance <= _hero.AtkRange)
         {
             return NodeState.SUCCESS;

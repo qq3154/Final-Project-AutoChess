@@ -16,12 +16,15 @@ public class Hero : MonoBehaviour
     
     [Header("Target")]
     [SerializeField] public Hero Target;
+    [SerializeField] public int TargetPosX;
+    [SerializeField] public int TargetPosY;
+    
 
     [Header("Stats")]
     [SerializeField] public float Dmg;
     [SerializeField] public float Hp;
     [SerializeField] public float AtkSpeed;
-    [SerializeField] public float AtkRange;
+    [SerializeField] public int AtkRange;
     [SerializeField] public float MoveSpeed;
 
 
@@ -60,6 +63,8 @@ public class Hero : MonoBehaviour
         {
             BoardManager.instance._teamB.Remove(this);
         }
+
+        BoardManager.instance.Pos[PosX, PosY] = false;
       
         Destroy(this.gameObject);
        

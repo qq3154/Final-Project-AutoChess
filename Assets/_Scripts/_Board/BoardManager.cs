@@ -9,7 +9,9 @@ public class BoardManager : MonoSingleton<BoardManager>
 {
     public int _X;
     public int _Y;
-
+    
+    public bool[,] Pos;
+    
     public  List<Hero> _allHeros;
     public  List<Hero> _teamA;
     public  List<Hero> _teamB;
@@ -20,6 +22,23 @@ public class BoardManager : MonoSingleton<BoardManager>
     
 
     [SerializeField] private GameObject _heroPref;
+
+    protected override void DoOnAwake()
+    {
+        base.DoOnAwake();
+        Pos = new bool[_X, _Y];
+        for (int i = 0; i < _X; i++)
+        {
+            for (int j = 0; j < _Y; j++)
+            {
+                Pos[i, j] = false;
+            }
+        }
+        foreach (var hero in _allHeros)
+        {
+            Pos[hero.PosX, hero.PosY] = true;
+        }
+    }
 
     public void AddHeroToBench(TeamID teamID, HeroID heroID, Card card)
     {
