@@ -16,8 +16,8 @@ public class AxieSpawner : MonoBehaviour
     
     [SerializeField] private HeroProfileConfigMap _heroProfileConfigMap;
 
-    bool _isPlaying = false;
-    bool _isFetchingGenes = false;
+    //bool _isPlaying = false;
+    //bool _isFetchingGenes = false;
     
 
     // Start is called before the first frame update
@@ -45,7 +45,7 @@ public class AxieSpawner : MonoBehaviour
 
     void OnMixButtonClicked()
     {
-        _isFetchingGenes = true;
+        //_isFetchingGenes = true;
         StartCoroutine(GetAxiesGenes(axieId));
     }
     
@@ -76,6 +76,6 @@ public class AxieSpawner : MonoBehaviour
                 axieFigureController.SetGenes(axieId, genesStr);
             }
         }
-        _isFetchingGenes = false;
+        //_isFetchingGenes = false;
     }
 }
