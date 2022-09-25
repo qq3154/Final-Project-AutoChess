@@ -24,6 +24,7 @@ public class AxieSpawner : MonoBehaviour
     void Start()
     {
         Mixer.Init();
+        OnMixButtonClicked();
     }
 
     // Update is called once per frame

@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 4624320821420310583}
   - component: {fileID: 4624320821420310570}
   - component: {fileID: 3125308320652600796}
+  - component: {fileID: 2039208022947602638}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -250,6 +251,7 @@ MonoBehaviour:
   AtkRange: 0
   MoveSpeed: 0
   _axieSpawner: {fileID: 3125308320652600796}
+  _axieAnimationController: {fileID: 2039208022947602638}
 --- !u!114 &4624320821420310570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,3 +281,16 @@ MonoBehaviour:
   _heroID: 0
   axieId: 
   _heroProfileConfigMap: {fileID: 11400000, guid: 4f96d28fb5d80cf4888588053b1c83b3, type: 2}
+--- !u!114 &2039208022947602638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4624320821420310582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967c28211a46be74491b6c2cc65a7ba6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skeletonAnimation: {fileID: 3841342295348875599}

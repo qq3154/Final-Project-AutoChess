@@ -29,6 +29,7 @@ public class Hero : MonoBehaviour
 
     [Header("Axie")]
     [SerializeField] private AxieSpawner _axieSpawner;
+    [SerializeField] private AxieAnimationController _axieAnimationController;
 
     
     
