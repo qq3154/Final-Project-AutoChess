@@ -36,8 +36,8 @@ public class SelectCardBoard : MonoBehaviour
 
     private void Show()
     {
-        InitRandomCard();
         _root.SetActive(true);
+        InitRandomCard();
     }
 
     private void InitRandomCard()

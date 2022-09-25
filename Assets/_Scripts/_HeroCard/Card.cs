@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,8 @@ public class Card : MonoBehaviour
     [SerializeField] private HeroID _heroID;
 
     [SerializeField] private Button _btn;
+    
+    [SerializeField] private AxieSpawner _axieSpawner;
 
     private void Awake()
     {
@@ -23,6 +26,7 @@ public class Card : MonoBehaviour
     public void InitCard(HeroID heroID)
     {
         this._heroID = heroID;
+        _axieSpawner.Init(heroID);
     }
 
     public void OnSelectCard(TeamID teamID)

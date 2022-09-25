@@ -27,6 +27,8 @@ public class Hero : MonoBehaviour
     [SerializeField] public int AtkRange;
     [SerializeField] public float MoveSpeed;
 
+    [Header("Axie")]
+    [SerializeField] private AxieSpawner _axieSpawner;
 
     
     
@@ -37,9 +39,10 @@ public class Hero : MonoBehaviour
 
     public void InitHero(TeamID teamID, HeroID heroID, int level)
     {
-        this.TeamID = teamID;
-        this.HeroID = heroID;
-        this.Level = level;
+        TeamID = teamID;
+        HeroID = heroID;
+        Level = level;
+        _axieSpawner.Init(heroID);
     }
 
 

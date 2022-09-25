@@ -11,9 +11,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Board
+  - Hero
+  - Skill
   - 
   - 
   - 
@@ -40,4 +40,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Board
+    uniqueID: 3845074465
+    locked: 0
+  - name: Hero
+    uniqueID: 1786467809
+    locked: 0
+  - name: Skill
+    uniqueID: 3795427099
     locked: 0
