@@ -50,3 +50,6 @@ TagManager:
   - name: Skill
     uniqueID: 3795427099
     locked: 0
+  - name: UI
+    uniqueID: 375069005
+    locked: 0

@@ -10,8 +10,8 @@ public class SelectCardBoard : MonoBehaviour
 {
    
     [SerializeField] private GameObject _root;
-    [SerializeField] private List<Card> _heroCards;
     [SerializeField] private GameObject _cardHolder;
+    [SerializeField] private List<Card> _randomCards;
     
     [SerializeField] private List<HeroID> _heroPool;
     [SerializeField] private int _maxCardToSelect = 5;
@@ -25,13 +25,17 @@ public class SelectCardBoard : MonoBehaviour
 
     private void DoOnWaveStart()
     {
-        Hide();
-        this.PostEvent(EventID.OnSelectCardPhaseStart);
+        //Hide();
+        //this.PostEvent(EventID.OnSelectCardPhaseStart);
     }
 
     private void Hide()
     {
         _root.SetActive(false);
+        foreach (var card in _randomCards)
+        {
+            Destroy(card.gameObject);
+        }
     }
 
     private void Show()
@@ -42,18 +46,35 @@ public class SelectCardBoard : MonoBehaviour
 
     private void InitRandomCard()
     {
-       
-        
+        _randomCards.Clear();
         for (int i = 0; i < _maxCardToSelect; i++)
         {
             int index = Random.Range(0,_heroPool.Count);
             HeroID heroID = _heroPool[index];
-            _heroPool.RemoveAt(index);
+            //_heroPool.RemoveAt(index);
             
             var instantiate = Instantiate(_cardPref, _cardHolder.transform);
 
             Card myCard= instantiate.GetComponent<Card>();
             myCard.InitCard(heroID);
+            _randomCards.Add(myCard);
         }
     }
+
+    #region Debug function
+
+    public void ShowInDebug()
+    {
+        if (_root.gameObject.activeSelf)
+        {
+            Hide();
+        }
+        else
+        {
+            Show();
+        }
+    }
+
+    #endregion
+
 }

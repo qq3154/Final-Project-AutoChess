@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 91a60be3ea058c245b89efb440a49a58, type: 2}
+  skeletonDataAsset: {fileID: 0}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -136,6 +136,8 @@ MonoBehaviour:
   _flipX: 1
   _localScale: {x: 1, y: 1, z: 1}
   _position: {x: 0, y: 0, z: 0}
+  _layerName: Board
+  skeletonAnimation: {fileID: 3841342295348875599}
 --- !u!1 &4624320821420310582
 GameObject:
   m_ObjectHideFlags: 0

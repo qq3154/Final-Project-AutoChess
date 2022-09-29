@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using AxieCore.AxieMixer;
 using AxieMixer.Unity;
 using Newtonsoft.Json.Linq;
+using Spine.Unity;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -18,13 +21,16 @@ public class AxieSpawner : MonoBehaviour
 
     //bool _isPlaying = false;
     //bool _isFetchingGenes = false;
-    
+
+    private void Awake()
+    {
+        Mixer.Init();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        Mixer.Init();
-        OnMixButtonClicked();
+        //OnMixButtonClicked();
     }
 
     // Update is called once per frame
@@ -43,11 +49,16 @@ public class AxieSpawner : MonoBehaviour
 
         OnMixButtonClicked();
     }
+    
+    
 
     void OnMixButtonClicked()
     {
-        //_isFetchingGenes = true;
-        StartCoroutine(GetAxiesGenes(axieId));
+        //StartCoroutine(GetAxiesGenes(axieId));
+        
+        axieFigureController.SetGenes();
+
+        
     }
     
 
