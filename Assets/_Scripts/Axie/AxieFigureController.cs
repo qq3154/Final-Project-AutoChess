@@ -13,6 +13,7 @@ public class AxieFigureController : MonoBehaviour
     [SerializeField] private Vector3 _localScale;
     [SerializeField] private Vector3 _position;
     [SerializeField] private string _layerName;
+    [SerializeField] private int _layerOrder;
     
     [SerializeField] private SkeletonAnimation skeletonAnimation;
     
@@ -56,9 +57,15 @@ public class AxieFigureController : MonoBehaviour
       
     }
 
-    public void SetGenes()
+    public void SetGenes(AxieProfile axieProfile)
     {
-        var (key, body, classIdx, classValue) = ("beast-04", "body-bigyak", 0, 4);
+        // var (key, body, classIdx, classValue) = ("beast-04", "body-bigyak", 0, 4);
+
+        var key = axieProfile.key;
+        var body = axieProfile.body;
+        var classIdx = axieProfile.classIdx;
+        var classValue = axieProfile.classValue;
+        
         
         var characterClass = (CharacterClass)classIdx;
         string finalBody = body;
@@ -84,7 +91,6 @@ public class AxieFigureController : MonoBehaviour
         var mySkeletonAnimation = SkeletonAnimation.NewSkeletonAnimationGameObject(builderResult.skeletonDataAsset);
        
         
-        mySkeletonAnimation.name = "b";
         mySkeletonAnimation.transform.localPosition = _position;
         mySkeletonAnimation.transform.SetParent(transform, false);
         mySkeletonAnimation.transform.localScale = _localScale;
@@ -93,8 +99,8 @@ public class AxieFigureController : MonoBehaviour
         mySkeletonAnimation.state.SetAnimation(0, "action/idle/normal", true);
         mySkeletonAnimation.skeleton.ScaleX = (_flipX ? -1 : 1) * Mathf.Abs(mySkeletonAnimation.skeleton.ScaleX);
         
-        mySkeletonAnimation.GetComponent<MeshRenderer>().sortingLayerID = SortingLayer.NameToID("UI");
-        mySkeletonAnimation.GetComponent<MeshRenderer>().sortingOrder = 2;
+        mySkeletonAnimation.GetComponent<MeshRenderer>().sortingLayerID = SortingLayer.NameToID(_layerName);
+        mySkeletonAnimation.GetComponent<MeshRenderer>().sortingOrder = _layerOrder;
         
     }
 

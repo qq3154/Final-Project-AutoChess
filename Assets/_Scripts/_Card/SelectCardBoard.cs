@@ -31,11 +31,16 @@ public class SelectCardBoard : MonoBehaviour
 
     private void Hide()
     {
-        _root.SetActive(false);
         foreach (var card in _randomCards)
         {
             Destroy(card.gameObject);
         }
+
+        foreach (Transform child in _cardHolder.transform) {
+            Destroy(child.gameObject);
+        }
+        _root.SetActive(false);
+       
     }
 
     private void Show()

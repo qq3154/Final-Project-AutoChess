@@ -12,7 +12,11 @@ public class HeroProfileConfigMap : ScriptableObject
     public class HeroConfig
     {
         [SerializeField] public string Name;
-        [SerializeField] public string AxieId;
+        [SerializeField] public string Class;
+        [SerializeField] public string species;
+        [SerializeField] public string Description;
+        //[SerializeField] public string AxieId;
+        [SerializeField] public AxieProfile axieProfile;
     }
 
     [System.Serializable]

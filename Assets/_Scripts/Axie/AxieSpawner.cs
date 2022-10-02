@@ -15,7 +15,8 @@ public class AxieSpawner : MonoBehaviour
     [SerializeField] AxieFigureController axieFigureController;
 
     [SerializeField] private HeroID _heroID;
-    [SerializeField] private string axieId;
+    //[SerializeField] private string axieId;
+    [SerializeField] private AxieProfile axieProfile;
     
     [SerializeField] private HeroProfileConfigMap _heroProfileConfigMap;
 
@@ -45,7 +46,8 @@ public class AxieSpawner : MonoBehaviour
     public void Init(HeroID heroID)
     {
         this._heroID = heroID;
-        axieId = _heroProfileConfigMap.GetValueFromKey(heroID).AxieId;
+        //axieId = _heroProfileConfigMap.GetValueFromKey(heroID).AxieId;
+        axieProfile = _heroProfileConfigMap.GetValueFromKey(heroID).axieProfile;
 
         OnMixButtonClicked();
     }
@@ -56,7 +58,7 @@ public class AxieSpawner : MonoBehaviour
     {
         //StartCoroutine(GetAxiesGenes(axieId));
         
-        axieFigureController.SetGenes();
+        axieFigureController.SetGenes(axieProfile);
 
         
     }

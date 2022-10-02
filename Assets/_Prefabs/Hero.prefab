@@ -137,6 +137,7 @@ MonoBehaviour:
   _localScale: {x: 1, y: 1, z: 1}
   _position: {x: 0, y: 0, z: 0}
   _layerName: Board
+  _layerOrder: 1
   skeletonAnimation: {fileID: 3841342295348875599}
 --- !u!1 &4624320821420310582
 GameObject:
@@ -281,7 +282,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axieFigureController: {fileID: 8452323944113640131}
   _heroID: 0
-  axieId: 
+  axieProfile:
+    key: 
+    body: 
+    classIdx: 0
+    classValue: 0
   _heroProfileConfigMap: {fileID: 11400000, guid: 4f96d28fb5d80cf4888588053b1c83b3, type: 2}
 --- !u!114 &2039208022947602638
 MonoBehaviour:
