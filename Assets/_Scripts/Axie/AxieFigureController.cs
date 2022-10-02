@@ -15,48 +15,10 @@ public class AxieFigureController : MonoBehaviour
     [SerializeField] private string _layerName;
     [SerializeField] private int _layerOrder;
     
-    [SerializeField] private SkeletonAnimation skeletonAnimation;
+    [SerializeField] private SkeletonAnimation _skeletonAnimation;
     
     Axie2dBuilder builder => Mixer.Builder;
     
-    // public bool flipX
-    // {
-    //     get
-    //     {
-    //         return _flipX;
-    //     }
-    //     set
-    //     {
-    //         _flipX = value;
-    //         if (skeletonAnimation != null)
-    //         {
-    //             skeletonAnimation.skeleton.ScaleX = (_flipX ? -1 : 1) * Mathf.Abs(skeletonAnimation.skeleton.ScaleX);
-    //         }
-    //     }
-    // }
-
-    private void Awake()
-    {
-    }
-
-    public void SetGenes(string id, string genes)
-    {
-        if (string.IsNullOrEmpty(genes)) return;
-
-        
-        Mixer.SpawnSkeletonAnimation(skeletonAnimation, id, genes);
-
-        skeletonAnimation.transform.localPosition = _position;
-        skeletonAnimation.transform.SetParent(transform, false);
-        skeletonAnimation.transform.localScale = _localScale;
-        skeletonAnimation.skeleton.ScaleX = (_flipX ? -1 : 1) * Mathf.Abs(skeletonAnimation.skeleton.ScaleX);
-        skeletonAnimation.timeScale = 0.5f;
-        skeletonAnimation.skeleton.FindSlot("shadow").Attachment = null;
-        skeletonAnimation.state.SetAnimation(0, "action/idle/normal", true);
-        skeletonAnimation.gameObject.layer = LayerMask.NameToLayer("Board");
-      
-    }
-
     public void SetGenes(AxieProfile axieProfile)
     {
         // var (key, body, classIdx, classValue) = ("beast-04", "body-bigyak", 0, 4);
@@ -101,9 +63,17 @@ public class AxieFigureController : MonoBehaviour
         
         mySkeletonAnimation.GetComponent<MeshRenderer>().sortingLayerID = SortingLayer.NameToID(_layerName);
         mySkeletonAnimation.GetComponent<MeshRenderer>().sortingOrder = _layerOrder;
-        
+
+        _skeletonAnimation = mySkeletonAnimation.GetComponent<SkeletonAnimation>();
+
+
     }
 
+    
+    public void SetRun(float duration)
+    {
+        _skeletonAnimation.state.SetAnimation(0, "action/move-forward", false).TimeScale = duration * 1.5f;
+    }
     
 
    

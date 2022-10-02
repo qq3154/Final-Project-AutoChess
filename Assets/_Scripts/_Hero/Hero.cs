@@ -30,7 +30,7 @@ public class Hero : MonoBehaviour
     [Header("Axie")]
     [SerializeField] private AxieSpawner _axieSpawner;
     [SerializeField] private AxieAnimationController _axieAnimationController;
-
+    [SerializeField] private AxieFigureController _axieFigureController;
     
     
     private void OnDestroy()
@@ -43,7 +43,7 @@ public class Hero : MonoBehaviour
         TeamID = teamID;
         HeroID = heroID;
         Level = level;
-        _axieSpawner.Init(heroID);
+        _axieSpawner.Init(this);
     }
 
 

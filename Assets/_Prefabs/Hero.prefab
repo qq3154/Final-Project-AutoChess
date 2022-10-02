@@ -9,10 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7852370412501301202}
-  - component: {fileID: 2099700785656465190}
-  - component: {fileID: 7338586108746877487}
-  - component: {fileID: 3841342295348875599}
-  - component: {fileID: 8452323944113640131}
   m_Layer: 0
   m_Name: AxieSpine
   m_TagString: Untagged
@@ -35,110 +31,6 @@ Transform:
   m_Father: {fileID: 4624320821420310569}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &2099700785656465190
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2954923236399135062}
-  m_Mesh: {fileID: 0}
---- !u!23 &7338586108746877487
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2954923236399135062}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials: []
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1786467809
-  m_SortingLayer: 2
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3841342295348875599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2954923236399135062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 0}
-  initialSkinName: 
-  initialFlipX: 0
-  initialFlipY: 0
-  updateWhenInvisible: 3
-  separatorSlotNames: []
-  zSpacing: 0
-  useClipping: 1
-  immutableTriangles: 0
-  pmaVertexColors: 1
-  clearStateOnDisable: 0
-  tintBlack: 0
-  singleSubmesh: 0
-  fixDrawOrder: 0
-  addNormals: 0
-  calculateTangents: 0
-  maskInteraction: 0
-  maskMaterials:
-    materialsMaskDisabled: []
-    materialsInsideMask: []
-    materialsOutsideMask: []
-  disableRenderingOnOverride: 1
-  _animationName: 
-  loop: 0
-  timeScale: 1
---- !u!114 &8452323944113640131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2954923236399135062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3961e1d0a64003e47b08177f51744895, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _flipX: 1
-  _localScale: {x: 1, y: 1, z: 1}
-  _position: {x: 0, y: 0, z: 0}
-  _layerName: Board
-  _layerOrder: 1
-  skeletonAnimation: {fileID: 3841342295348875599}
 --- !u!1 &4624320821420310582
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,7 +44,7 @@ GameObject:
   - component: {fileID: 4624320821420310583}
   - component: {fileID: 4624320821420310570}
   - component: {fileID: 3125308320652600796}
-  - component: {fileID: 2039208022947602638}
+  - component: {fileID: 7840129748064238329}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -254,7 +146,8 @@ MonoBehaviour:
   AtkRange: 0
   MoveSpeed: 0
   _axieSpawner: {fileID: 3125308320652600796}
-  _axieAnimationController: {fileID: 2039208022947602638}
+  _axieAnimationController: {fileID: 0}
+  _axieFigureController: {fileID: 7840129748064238329}
 --- !u!114 &4624320821420310570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,7 +155,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4624320821420310582}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29e070d3ad0e42b4e9f07353cd89d0d6, type: 3}
   m_Name: 
@@ -280,15 +173,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae9b9a438d63abc4cbf6f51abe2ca030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  axieFigureController: {fileID: 8452323944113640131}
-  _heroID: 0
+  axieFigureController: {fileID: 7840129748064238329}
   axieProfile:
     key: 
     body: 
     classIdx: 0
     classValue: 0
   _heroProfileConfigMap: {fileID: 11400000, guid: 4f96d28fb5d80cf4888588053b1c83b3, type: 2}
---- !u!114 &2039208022947602638
+--- !u!114 &7840129748064238329
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -297,7 +189,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4624320821420310582}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 967c28211a46be74491b6c2cc65a7ba6, type: 3}
+  m_Script: {fileID: 11500000, guid: 3961e1d0a64003e47b08177f51744895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skeletonAnimation: {fileID: 3841342295348875599}
+  _flipX: 1
+  _localScale: {x: 1, y: 1, z: 1}
+  _position: {x: 0, y: 0, z: 0}
+  _layerName: Board
+  _layerOrder: 1
+  _skeletonAnimation: {fileID: 0}

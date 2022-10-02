@@ -82,7 +82,7 @@ public class TaskMovetoTarget : Node
                 _hero.transform.DOMove(new Vector3(_hero.PosX, _hero.PosY, 0), 1/_hero.MoveSpeed)
                     .SetDelay(0)
                     .SetEase(Ease.InFlash)
-                    .OnStart(() => DoOnStart())
+                    .OnStart(() => DoOnStartMove())
                     .OnComplete(() => DoOnFinishMove(findPath2.nextMoveX, findPath2.nextMoveY));
                 
                 Debug.Log("move");
@@ -94,9 +94,9 @@ public class TaskMovetoTarget : Node
         return state;
     }
 
-    private void DoOnStart()
+    private void DoOnStartMove()
     {
-        _hero.GetComponent<AxieAnimationController>().SetRun(_hero.MoveSpeed);
+        _hero.GetComponent<AxieFigureController>().SetRun(_hero.MoveSpeed);
     }
 
     private void DoOnFinishMove(int nextX, int nextY)
