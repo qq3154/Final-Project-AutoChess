@@ -18,7 +18,7 @@ public class TaskFindTarget : Node
         List<Hero> enemyTeam;
         int distance = BoardManager.instance._X * BoardManager.instance._Y;
         
-        enemyTeam = _hero.TeamID == TeamID.Blue ? BoardManager.instance._teamB : BoardManager.instance._teamA;
+        enemyTeam = _hero.TeamID == TeamID.Blue ? BoardManager.instance._onBoardB : BoardManager.instance._onBoardA;
 
         if (enemyTeam == null || enemyTeam.Count ==0)
         {

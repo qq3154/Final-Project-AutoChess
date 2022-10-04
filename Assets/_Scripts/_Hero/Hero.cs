@@ -66,11 +66,11 @@ public class Hero : MonoBehaviour
         BoardManager.instance._allHeros.Remove(this);
         if (this.TeamID == TeamID.Blue)
         {  
-            BoardManager.instance._teamA.Remove(this);
+            BoardManager.instance._onBoardA.Remove(this);
         }
         else
         {
-            BoardManager.instance._teamB.Remove(this);
+            BoardManager.instance._onBoardB.Remove(this);
         }
 
         BoardManager.instance.Pos[PosX, PosY] = false;

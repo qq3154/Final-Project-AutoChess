@@ -12,13 +12,13 @@ public class BoardManager : MonoSingleton<BoardManager>
     
     public bool[,] Pos;
     
-    public  List<Hero> _allHeros;
-    public  List<Hero> _teamA;
-    public  List<Hero> _teamB;
-    public  List<Hero> _benchA;
-    public  List<Hero> _benchB;
-    public List<BenchSlot> _benchASlots;
-    public List<BenchSlot> _benchBSlots;
+    public List<Hero> _allHeros;
+    public List<Hero> _onBoardA;
+    public List<Hero> _onBoardB;
+    public List<Hero> _benchA;
+    public List<Hero> _benchB;
+    public List<BenchSlot> _benchSlotA;
+    public List<BenchSlot> _benchSlotB;
     
 
     [SerializeField] private GameObject _heroPref;
@@ -40,91 +40,94 @@ public class BoardManager : MonoSingleton<BoardManager>
         }
     }
 
-    public void AddHeroToBench(TeamID teamID, HeroID heroID, Card card)
+    public void AddHero(TeamID teamID, HeroID heroID, Card card)
     {
-        List<BenchSlot> slots;
-        List<Hero> teams;
-        List<Hero> benchs;
+        List<BenchSlot> benchSlots;
+        List<Hero> heroOnBoards;
+        List<Hero> heroOnBenchs;
         
         if (teamID == TeamID.Blue)
         {
-            slots = _benchASlots;
-            teams = _teamA;
-            benchs = _benchA;
+            benchSlots = _benchSlotA;
+            heroOnBoards = _onBoardA;
+            heroOnBenchs = _benchA;
         }
         else
         {
-            slots = _benchBSlots;
-            teams = _teamB;
-            benchs = _benchB;
+            benchSlots = _benchSlotB;
+            heroOnBoards = _onBoardB;
+            heroOnBenchs = _benchB;
         }
         
         
         
 
-        List<Hero> oneStarHero = new List<Hero>();
-        List<Hero> twoStarHero = new List<Hero>();
+        List<Hero> oneStarHeros = new List<Hero>();
+        List<Hero> twoStarHeros = new List<Hero>();
 
-        foreach (var hero in teams)
+        foreach (var hero in heroOnBoards)
         {
             if (hero.HeroID == heroID)
             {
                 if (hero.Level == 1)
                 {
-                    oneStarHero.Add(hero);
+                    oneStarHeros.Add(hero);
                 }
                 if (hero.Level == 2)
                 {
-                    twoStarHero.Add(hero);
+                    twoStarHeros.Add(hero);
                 }
             }
             
         }
         
-        foreach (var hero in benchs)
+        foreach (var hero in heroOnBenchs)
         {
             if (hero.HeroID == heroID)
             {
                 if (hero.Level == 1)
                 {
-                    oneStarHero.Add(hero);
+                    oneStarHeros.Add(hero);
                 }
                 if (hero.Level == 2)
                 {
-                    twoStarHero.Add(hero);
+                    twoStarHeros.Add(hero);
                 }
             }
         }
 
-        //update 3 star
-        if (oneStarHero.Count == 2 && twoStarHero.Count == 2)
-        {
-            //find a 2star hero on board
-            //find a 1 star hero on board
-            //find first 2star hero on bench
-            //upgrade that hero and destroy others
-            
-            //return 
-            
-            Debug.Log("upgrade 3 star");
-        }
+        // //update 3 star
+        // if (oneStarHero.Count == 2 && twoStarHero.Count == 2)
+        // {
+        //     card.SetInteractable(false);
+        //     
+        //     //find a 2star hero on board
+        //     //find a 1 star hero on board
+        //     //find first 2star hero on bench
+        //     //upgrade that hero and destroy others
+        //     
+        //     //return 
+        //     
+        //     Debug.Log("upgrade 3 star");
+        // }
         
         //update 2 star
-        if (oneStarHero.Count == 2)
+        if (oneStarHeros.Count == 2)
         {
-
+            card.SetInteractable(false);
+            
             //find a 1 star hero on board
-            foreach (var hero in oneStarHero)
+            foreach (var hero in oneStarHeros)
             {
-                if (teams.Contains(hero))
+                if (heroOnBoards.Contains(hero))
                 {
                     hero.LevelUp();
 
-                    oneStarHero.Remove(hero);
+                    oneStarHeros.Remove(hero);
 
-                    foreach (var otherhero in oneStarHero)
+                    foreach (var otherhero in oneStarHeros)
                     {
-                        Destroy(otherhero.gameObject);
+                        RemoveHero(otherhero, benchSlots, heroOnBoards, heroOnBenchs);
                     }
 
                     return;
@@ -133,17 +136,17 @@ public class BoardManager : MonoSingleton<BoardManager>
             
             
             //find first 1 star hero on bench
-            foreach (var hero in oneStarHero)
+            foreach (var hero in oneStarHeros)
             {
-                if (benchs.Contains(hero))
+                if (heroOnBenchs.Contains(hero))
                 {
                     hero.LevelUp();
 
-                    oneStarHero.Remove(hero);
+                    oneStarHeros.Remove(hero);
 
-                    foreach (var otherhero in oneStarHero)
+                    foreach (var otherhero in oneStarHeros)
                     {
-                        Destroy(otherhero.gameObject);
+                        RemoveHero(otherhero, benchSlots, heroOnBoards, heroOnBenchs);
                     }
 
                     return;
@@ -160,7 +163,7 @@ public class BoardManager : MonoSingleton<BoardManager>
 
         
         //add to bench
-        foreach (var slot in slots)
+        foreach (var slot in benchSlots)
         {
             if (slot.isUse == false)
             {
@@ -170,7 +173,8 @@ public class BoardManager : MonoSingleton<BoardManager>
                 myHero.InitHero(teamID, heroID, 1);
                 card.SetInteractable(false);
                 slot.isUse = true;
-                benchs.Add(myHero);
+                slot.SetHero(myHero);
+                heroOnBenchs.Add(myHero);
                 return;
             }
         }
@@ -181,6 +185,32 @@ public class BoardManager : MonoSingleton<BoardManager>
        
 
 
+    }
+
+    void RemoveHero(Hero hero, List<BenchSlot> benchSlots, List<Hero> heroOnBoards, List<Hero> heroOnBenchs)
+    {
+        foreach (var bench in benchSlots)
+        {
+            if (bench.GetHero() == hero)
+            {
+                bench.SetHero(null);
+                bench.isUse = false;
+            }
+        }
+
+        if (heroOnBoards.Contains(hero))
+        {
+            heroOnBoards.Remove(hero);
+        }
+        
+        if (heroOnBenchs.Contains(hero))
+        {
+            heroOnBenchs.Remove(hero);
+        }
+
+        _allHeros.Remove(hero);
+        
+        Destroy(hero.gameObject);
     }
     
 }

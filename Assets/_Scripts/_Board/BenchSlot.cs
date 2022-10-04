@@ -8,6 +8,18 @@ public class BenchSlot : MonoBehaviour
     [SerializeField] private Hero _hero;
 
     public bool isUse;
+
+
+    public void SetHero(Hero hero)
+    {
+        _hero = hero;
+    }
+
+    public Hero GetHero()
+    {
+        return _hero;
+    }
+    
     // Start is called before the first frame update
     void Start()
     {

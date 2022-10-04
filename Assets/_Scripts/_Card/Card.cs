@@ -32,7 +32,7 @@ public class Card : MonoBehaviour
     public void OnSelectCard(TeamID teamID)
     {
         
-        BoardManager.instance.AddHeroToBench(teamID, _heroID, this);
+        BoardManager.instance.AddHero(teamID, _heroID, this);
         
     }
 

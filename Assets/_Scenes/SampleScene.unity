@@ -2184,11 +2184,11 @@ MonoBehaviour:
   _X: 8
   _Y: 8
   _allHeros: []
-  _teamA: []
-  _teamB: []
+  _onBoardA: []
+  _onBoardB: []
   _benchA: []
   _benchB: []
-  _benchASlots:
+  _benchSlotA:
   - {fileID: 714181042}
   - {fileID: 711370291}
   - {fileID: 1502308100}
@@ -2197,7 +2197,7 @@ MonoBehaviour:
   - {fileID: 876143815}
   - {fileID: 2003172629}
   - {fileID: 209590387}
-  _benchBSlots:
+  _benchSlotB:
   - {fileID: 2140639542}
   - {fileID: 1158143228}
   - {fileID: 515782980}
