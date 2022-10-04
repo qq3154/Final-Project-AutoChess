@@ -316,17 +316,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8bcbdde0954d73478b55d336d7baa08, type: 3}
---- !u!114 &87874914 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4624320821420310583, guid: c8bcbdde0954d73478b55d336d7baa08, type: 3}
-  m_PrefabInstance: {fileID: 87874913}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbc4600828d90d2408d5445aa25347e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &87874915 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4624320821420310569, guid: c8bcbdde0954d73478b55d336d7baa08, type: 3}
@@ -2194,13 +2183,9 @@ MonoBehaviour:
   dontDestroyThisObject: 1
   _X: 8
   _Y: 8
-  _allHeros:
-  - {fileID: 87874914}
-  - {fileID: 1326897822}
-  _teamA:
-  - {fileID: 87874914}
-  _teamB:
-  - {fileID: 1326897822}
+  _allHeros: []
+  _teamA: []
+  _teamB: []
   _benchA: []
   _benchB: []
   _benchASlots:
@@ -3009,17 +2994,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8bcbdde0954d73478b55d336d7baa08, type: 3}
---- !u!114 &1326897822 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4624320821420310583, guid: c8bcbdde0954d73478b55d336d7baa08, type: 3}
-  m_PrefabInstance: {fileID: 1326897821}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbc4600828d90d2408d5445aa25347e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1326897823 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4624320821420310569, guid: c8bcbdde0954d73478b55d336d7baa08, type: 3}

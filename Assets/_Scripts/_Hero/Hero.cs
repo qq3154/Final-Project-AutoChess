@@ -46,6 +46,11 @@ public class Hero : MonoBehaviour
         _axieSpawner.Init(this);
     }
 
+    public void LevelUp()
+    {
+        Level++;
+    }
+
 
     public void OnDamage(float dmg)
     {
