@@ -58,9 +58,6 @@ public class BoardManager : MonoSingleton<BoardManager>
             heroOnBoards = _onBoardB;
             heroOnBenchs = _benchB;
         }
-        
-        
-        
 
         List<Hero> oneStarHeros = new List<Hero>();
         List<Hero> twoStarHeros = new List<Hero>();
@@ -81,35 +78,106 @@ public class BoardManager : MonoSingleton<BoardManager>
             
         }
         
-        foreach (var hero in heroOnBenchs)
+        foreach (var benchSlot in benchSlots)
         {
-            if (hero.HeroID == heroID)
+            var hero = benchSlot.GetHero();
+            if (hero != null)
             {
-                if (hero.Level == 1)
+                if (hero.HeroID == heroID)
                 {
-                    oneStarHeros.Add(hero);
-                }
-                if (hero.Level == 2)
-                {
-                    twoStarHeros.Add(hero);
+                    if (hero.Level == 1)
+                    {
+                        oneStarHeros.Add(hero);
+                    }
+                    if (hero.Level == 2)
+                    {
+                        twoStarHeros.Add(hero);
+                    }
                 }
             }
+            
         }
+        
+        //update 3 star
+        if (oneStarHeros.Count == 2 && twoStarHeros.Count == 2)
+        {
+            card.SetInteractable(false);
+            
+            //find a 2star hero on board
+            foreach (var hero in twoStarHeros)
+            {
+                if (heroOnBoards.Contains(hero))
+                {
+                    hero.LevelUp();
 
-        // //update 3 star
-        // if (oneStarHero.Count == 2 && twoStarHero.Count == 2)
-        // {
-        //     card.SetInteractable(false);
-        //     
-        //     //find a 2star hero on board
-        //     //find a 1 star hero on board
-        //     //find first 2star hero on bench
-        //     //upgrade that hero and destroy others
-        //     
-        //     //return 
-        //     
-        //     Debug.Log("upgrade 3 star");
-        // }
+                    twoStarHeros.Remove(hero);
+                    
+                    foreach (var otherhero in twoStarHeros)
+                    {
+                        RemoveHero(otherhero, benchSlots, heroOnBoards, heroOnBenchs);
+                    }
+
+                    foreach (var otherhero in oneStarHeros)
+                    {
+                        RemoveHero(otherhero, benchSlots, heroOnBoards, heroOnBenchs);
+                    }
+
+                    return;
+                }
+            }
+            
+            //find a 1star hero on board
+            foreach (var hero in oneStarHeros)
+            {
+                if (heroOnBoards.Contains(hero))
+                {
+                    hero.LevelUp();
+
+                    oneStarHeros.Remove(hero);
+                    
+                    foreach (var otherhero in twoStarHeros)
+                    {
+                        RemoveHero(otherhero, benchSlots, heroOnBoards, heroOnBenchs);
+                    }
+
+                    foreach (var otherhero in oneStarHeros)
+                    {
+                        RemoveHero(otherhero, benchSlots, heroOnBoards, heroOnBenchs);
+                    }
+
+                    return;
+                    
+                    
+                }
+            }
+            
+            //find a 2star hero on bench
+            foreach (var hero in twoStarHeros)
+            {
+                if (heroOnBenchs.Contains(hero))
+                {
+                    hero.LevelUp();
+
+                    twoStarHeros.Remove(hero);
+                    
+                    foreach (var otherhero in twoStarHeros)
+                    {
+                        RemoveHero(otherhero, benchSlots, heroOnBoards, heroOnBenchs);
+                    }
+
+                    foreach (var otherhero in oneStarHeros)
+                    {
+                        RemoveHero(otherhero, benchSlots, heroOnBoards, heroOnBenchs);
+                    }
+
+                    return;
+                }
+            }
+            
+            Debug.Log("upgrade 2 star");
+            return;
+            
+        }
         
         //update 2 star
         if (oneStarHeros.Count == 2)
@@ -157,11 +225,8 @@ public class BoardManager : MonoSingleton<BoardManager>
             Debug.Log("upgrade 2 star");
             return;
 
-
-
         }
 
-        
         //add to bench
         foreach (var slot in benchSlots)
         {
@@ -182,9 +247,6 @@ public class BoardManager : MonoSingleton<BoardManager>
         //noti bench is full
         Debug.Log(teamID + " bench full");
         
-       
-
-
     }
 
     void RemoveHero(Hero hero, List<BenchSlot> benchSlots, List<Hero> heroOnBoards, List<Hero> heroOnBenchs)

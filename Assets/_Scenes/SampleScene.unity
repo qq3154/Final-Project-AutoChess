@@ -294,6 +294,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hero
       objectReference: {fileID: 0}
+    - target: {fileID: 4624320821420310582, guid: c8bcbdde0954d73478b55d336d7baa08, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4624320821420310583, guid: c8bcbdde0954d73478b55d336d7baa08, type: 3}
       propertyPath: Hp
       value: 100
@@ -2955,6 +2959,10 @@ PrefabInstance:
     - target: {fileID: 4624320821420310582, guid: c8bcbdde0954d73478b55d336d7baa08, type: 3}
       propertyPath: m_Name
       value: Hero (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4624320821420310582, guid: c8bcbdde0954d73478b55d336d7baa08, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4624320821420310583, guid: c8bcbdde0954d73478b55d336d7baa08, type: 3}
       propertyPath: Hp
