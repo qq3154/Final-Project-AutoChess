@@ -29,8 +29,8 @@ public class Hero : MonoBehaviour
 
     [Header("Axie")]
     [SerializeField] private AxieSpawner _axieSpawner;
-    [SerializeField] private AxieAnimationController _axieAnimationController;
     [SerializeField] private AxieFigureController _axieFigureController;
+    [SerializeField] private HeroHUD _heroHUD;
     
     
     private void OnDestroy()
@@ -44,11 +44,13 @@ public class Hero : MonoBehaviour
         HeroID = heroID;
         Level = level;
         _axieSpawner.Init(this);
+        _heroHUD.SetLevel(Level);
     }
 
     public void LevelUp()
     {
         Level++;
+        _heroHUD.SetLevel(Level);
     }
 
 

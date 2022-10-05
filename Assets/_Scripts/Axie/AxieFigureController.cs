@@ -15,6 +15,8 @@ public class AxieFigureController : MonoBehaviour
     [SerializeField] private string _layerName;
     [SerializeField] private int _layerOrder;
     
+    [SerializeField] private GameObject _skeletonHolder;
+    
     [SerializeField] private SkeletonAnimation _skeletonAnimation;
     
     Axie2dBuilder builder => Mixer.Builder;
@@ -51,20 +53,19 @@ public class AxieFigureController : MonoBehaviour
         var builderResult = builder.BuildSpineAdultCombo(adultCombo, colorVariant, scale, true);
         
         var mySkeletonAnimation = SkeletonAnimation.NewSkeletonAnimationGameObject(builderResult.skeletonDataAsset);
-       
         
-        mySkeletonAnimation.transform.localPosition = _position;
-        mySkeletonAnimation.transform.SetParent(transform, false);
-        mySkeletonAnimation.transform.localScale = _localScale;
-        mySkeletonAnimation.timeScale = 0.5f;
-        mySkeletonAnimation.skeleton.FindSlot("shadow").Attachment = null;
-        mySkeletonAnimation.state.SetAnimation(0, "action/idle/normal", true);
-        mySkeletonAnimation.skeleton.ScaleX = (_flipX ? -1 : 1) * Mathf.Abs(mySkeletonAnimation.skeleton.ScaleX);
-        
-        mySkeletonAnimation.GetComponent<MeshRenderer>().sortingLayerID = SortingLayer.NameToID(_layerName);
-        mySkeletonAnimation.GetComponent<MeshRenderer>().sortingOrder = _layerOrder;
-
         _skeletonAnimation = mySkeletonAnimation.GetComponent<SkeletonAnimation>();
+        
+        _skeletonAnimation.transform.localPosition = _position;
+        _skeletonAnimation.transform.SetParent(_skeletonHolder.transform, false);
+        _skeletonAnimation.transform.localScale = _localScale;
+        _skeletonAnimation.timeScale = 0.5f;
+        _skeletonAnimation.skeleton.FindSlot("shadow").Attachment = null;
+        _skeletonAnimation.state.SetAnimation(0, "action/idle/normal", true);
+        _skeletonAnimation.skeleton.ScaleX = (_flipX ? -1 : 1) * Mathf.Abs(mySkeletonAnimation.skeleton.ScaleX);
+        
+        _skeletonAnimation.GetComponent<MeshRenderer>().sortingLayerID = SortingLayer.NameToID(_layerName);
+        _skeletonAnimation.GetComponent<MeshRenderer>().sortingOrder = _layerOrder;
 
 
     }

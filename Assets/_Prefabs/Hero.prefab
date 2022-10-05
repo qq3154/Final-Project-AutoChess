@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7852370412501301202}
+  - component: {fileID: 8074410213427083743}
+  - component: {fileID: 451860865575750009}
   m_Layer: 0
   m_Name: AxieSpine
   m_TagString: Untagged
@@ -31,6 +33,44 @@ Transform:
   m_Father: {fileID: 4624320821420310569}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8074410213427083743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2954923236399135062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae9b9a438d63abc4cbf6f51abe2ca030, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axieFigureController: {fileID: 451860865575750009}
+  axieProfile:
+    key: 
+    body: 
+    classIdx: 0
+    classValue: 0
+  _heroProfileConfigMap: {fileID: 11400000, guid: 4f96d28fb5d80cf4888588053b1c83b3, type: 2}
+--- !u!114 &451860865575750009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2954923236399135062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3961e1d0a64003e47b08177f51744895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flipX: 1
+  _localScale: {x: 1, y: 1, z: 1}
+  _position: {x: 0, y: 0, z: 0}
+  _layerName: Board
+  _layerOrder: 1
+  _skeletonHolder: {fileID: 2954923236399135062}
+  _skeletonAnimation: {fileID: 0}
 --- !u!1 &3360674590311818629
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,7 +184,7 @@ GameObject:
   - component: {fileID: 544710458039474100}
   - component: {fileID: 5954613280742431465}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: LevelText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -198,7 +238,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Level
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -276,13 +316,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8788143159538010938}
+  - component: {fileID: 3034142547456051244}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8788143159538010938
 RectTransform:
   m_ObjectHideFlags: 0
@@ -304,6 +345,19 @@ RectTransform:
   m_AnchoredPosition: {x: -539.97797, y: -958.3612}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3034142547456051244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3530013835611742543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 281d8f7864d45244b82cab5aadf8cf26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelTxt: {fileID: 5954613280742431465}
 --- !u!1 &4624320821420310582
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,8 +370,6 @@ GameObject:
   - component: {fileID: 4624320821420310568}
   - component: {fileID: 4624320821420310583}
   - component: {fileID: 4624320821420310570}
-  - component: {fileID: 3125308320652600796}
-  - component: {fileID: 7840129748064238329}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -419,9 +471,10 @@ MonoBehaviour:
   AtkSpeed: 0
   AtkRange: 0
   MoveSpeed: 0
-  _axieSpawner: {fileID: 3125308320652600796}
+  _axieSpawner: {fileID: 8074410213427083743}
   _axieAnimationController: {fileID: 0}
-  _axieFigureController: {fileID: 7840129748064238329}
+  _axieFigureController: {fileID: 451860865575750009}
+  _heroHUD: {fileID: 3034142547456051244}
 --- !u!114 &4624320821420310570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,40 +488,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hero: {fileID: 4624320821420310583}
---- !u!114 &3125308320652600796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4624320821420310582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae9b9a438d63abc4cbf6f51abe2ca030, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  axieFigureController: {fileID: 7840129748064238329}
-  axieProfile:
-    key: 
-    body: 
-    classIdx: 0
-    classValue: 0
-  _heroProfileConfigMap: {fileID: 11400000, guid: 4f96d28fb5d80cf4888588053b1c83b3, type: 2}
---- !u!114 &7840129748064238329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4624320821420310582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3961e1d0a64003e47b08177f51744895, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _flipX: 1
-  _localScale: {x: 1, y: 1, z: 1}
-  _position: {x: 0, y: 0, z: 0}
-  _layerName: Board
-  _layerOrder: 1
-  _skeletonAnimation: {fileID: 0}
