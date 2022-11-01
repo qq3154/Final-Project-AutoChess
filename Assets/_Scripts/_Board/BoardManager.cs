@@ -19,6 +19,11 @@ public class BoardManager : MonoSingleton<BoardManager>
     public List<Hero> _benchB;
     public List<BenchSlot> _benchSlotA;
     public List<BenchSlot> _benchSlotB;
+
+    public GameObject _fightBoardRoot;
+
+    public Hero _currentSelectA;
+    public Hero _currentSelectB;
     
 
     [SerializeField] private GameObject _heroPref;
@@ -273,6 +278,53 @@ public class BoardManager : MonoSingleton<BoardManager>
         _allHeros.Remove(hero);
         
         Destroy(hero.gameObject);
+    }
+
+    void MoveHeroToBoard(TeamID teamID, Hero hero, int x, int y)
+    {
+        if (teamID == TeamID.Blue)
+        {
+            hero.transform.SetParent(_fightBoardRoot.transform);
+            hero.transform.position = new Vector2(x, y);
+            hero.PosX = x;
+            hero.PosY = y;
+            
+            if (_benchA.Contains(hero))
+            {
+                _benchA.Remove(hero);
+            }
+            
+            if (!_onBoardA.Contains(hero))
+            {
+                _onBoardA.Add(hero);
+            }
+          
+            _currentSelectA = null;
+        }
+    }
+
+    public void SelectHero(Hero hero)
+    {
+        if (hero.TeamID == TeamID.Blue)
+        {
+            _currentSelectA = hero;
+        }
+        else
+        {
+            _currentSelectB = hero;
+        }
+    }
+    
+
+    public void SelectCell(TeamID teamID, int x, int y)
+    {
+        if (teamID == TeamID.Blue)
+        {
+            if (_currentSelectA != null)
+            {
+                MoveHeroToBoard(teamID, _currentSelectA, x, y);
+            }
+        }
     }
     
 }

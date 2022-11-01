@@ -9,6 +9,8 @@ public class GameFlowManager : MonoSingleton<GameFlowManager>
     [FormerlySerializedAs("GamePlayState")] public GamePlayState gamePlayState;
 
     public int waveID;
+
+    public TeamID playerTeam;
 }
 
 public enum GameState
