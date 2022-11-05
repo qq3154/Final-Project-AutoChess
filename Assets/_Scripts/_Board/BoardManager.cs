@@ -85,21 +85,25 @@ public class BoardManager : MonoSingleton<BoardManager>
         
         foreach (var benchSlot in benchSlots)
         {
-            var hero = benchSlot.GetHero();
-            if (hero != null)
+            if (benchSlot.isUse)
             {
-                if (hero.HeroID == heroID)
+                var hero = benchSlot.GetHero();
+                if (hero != null)
                 {
-                    if (hero.Level == 1)
+                    if (hero.HeroID == heroID)
                     {
-                        oneStarHeros.Add(hero);
-                    }
-                    if (hero.Level == 2)
-                    {
-                        twoStarHeros.Add(hero);
+                        if (hero.Level == 1)
+                        {
+                            oneStarHeros.Add(hero);
+                        }
+                        if (hero.Level == 2)
+                        {
+                            twoStarHeros.Add(hero);
+                        }
                     }
                 }
             }
+            
             
         }
         
@@ -242,7 +246,6 @@ public class BoardManager : MonoSingleton<BoardManager>
                 Hero myHero = instantiate.GetComponent<Hero>();
                 myHero.InitHero(teamID, heroID, 1);
                 card.SetInteractable(false);
-                slot.isUse = true;
                 slot.SetHero(myHero);
                 heroOnBenchs.Add(myHero);
                 return;
@@ -260,8 +263,7 @@ public class BoardManager : MonoSingleton<BoardManager>
         {
             if (bench.GetHero() == hero)
             {
-                bench.SetHero(null);
-                bench.isUse = false;
+                bench.RemoveHero();
             }
         }
 
@@ -288,6 +290,17 @@ public class BoardManager : MonoSingleton<BoardManager>
             hero.transform.position = new Vector2(x, y);
             hero.PosX = x;
             hero.PosY = y;
+
+            foreach (var benchSlot in _benchSlotA)
+            {
+                if (benchSlot.isUse)
+                {
+                    if (benchSlot.GetHero() == hero)
+                    {
+                        benchSlot.RemoveHero();
+                    }
+                }
+            }
             
             if (_benchA.Contains(hero))
             {
@@ -299,6 +312,37 @@ public class BoardManager : MonoSingleton<BoardManager>
                 _onBoardA.Add(hero);
             }
           
+            _currentSelectA._heroVFXController.SetSelectVFXEnable(false);
+            _currentSelectA = null;
+        }
+    }
+    
+    void MoveHeroToBench(TeamID teamID, Hero hero, int index)
+    {
+        if (teamID == TeamID.Blue)
+        {
+            // hero.transform.SetParent(_fightBoardRoot.transform);
+            // hero.transform.position = new Vector2(x, y);
+            // hero.PosX = x;
+            // hero.PosY = y;
+            
+            hero.transform.SetParent( _benchSlotA[index].transform);
+            hero.transform.localPosition = Vector2.zero;
+            
+            _benchSlotA[index].SetHero(hero);
+            
+            if (!_benchA.Contains(hero))
+            {
+                _benchA.Add(hero);
+            }
+            
+            if (_onBoardA.Contains(hero))
+            {
+                _onBoardA.Remove(hero);
+            }
+            
+        
+            _currentSelectA._heroVFXController.SetSelectVFXEnable(false);
             _currentSelectA = null;
         }
     }
@@ -307,7 +351,18 @@ public class BoardManager : MonoSingleton<BoardManager>
     {
         if (hero.TeamID == TeamID.Blue)
         {
+            if (_currentSelectA != null)
+            {
+                if (_currentSelectA == hero)
+                {
+                    _currentSelectA = null;
+                    hero._heroVFXController.SetSelectVFXEnable(false);
+                    return;
+                }
+                _currentSelectA._heroVFXController.SetSelectVFXEnable(false);
+            } 
             _currentSelectA = hero;
+            _currentSelectA._heroVFXController.SetSelectVFXEnable(true);
         }
         else
         {
@@ -324,6 +379,25 @@ public class BoardManager : MonoSingleton<BoardManager>
             {
                 MoveHeroToBoard(teamID, _currentSelectA, x, y);
             }
+        }
+    }
+    
+    public void SelectBench(TeamID teamID, int index)
+    {
+        if (teamID == TeamID.Blue)
+        {
+            if (_currentSelectA != null)
+            {
+                MoveHeroToBench(teamID, _currentSelectA, index);
+            }
+        }
+    }
+
+    public void StartFight()
+    {
+        foreach (var hero in _allHeros)
+        {
+            hero._heroBT.enabled = true;
         }
     }
     

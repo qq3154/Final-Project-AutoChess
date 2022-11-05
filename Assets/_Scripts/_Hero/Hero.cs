@@ -31,7 +31,9 @@ public class Hero : MonoBehaviour
     [Header("Axie")]
     [SerializeField] private AxieSpawner _axieSpawner;
     [SerializeField] private AxieFigureController _axieFigureController;
-    [SerializeField] private HeroHUD _heroHUD;
+    [SerializeField] public HeroHUD _heroHUD;
+    [SerializeField] public HeroVFXController _heroVFXController;
+    [SerializeField] public HeroBT _heroBT;
     
     
     private void OnDestroy()
