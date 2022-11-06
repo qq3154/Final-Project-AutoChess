@@ -27,7 +27,7 @@ public class IsAttackInRange : Node
 
         float distance = Mathf.Max(Mathf.Abs(_hero.PosX - _target.PosX), Mathf.Abs(_hero.PosY - _target.PosY));
         
-        if (distance <= _hero.AtkRange)
+        if (distance <= _hero.HeroStats.AtkRange)
         {
             return NodeState.SUCCESS;
         }

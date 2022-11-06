@@ -3004,7 +3004,11 @@ MonoBehaviour:
   _root: {fileID: 1146010265}
   _cardHolder: {fileID: 1753415213}
   _randomCards: []
-  _heroPool: 00000000010000000200000003000000
+  _heroPool:
+  - A
+  - B
+  - C
+  - D
   _maxCardToSelect: 5
   _cardPref: {fileID: 6869082755462373385, guid: 72e7f05132dfce241b46a1318b9803bf, type: 3}
 --- !u!1 &357165168

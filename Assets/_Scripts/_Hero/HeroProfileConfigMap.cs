@@ -11,26 +11,25 @@ public class HeroProfileConfigMap : ScriptableObject
     [System.Serializable]
     public class HeroConfig
     {
-        [SerializeField] public string Name;
-        [SerializeField] public string Class;
-        [SerializeField] public string species;
-        [SerializeField] public string Description;
-        //[SerializeField] public string AxieId;
+        [Header("Stats")]
+        [SerializeField] public HeroStats HeroStats;
+        
+        [Header("Axie")]
         [SerializeField] public AxieProfile axieProfile;
     }
 
     [System.Serializable]
     public class KeyValue
     {
-        public HeroID id;
+        public string id;
         public HeroConfig heroConfig;       
     }
     #endregion//Data
 
     #region Public - get data
-    Dictionary<HeroID, HeroConfig> _fromListTomap
-        = new Dictionary<HeroID, HeroConfig>();
-    Dictionary<HeroID, HeroConfig> FromListToMap
+    Dictionary<string, HeroConfig> _fromListTomap
+        = new Dictionary<string, HeroConfig>();
+    Dictionary<string, HeroConfig> FromListToMap
     {
         get
         {
@@ -47,7 +46,7 @@ public class HeroProfileConfigMap : ScriptableObject
         }
     }
 
-    public HeroConfig GetValueFromKey(HeroID id)
+    public HeroConfig GetValueFromKey(string id)
     {
         var result = FromListToMap[id];
         // validate data

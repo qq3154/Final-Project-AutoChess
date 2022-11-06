@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class Card : MonoBehaviour
 {
-    [SerializeField] private HeroID _heroID;
+    [SerializeField] private string _heroID;
 
     [SerializeField] private Button _btn;
     
@@ -23,7 +23,7 @@ public class Card : MonoBehaviour
         _btn.onClick.RemoveAllListeners();
     }
 
-    public void InitCard(HeroID heroID)
+    public void InitCard(string heroID)
     {
         this._heroID = heroID;
         _axieSpawner.Init(heroID);

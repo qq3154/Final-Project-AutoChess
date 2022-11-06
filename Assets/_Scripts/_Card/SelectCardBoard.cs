@@ -13,7 +13,7 @@ public class SelectCardBoard : MonoBehaviour
     [SerializeField] private GameObject _cardHolder;
     [SerializeField] private List<Card> _randomCards;
     
-    [SerializeField] private List<HeroID> _heroPool;
+    [SerializeField] private List<string> _heroPool;
     [SerializeField] private int _maxCardToSelect = 5;
     [SerializeField] private GameObject _cardPref;
     private void Awake()
@@ -55,7 +55,7 @@ public class SelectCardBoard : MonoBehaviour
         for (int i = 0; i < _maxCardToSelect; i++)
         {
             int index = Random.Range(0,_heroPool.Count);
-            HeroID heroID = _heroPool[index];
+            string heroID = _heroPool[index];
             //_heroPool.RemoveAt(index);
             
             var instantiate = Instantiate(_cardPref, _cardHolder.transform);

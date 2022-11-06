@@ -17,10 +17,10 @@ public class TaskNormalAttack : Node
     public override NodeState Evaluate()
     {
         _attackCounter += Time.deltaTime;
-        if (_attackCounter >= 1 / _hero.AtkSpeed)
+        if (_attackCounter >= 1 / _hero.HeroStats.AtkSpeed)
         {
             Debug.Log( _hero.name + " attack " + _hero.Target.name);
-            _hero.Target.OnDamage(_hero.Dmg);
+            _hero.Target.OnDamage(_hero.HeroStats.Dmg);
             _attackCounter = 0f;
         }
         

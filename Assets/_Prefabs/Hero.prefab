@@ -97,7 +97,7 @@ MonoBehaviour:
     body: 
     classIdx: 0
     classValue: 0
-  _heroProfileConfigMap: {fileID: 11400000, guid: 4f96d28fb5d80cf4888588053b1c83b3, type: 2}
+  _heroProfileConfigMap: {fileID: 11400000, guid: ec275fa2a9e3a794bb5489573e9ee6f9, type: 2}
 --- !u!114 &451860865575750009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -514,16 +514,22 @@ MonoBehaviour:
   Target: {fileID: 0}
   TargetPosX: 0
   TargetPosY: 0
-  Dmg: 0
-  Hp: 0
-  AtkSpeed: 0
-  AtkRange: 0
-  MoveSpeed: 0
+  HeroStats:
+    Name: 
+    Description: 
+    Class: 
+    Species: 
+    Dmg: 0
+    Hp: 0
+    AtkSpeed: 0
+    AtkRange: 0
+    MoveSpeed: 0
   _axieSpawner: {fileID: 8074410213427083743}
   _axieFigureController: {fileID: 451860865575750009}
   _heroHUD: {fileID: 3034142547456051244}
   _heroVFXController: {fileID: 7487097303614170857}
   _heroBT: {fileID: 4624320821420310570}
+  _heroProfileConfigMap: {fileID: 11400000, guid: ec275fa2a9e3a794bb5489573e9ee6f9, type: 2}
 --- !u!114 &4624320821420310570
 MonoBehaviour:
   m_ObjectHideFlags: 0

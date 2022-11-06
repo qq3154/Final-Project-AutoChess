@@ -45,7 +45,7 @@ public class BoardManager : MonoSingleton<BoardManager>
         }
     }
 
-    public void AddHero(TeamID teamID, HeroID heroID, Card card)
+    public void AddHero(TeamID teamID, string heroID, Card card)
     {
         List<BenchSlot> benchSlots;
         List<Hero> heroOnBoards;

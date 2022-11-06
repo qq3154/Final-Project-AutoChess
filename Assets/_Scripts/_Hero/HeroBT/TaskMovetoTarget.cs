@@ -37,7 +37,7 @@ public class TaskMovetoTarget : Node
                 for (int j = 0; j < BoardManager.instance._Y; j++)
                 {
                     int range = Mathf.Max(Mathf.Abs(_target.PosX - i), Mathf.Abs(_target.PosY - j));
-                    if (range <= _hero.AtkRange)
+                    if (range <= _hero.HeroStats.AtkRange)
                     {
                         if (_hero.PosX == i && _hero.PosY == j)
                         {
@@ -79,7 +79,7 @@ public class TaskMovetoTarget : Node
                 _hero.PosX = findPath2.nextMoveX;
                 _hero.PosY = findPath2.nextMoveY;
                 
-                _hero.transform.DOMove(new Vector3(_hero.PosX, _hero.PosY, 0), 1/_hero.MoveSpeed)
+                _hero.transform.DOMove(new Vector3(_hero.PosX, _hero.PosY, 0), 1/_hero.HeroStats.MoveSpeed)
                     .SetDelay(0)
                     .SetEase(Ease.InFlash)
                     .OnStart(() => DoOnStartMove())
@@ -96,7 +96,7 @@ public class TaskMovetoTarget : Node
 
     private void DoOnStartMove()
     {
-        _hero.GetComponent<AxieFigureController>().SetRun(_hero.MoveSpeed);
+        _hero.GetComponent<AxieFigureController>().SetRun(_hero.HeroStats.MoveSpeed);
     }
 
     private void DoOnFinishMove(int nextX, int nextY)

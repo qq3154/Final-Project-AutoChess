@@ -41,7 +41,7 @@ public class TaskFindTarget : Node
                     for (int j = 0; j < BoardManager.instance._Y; j++)
                     {
                         int range = Mathf.Max(Mathf.Abs(enemy.PosX - i), Mathf.Abs(enemy.PosY - j));
-                        if (range <= _hero.AtkRange)
+                        if (range <= _hero.HeroStats.AtkRange)
                         {
                             if (_hero.PosX == i && _hero.PosY == j)
                             {
@@ -75,7 +75,7 @@ public class TaskFindTarget : Node
         else
         {
             int rangetoAttack = Mathf.Max(Mathf.Abs(_hero.PosX - _hero.Target.PosX), Mathf.Abs(_hero.PosY - _hero.Target.PosY));
-            if (rangetoAttack <= _hero.AtkRange)
+            if (rangetoAttack <= _hero.HeroStats.AtkRange)
             {
                 return NodeState.SUCCESS;
             }
@@ -91,7 +91,7 @@ public class TaskFindTarget : Node
                     for (int j = 0; j < BoardManager.instance._Y; j++)
                     {
                         int range = Mathf.Max(Mathf.Abs(enemy.PosX - i), Mathf.Abs(enemy.PosY - j));
-                        if (range <= _hero.AtkRange)
+                        if (range <= _hero.HeroStats.AtkRange)
                         {
                             if (_hero.PosX == i && _hero.PosY == j)
                             {

@@ -65,7 +65,7 @@ MonoBehaviour:
     body: 
     classIdx: 0
     classValue: 0
-  _heroProfileConfigMap: {fileID: 11400000, guid: 4f96d28fb5d80cf4888588053b1c83b3, type: 2}
+  _heroProfileConfigMap: {fileID: 11400000, guid: ec275fa2a9e3a794bb5489573e9ee6f9, type: 2}
 --- !u!114 &5806295089351465381
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class Hero : MonoBehaviour
 {
     [Header("ID")]
-    [SerializeField] public HeroID HeroID;
+    [SerializeField] public string HeroID;
     [SerializeField] public int Level;
     [SerializeField] public TeamID TeamID; 
     
@@ -20,13 +20,8 @@ public class Hero : MonoBehaviour
     [SerializeField] public int TargetPosX;
     [SerializeField] public int TargetPosY;
     
-
     [Header("Stats")]
-    [SerializeField] public float Dmg;
-    [SerializeField] public float Hp;
-    [SerializeField] public float AtkSpeed;
-    [SerializeField] public int AtkRange;
-    [SerializeField] public float MoveSpeed;
+    [SerializeField] public HeroStats HeroStats;
 
     [Header("Axie")]
     [SerializeField] private AxieSpawner _axieSpawner;
@@ -34,20 +29,21 @@ public class Hero : MonoBehaviour
     [SerializeField] public HeroHUD _heroHUD;
     [SerializeField] public HeroVFXController _heroVFXController;
     [SerializeField] public HeroBT _heroBT;
-    
-    
-    private void OnDestroy()
-    {
-       
-    }
 
-    public void InitHero(TeamID teamID, HeroID heroID, int level)
+
+    [Header("Profile Config")]
+    [SerializeField] private HeroProfileConfigMap _heroProfileConfigMap;
+    
+    public void InitHero(TeamID teamID, string heroID, int level)
     {
         TeamID = teamID;
         HeroID = heroID;
         Level = level;
         _axieSpawner.Init(this);
         _heroHUD.SetLevel(Level);
+
+        var config = _heroProfileConfigMap.GetValueFromKey(heroID);
+        HeroStats = config.HeroStats;
     }
 
     public void LevelUp()
@@ -59,8 +55,8 @@ public class Hero : MonoBehaviour
 
     public void OnDamage(float dmg)
     {
-        Hp -= dmg;
-        if (Hp <= 0)
+        HeroStats.Hp -= dmg;
+        if (HeroStats.Hp  <= 0)
         {
             Dead();
         }
@@ -94,10 +90,19 @@ public enum TeamID
     Red = 1,
 }
 
-public enum HeroID
+
+[Serializable]
+public class HeroStats
 {
-    A,
-    B,
-    C,
-    D
+    [SerializeField] public string Name;
+    [SerializeField] public string Description;
+    
+    [SerializeField] public string Class;
+    [SerializeField] public string Species;
+    
+    [SerializeField] public float Dmg;
+    [SerializeField] public float Hp;
+    [SerializeField] public float AtkSpeed;
+    [SerializeField] public int AtkRange;
+    [SerializeField] public float MoveSpeed;
 }

@@ -40,7 +40,7 @@ public class AxieSpawner : MonoBehaviour
         }
     }
     
-    public void Init(HeroID heroID)
+    public void Init(string heroID)
     {
         //axieId = _heroProfileConfigMap.GetValueFromKey(heroID).AxieId;
         axieProfile = _heroProfileConfigMap.GetValueFromKey(heroID).axieProfile;
