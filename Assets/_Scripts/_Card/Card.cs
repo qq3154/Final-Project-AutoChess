@@ -15,7 +15,7 @@ public class Card : MonoBehaviour
 
     private void Awake()
     {
-        _btn.onClick.AddListener(() => OnSelectCard(TeamID.Blue));
+        _btn.onClick.AddListener(() => OnSelectCard(GameFlowManager.instance.playerTeam));
     }
 
     private void OnDestroy()

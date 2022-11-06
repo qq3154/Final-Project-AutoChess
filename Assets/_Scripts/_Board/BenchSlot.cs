@@ -34,7 +34,10 @@ public class BenchSlot : MonoBehaviour
     
     private void OnMouseDown()
     {
-        Debug.Log("select bench" + index);
-        BoardManager.instance.SelectBench(GameFlowManager.instance.playerTeam, index);
+        if (_teamID == GameFlowManager.instance.playerTeam)
+        {
+            Debug.Log("select bench" + index);
+            BoardManager.instance.SelectBench(GameFlowManager.instance.playerTeam, index);
+        }
     }
 }

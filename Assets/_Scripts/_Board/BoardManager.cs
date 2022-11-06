@@ -7,6 +7,7 @@ using UnityEngine.Serialization;
 
 public class BoardManager : MonoSingleton<BoardManager>
 {
+    #region Field
     public int _X;
     public int _Y;
     
@@ -20,14 +21,15 @@ public class BoardManager : MonoSingleton<BoardManager>
     public List<BenchSlot> _benchSlotA;
     public List<BenchSlot> _benchSlotB;
 
-    public GameObject _fightBoardRoot;
-
     public Hero _currentSelectA;
     public Hero _currentSelectB;
     
-
+    public GameObject _fightBoardRoot;
     [SerializeField] private GameObject _heroPref;
+    
+    #endregion
 
+    #region Unity function
     protected override void DoOnAwake()
     {
         base.DoOnAwake();
@@ -44,25 +46,27 @@ public class BoardManager : MonoSingleton<BoardManager>
             Pos[hero.PosX, hero.PosY] = true;
         }
     }
+    
+    #endregion
+
+    #region Board function
+    public void StartFight()
+    {
+        foreach (var hero in _allHeros)
+        {
+            hero._heroBT.enabled = true;
+        }
+    }
+    
+    #endregion
+
+    #region Hero function
 
     public void AddHero(TeamID teamID, string heroID, Card card)
     {
-        List<BenchSlot> benchSlots;
-        List<Hero> heroOnBoards;
-        List<Hero> heroOnBenchs;
-        
-        if (teamID == TeamID.Blue)
-        {
-            benchSlots = _benchSlotA;
-            heroOnBoards = _onBoardA;
-            heroOnBenchs = _benchA;
-        }
-        else
-        {
-            benchSlots = _benchSlotB;
-            heroOnBoards = _onBoardB;
-            heroOnBenchs = _benchB;
-        }
+        List<BenchSlot> benchSlots = PlayerBenchSlot();
+        List<Hero> heroOnBoards = PlayerOnBoard();
+        List<Hero> heroOnBenchs = PlayerBench();
 
         List<Hero> oneStarHeros = new List<Hero>();
         List<Hero> twoStarHeros = new List<Hero>();
@@ -103,8 +107,6 @@ public class BoardManager : MonoSingleton<BoardManager>
                     }
                 }
             }
-            
-            
         }
         
         //update 3 star
@@ -251,7 +253,6 @@ public class BoardManager : MonoSingleton<BoardManager>
                 return;
             }
         }
-
         //noti bench is full
         Debug.Log(teamID + " bench full");
         
@@ -284,85 +285,123 @@ public class BoardManager : MonoSingleton<BoardManager>
 
     void MoveHeroToBoard(TeamID teamID, Hero hero, int x, int y)
     {
-        if (teamID == TeamID.Blue)
-        {
-            hero.transform.SetParent(_fightBoardRoot.transform);
-            hero.transform.position = new Vector2(x, y);
-            hero.PosX = x;
-            hero.PosY = y;
+        hero.transform.SetParent(_fightBoardRoot.transform);
+        hero.transform.position = new Vector2(x, y);
+        hero.PosX = x;
+        hero.PosY = y;
 
-            foreach (var benchSlot in _benchSlotA)
+        foreach (var benchSlot in PlayerBenchSlot())
+        {
+            if (benchSlot.isUse)
             {
-                if (benchSlot.isUse)
+                if (benchSlot.GetHero() == hero)
                 {
-                    if (benchSlot.GetHero() == hero)
-                    {
-                        benchSlot.RemoveHero();
-                    }
+                    benchSlot.RemoveHero();
                 }
             }
-            
-            if (_benchA.Contains(hero))
-            {
-                _benchA.Remove(hero);
-            }
-            
-            if (!_onBoardA.Contains(hero))
-            {
-                _onBoardA.Add(hero);
-            }
-          
-            _currentSelectA._heroVFXController.SetSelectVFXEnable(false);
-            _currentSelectA = null;
         }
+        
+        if (PlayerBench().Contains(hero))
+        {
+            PlayerBench().Remove(hero);
+        }
+        
+        if (!PlayerOnBoard().Contains(hero))
+        {
+            PlayerOnBoard().Add(hero);
+        }
+      
+        PlayerCurrentSelect()._heroVFXController.SetSelectVFXEnable(false);
+        SetPlayerCurrentSelect(null);
     }
     
     void MoveHeroToBench(TeamID teamID, Hero hero, int index)
     {
-        if (teamID == TeamID.Blue)
-        {
-            // hero.transform.SetParent(_fightBoardRoot.transform);
-            // hero.transform.position = new Vector2(x, y);
-            // hero.PosX = x;
-            // hero.PosY = y;
-            
-            hero.transform.SetParent( _benchSlotA[index].transform);
-            hero.transform.localPosition = Vector2.zero;
-            
-            _benchSlotA[index].SetHero(hero);
-            
-            if (!_benchA.Contains(hero))
-            {
-                _benchA.Add(hero);
-            }
-            
-            if (_onBoardA.Contains(hero))
-            {
-                _onBoardA.Remove(hero);
-            }
-            
+        hero.transform.SetParent( PlayerBenchSlot()[index].transform);
+        hero.transform.localPosition = Vector2.zero;
         
-            _currentSelectA._heroVFXController.SetSelectVFXEnable(false);
-            _currentSelectA = null;
+        PlayerBenchSlot()[index].SetHero(hero);
+        
+        if (!PlayerBench().Contains(hero))
+        {
+            PlayerBench().Add(hero);
+        }
+        
+        if (PlayerOnBoard().Contains(hero))
+        {
+            PlayerOnBoard().Remove(hero);
+        }
+        
+        PlayerCurrentSelect()._heroVFXController.SetSelectVFXEnable(false);
+        SetPlayerCurrentSelect(null);
+    }
+
+    #endregion
+    
+    #region User Input
+    public void SelectHero(Hero hero)
+    {
+        if (PlayerCurrentSelect() != null)
+        {
+            if (PlayerCurrentSelect() == hero)
+            {
+                SetPlayerCurrentSelect(null);
+                hero._heroVFXController.SetSelectVFXEnable(false);
+                return;
+            }
+            PlayerCurrentSelect()._heroVFXController.SetSelectVFXEnable(false);
+        } 
+        SetPlayerCurrentSelect(hero);
+        PlayerCurrentSelect()._heroVFXController.SetSelectVFXEnable(true);
+        
+    }
+
+    public void SelectCell(TeamID teamID, int x, int y)
+    {
+      
+        if (PlayerCurrentSelect() != null)
+        {
+            MoveHeroToBoard(teamID, PlayerCurrentSelect(), x, y);
+        }
+    }
+    
+    public void SelectBench(TeamID teamID, int index)
+    {
+        if (PlayerCurrentSelect() != null)
+        {
+            MoveHeroToBench(teamID, PlayerCurrentSelect(), index);
         }
     }
 
-    public void SelectHero(Hero hero)
+
+    #endregion
+
+    #region Get field shortcut 
+    public List<Hero> PlayerOnBoard()
     {
-        if (hero.TeamID == TeamID.Blue)
+        return (GameFlowManager.instance.playerTeam == TeamID.Blue) ? _onBoardA : _onBoardB;
+    }
+    
+    public List<Hero> PlayerBench()
+    {
+        return (GameFlowManager.instance.playerTeam == TeamID.Blue) ? _benchA : _benchB;
+    }
+    
+    public List<BenchSlot> PlayerBenchSlot()
+    {
+        return (GameFlowManager.instance.playerTeam == TeamID.Blue) ? _benchSlotA : _benchSlotB;
+    }
+
+    public Hero PlayerCurrentSelect()
+    {
+        return (GameFlowManager.instance.playerTeam == TeamID.Blue) ? _currentSelectA : _currentSelectB;
+    }
+
+    public void SetPlayerCurrentSelect(Hero hero)
+    {
+        if (GameFlowManager.instance.playerTeam == TeamID.Blue)
         {
-            if (_currentSelectA != null)
-            {
-                if (_currentSelectA == hero)
-                {
-                    _currentSelectA = null;
-                    hero._heroVFXController.SetSelectVFXEnable(false);
-                    return;
-                }
-                _currentSelectA._heroVFXController.SetSelectVFXEnable(false);
-            } 
             _currentSelectA = hero;
-            _currentSelectA._heroVFXController.SetSelectVFXEnable(true);
         }
         else
         {
@@ -371,34 +410,5 @@ public class BoardManager : MonoSingleton<BoardManager>
     }
     
 
-    public void SelectCell(TeamID teamID, int x, int y)
-    {
-        if (teamID == TeamID.Blue)
-        {
-            if (_currentSelectA != null)
-            {
-                MoveHeroToBoard(teamID, _currentSelectA, x, y);
-            }
-        }
-    }
-    
-    public void SelectBench(TeamID teamID, int index)
-    {
-        if (teamID == TeamID.Blue)
-        {
-            if (_currentSelectA != null)
-            {
-                MoveHeroToBench(teamID, _currentSelectA, index);
-            }
-        }
-    }
-
-    public void StartFight()
-    {
-        foreach (var hero in _allHeros)
-        {
-            hero._heroBT.enabled = true;
-        }
-    }
-    
+    #endregion
 }
