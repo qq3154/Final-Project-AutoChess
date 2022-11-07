@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &115558877709275006
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5366583318461644277}
+  m_Layer: 0
+  m_Name: BulletRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5366583318461644277
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 115558877709275006}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.5, y: 0.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7852370412501301202}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1446657992908395797
 GameObject:
   m_ObjectHideFlags: 0
@@ -75,7 +106,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5366583318461644277}
   m_Father: {fileID: 4624320821420310569}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -97,6 +129,7 @@ MonoBehaviour:
     body: 
     classIdx: 0
     classValue: 0
+  teamID: 0
   _heroProfileConfigMap: {fileID: 11400000, guid: ec275fa2a9e3a794bb5489573e9ee6f9, type: 2}
 --- !u!114 &451860865575750009
 MonoBehaviour:
@@ -530,6 +563,8 @@ MonoBehaviour:
   _heroVFXController: {fileID: 7487097303614170857}
   _heroBT: {fileID: 4624320821420310570}
   _heroProfileConfigMap: {fileID: 11400000, guid: ec275fa2a9e3a794bb5489573e9ee6f9, type: 2}
+  _rangeAttackBulletPref: {fileID: 8646619675482943653, guid: 52d528e8bc7684c43b10df562ac29200, type: 3}
+  _bulletRoot: {fileID: 115558877709275006}
 --- !u!114 &4624320821420310570
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -23,8 +23,8 @@ MonoBehaviour:
         Dmg: 1
         Hp: 100
         AtkSpeed: 1
-        AtkRange: 1
-        MoveSpeed: 1
+        AtkRange: 2
+        MoveSpeed: 2
       axieProfile:
         key: beast-02
         body: body-normal
@@ -38,7 +38,7 @@ MonoBehaviour:
         Class: B
         Species: B
         Dmg: 1
-        Hp: 72
+        Hp: 100
         AtkSpeed: 2
         AtkRange: 5
         MoveSpeed: 1
@@ -55,7 +55,7 @@ MonoBehaviour:
         Class: C
         Species: C
         Dmg: 1
-        Hp: 66
+        Hp: 100
         AtkSpeed: 2
         AtkRange: 1
         MoveSpeed: 2

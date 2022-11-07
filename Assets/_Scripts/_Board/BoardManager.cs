@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Spine.Unity.Examples;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -13,7 +14,7 @@ public class BoardManager : MonoSingleton<BoardManager>
     
     public bool[,] Pos;
     
-    public List<Hero> _allHeros;
+    //public List<Hero> _allHeros;
     public List<Hero> _onBoardA;
     public List<Hero> _onBoardB;
     public List<Hero> _benchA;
@@ -41,10 +42,10 @@ public class BoardManager : MonoSingleton<BoardManager>
                 Pos[i, j] = false;
             }
         }
-        foreach (var hero in _allHeros)
-        {
-            Pos[hero.PosX, hero.PosY] = true;
-        }
+        // foreach (var hero in _allHeros)
+        // {
+        //     Pos[hero.PosX, hero.PosY] = true;
+        // }
     }
     
     #endregion
@@ -52,7 +53,7 @@ public class BoardManager : MonoSingleton<BoardManager>
     #region Board function
     public void StartFight()
     {
-        foreach (var hero in _allHeros)
+        foreach (var hero in AllHeroes())
         {
             hero._heroBT.enabled = true;
         }
@@ -247,6 +248,7 @@ public class BoardManager : MonoSingleton<BoardManager>
                 instantiate.transform.SetParent(slot.transform);
                 Hero myHero = instantiate.GetComponent<Hero>();
                 myHero.InitHero(teamID, heroID, 1);
+                myHero.name = myHero.HeroStats.Name;
                 card.SetInteractable(false);
                 slot.SetHero(myHero);
                 heroOnBenchs.Add(myHero);
@@ -278,7 +280,7 @@ public class BoardManager : MonoSingleton<BoardManager>
             heroOnBenchs.Remove(hero);
         }
 
-        _allHeros.Remove(hero);
+        //_allHeros.Remove(hero);
         
         Destroy(hero.gameObject);
     }
@@ -376,7 +378,17 @@ public class BoardManager : MonoSingleton<BoardManager>
 
     #endregion
 
-    #region Get field shortcut 
+    #region Get field shortcut
+
+    public List<Hero> AllHeroes()
+    {
+        List<Hero> ans = new List<Hero>();  
+       
+        
+         ans = _onBoardA.Concat(_onBoardB).ToList();
+         return ans;
+    }
+    
     public List<Hero> PlayerOnBoard()
     {
         return (GameFlowManager.instance.playerTeam == TeamID.Blue) ? _onBoardA : _onBoardB;

@@ -25,7 +25,7 @@ using UnityEngine;
                 }
             }
 
-            foreach (var hero in BoardManager.instance._allHeros)
+            foreach (var hero in BoardManager.instance.AllHeroes())
             {
                 str[hero.PosX][hero.PosY] = '*';
             }

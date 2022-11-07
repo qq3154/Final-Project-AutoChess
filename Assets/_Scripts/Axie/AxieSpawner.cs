@@ -14,30 +14,14 @@ public class AxieSpawner : MonoBehaviour
 {
     [SerializeField] AxieFigureController axieFigureController;
     [SerializeField] private AxieProfile axieProfile;
+    [SerializeField] private TeamID teamID;
     
     [SerializeField] private HeroProfileConfigMap _heroProfileConfigMap;
-
-    //bool _isPlaying = false;
-    //bool _isFetchingGenes = false;
+    
 
     private void Awake()
     {
         Mixer.Init();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //OnMixButtonClicked();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown("r"))
-        {
-            OnMixButtonClicked();
-        }
     }
     
     public void Init(string heroID)
@@ -45,26 +29,14 @@ public class AxieSpawner : MonoBehaviour
         //axieId = _heroProfileConfigMap.GetValueFromKey(heroID).AxieId;
         axieProfile = _heroProfileConfigMap.GetValueFromKey(heroID).axieProfile;
 
-        OnMixButtonClicked();
+        axieFigureController.SetGenes(axieProfile, TeamID.Blue);
     }
 
     public void Init(Hero hero)
     {
         axieProfile = _heroProfileConfigMap.GetValueFromKey(hero.HeroID).axieProfile;
-
-        OnMixButtonClicked();
+        axieFigureController.SetGenes(axieProfile, hero.TeamID);
     }
-    
-    
 
-    void OnMixButtonClicked()
-    {
-        //StartCoroutine(GetAxiesGenes(axieId));
-        
-        axieFigureController.SetGenes(axieProfile);
-
-        
-    }
-    
     
 }

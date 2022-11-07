@@ -29,10 +29,13 @@ public class Hero : MonoBehaviour
     [SerializeField] public HeroHUD _heroHUD;
     [SerializeField] public HeroVFXController _heroVFXController;
     [SerializeField] public HeroBT _heroBT;
-
-
+    
     [Header("Profile Config")]
     [SerializeField] private HeroProfileConfigMap _heroProfileConfigMap;
+    
+    [Header("Bullet pref")]
+    [SerializeField] public RangeAttackBullet _rangeAttackBulletPref;
+    [SerializeField] public GameObject _bulletRoot;
     
     public void InitHero(TeamID teamID, string heroID, int level)
     {
@@ -43,6 +46,7 @@ public class Hero : MonoBehaviour
         _heroHUD.SetLevel(Level);
 
         var config = _heroProfileConfigMap.GetValueFromKey(heroID);
+
         HeroStats = config.HeroStats;
     }
 
@@ -64,7 +68,7 @@ public class Hero : MonoBehaviour
     
     private void Dead()
     {
-        BoardManager.instance._allHeros.Remove(this);
+        BoardManager.instance.AllHeroes().Remove(this);
         if (this.TeamID == TeamID.Blue)
         {  
             BoardManager.instance._onBoardA.Remove(this);
@@ -92,7 +96,7 @@ public enum TeamID
 
 
 [Serializable]
-public class HeroStats
+public struct HeroStats
 {
     [SerializeField] public string Name;
     [SerializeField] public string Description;

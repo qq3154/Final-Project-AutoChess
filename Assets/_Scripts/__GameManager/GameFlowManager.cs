@@ -11,6 +11,21 @@ public class GameFlowManager : MonoSingleton<GameFlowManager>
     public int waveID;
 
     public TeamID playerTeam;
+
+
+    #region Debug methods
+
+    public void SetPlayerTeamBlue()
+    {
+        playerTeam = TeamID.Blue;
+    }
+    
+    public void SetPlayerTeamRed()
+    {
+        playerTeam = TeamID.Red;
+    }
+
+    #endregion
 }
 
 public enum GameState

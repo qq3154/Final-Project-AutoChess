@@ -21,7 +21,7 @@ public class AxieFigureController : MonoBehaviour
     
     Axie2dBuilder builder => Mixer.Builder;
     
-    public void SetGenes(AxieProfile axieProfile)
+    public void SetGenes(AxieProfile axieProfile, TeamID teamID)
     {
         // var (key, body, classIdx, classValue) = ("beast-04", "body-bigyak", 0, 4);
 
@@ -46,6 +46,8 @@ public class AxieFigureController : MonoBehaviour
             {"body-class", characterClass.ToString() },
             {"body-id", " 2727 " },
         };
+
+        _flipX = (teamID == TeamID.Blue);
         
         float scale = 0.0018f;
         byte colorVariant = (byte)builder.GetSampleColorVariant(characterClass, classValue);
@@ -62,7 +64,10 @@ public class AxieFigureController : MonoBehaviour
         _skeletonAnimation.timeScale = 0.5f;
         _skeletonAnimation.skeleton.FindSlot("shadow").Attachment = null;
         _skeletonAnimation.state.SetAnimation(0, "action/idle/normal", true);
-        _skeletonAnimation.skeleton.ScaleX = (_flipX ? -1 : 1) * Mathf.Abs(mySkeletonAnimation.skeleton.ScaleX);
+       // _skeletonAnimation.skeleton.ScaleX = (_flipX ? -1 : 1) * Mathf.Abs(mySkeletonAnimation.skeleton.ScaleX);
+       
+       var transformScale = new Vector3(this.transform.localScale.x * (_flipX ? -1 : 1), this.transform.localScale.y, this.transform.localScale.z);
+       this.transform.localScale = transformScale;
         
         _skeletonAnimation.GetComponent<MeshRenderer>().sortingLayerID = SortingLayer.NameToID(_layerName);
         _skeletonAnimation.GetComponent<MeshRenderer>().sortingOrder = _layerOrder;
