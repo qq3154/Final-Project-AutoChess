@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
+using Observer;
 using Spine.Unity.Examples;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -21,6 +23,9 @@ public class BoardManager : MonoSingleton<BoardManager>
     public List<Hero> _benchB;
     public List<BenchSlot> _benchSlotA;
     public List<BenchSlot> _benchSlotB;
+
+    public Dictionary<string, int> _strategiesA = new Dictionary<string, int>();
+    public Dictionary<string, int> _strategiesB = new Dictionary<string, int>();
 
     public Hero _currentSelectA;
     public Hero _currentSelectB;
@@ -42,10 +47,6 @@ public class BoardManager : MonoSingleton<BoardManager>
                 Pos[i, j] = false;
             }
         }
-        // foreach (var hero in _allHeros)
-        // {
-        //     Pos[hero.PosX, hero.PosY] = true;
-        // }
     }
     
     #endregion
@@ -315,6 +316,8 @@ public class BoardManager : MonoSingleton<BoardManager>
       
         PlayerCurrentSelect()._heroVFXController.SetSelectVFXEnable(false);
         SetPlayerCurrentSelect(null);
+        
+        this.PostEvent(EventID.OnAddHeroToBoard, hero);
     }
     
     void MoveHeroToBench(TeamID teamID, Hero hero, int index)
@@ -336,6 +339,8 @@ public class BoardManager : MonoSingleton<BoardManager>
         
         PlayerCurrentSelect()._heroVFXController.SetSelectVFXEnable(false);
         SetPlayerCurrentSelect(null);
+        
+        this.PostEvent(EventID.OnRemoveHeroFromBoard, hero);
     }
 
     #endregion
@@ -402,6 +407,11 @@ public class BoardManager : MonoSingleton<BoardManager>
     public List<BenchSlot> PlayerBenchSlot()
     {
         return (GameFlowManager.instance.playerTeam == TeamID.Blue) ? _benchSlotA : _benchSlotB;
+    }
+
+    public Dictionary<string, int> PlayerStrategies()
+    {
+        return (GameFlowManager.instance.playerTeam == TeamID.Blue) ? _strategiesA : _strategiesB;
     }
 
     public Hero PlayerCurrentSelect()

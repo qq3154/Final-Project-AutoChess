@@ -18,8 +18,8 @@ MonoBehaviour:
       HeroStats:
         Name: A
         Description: A
-        Class: A
-        Species: A
+        Class: Assassin
+        Species: Human
         Dmg: 1
         Hp: 100
         AtkSpeed: 1
@@ -35,8 +35,8 @@ MonoBehaviour:
       HeroStats:
         Name: B
         Description: B
-        Class: B
-        Species: B
+        Class: Warrior
+        Species: Druild
         Dmg: 1
         Hp: 100
         AtkSpeed: 2
@@ -52,8 +52,8 @@ MonoBehaviour:
       HeroStats:
         Name: C
         Description: C
-        Class: C
-        Species: C
+        Class: Hunter
+        Species: Human
         Dmg: 1
         Hp: 100
         AtkSpeed: 2
@@ -69,8 +69,8 @@ MonoBehaviour:
       HeroStats:
         Name: D
         Description: D
-        Class: D
-        Species: D
+        Class: Kinght
+        Species: Shaman
         Dmg: 1
         Hp: 100
         AtkSpeed: 1

@@ -10,5 +10,8 @@ public enum EventID
     OnSelectCardPhaseStart,
     OnSelectPositionPhaseStart,
     OnFightStart,
+    
+    OnAddHeroToBoard,
+    OnRemoveHeroFromBoard,
 	
 }
