@@ -8,6 +8,7 @@ public class TaskNormalAttack : Node
 {
     private Hero _hero;
     private float _attackCounter = 0f;
+    private bool isAttack = false;
 
     public TaskNormalAttack(Hero hero)
     {
@@ -16,10 +17,11 @@ public class TaskNormalAttack : Node
     
     public override NodeState Evaluate()
     {
-        _attackCounter += Time.deltaTime;
-        if (_attackCounter >= 1 / _hero.HeroStats.AtkSpeed)
+        if (!isAttack)
         {
-            Debug.Log( _hero.name + " attack " + _hero.Target.name);
+            isAttack = true;
+            
+            _hero._axieFigureController.SetAttack();
             
             //melee attack
             if (_hero.HeroStats.AtkRange == 1)
@@ -34,8 +36,16 @@ public class TaskNormalAttack : Node
                 RangeAttackBullet bullet = GameObject.Instantiate(_hero._rangeAttackBulletPref);
                 bullet.Init(_hero, _hero.Target, _hero.HeroStats.Dmg);
             }
-           
-            _attackCounter = 0f;
+            Debug.Log( _hero.name + " attack " + _hero.Target.name);
+        }
+        
+        _attackCounter += Time.deltaTime;
+        if (_attackCounter >= 0.25f +  1/_hero.HeroStats.AtkSpeed)
+        {
+            _attackCounter = 0;
+
+            isAttack = false;
+
         }
         
         state = NodeState.RUNNING;

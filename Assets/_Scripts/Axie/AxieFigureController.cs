@@ -21,7 +21,7 @@ public class AxieFigureController : MonoBehaviour
     
     Axie2dBuilder builder => Mixer.Builder;
     
-    public void SetGenes(AxieProfile axieProfile, TeamID teamID)
+    public void SetGenes(AxieProfile axieProfile, bool isFaceRight)
     {
         // var (key, body, classIdx, classValue) = ("beast-04", "body-bigyak", 0, 4);
 
@@ -47,7 +47,7 @@ public class AxieFigureController : MonoBehaviour
             {"body-id", " 2727 " },
         };
 
-        _flipX = (teamID == TeamID.Blue);
+        _flipX = isFaceRight;
         
         float scale = 0.0018f;
         byte colorVariant = (byte)builder.GetSampleColorVariant(characterClass, classValue);
@@ -81,7 +81,27 @@ public class AxieFigureController : MonoBehaviour
         _skeletonAnimation.state.SetAnimation(0, "action/move-forward", false).TimeScale = duration * 1.5f;
     }
     
+    public void SwitchFace(bool isFaceRight)
+    {
+        _flipX = isFaceRight;
+        
+        Debug.Log("switch face");
+        
+        var transformScale = new Vector3(this.transform.localScale.x * -1, this.transform.localScale.y, this.transform.localScale.z);
+        this.transform.localScale = transformScale;
+        _skeletonAnimation.state.SetAnimation(0, "activity/prepare", false).TimeScale = 0.5f;
+    }
+    
 
-   
+    public void SetAttack()
+    {
+      _skeletonAnimation.state.SetAnimation(0, "attack/melee/mouth-bite", false).TimeScale = 1;
+    }
+    
+    public void SetUseUltimate()
+    {
+        _skeletonAnimation.state.SetAnimation(0, "attack/ranged/cast-tail", false).TimeScale = 1;
+    }
+
 }
 

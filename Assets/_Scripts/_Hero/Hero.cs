@@ -14,6 +14,8 @@ public class Hero : MonoBehaviour
     [Header("Position")]
     [SerializeField] public int PosX;  
     [SerializeField] public int PosY;
+    [SerializeField] public bool IsFaceRight;
+    [SerializeField] public int CurrentMana;
     
     [Header("Target")]
     [SerializeField] public Hero Target;
@@ -25,7 +27,7 @@ public class Hero : MonoBehaviour
 
     [Header("Axie")]
     [SerializeField] private AxieSpawner _axieSpawner;
-    [SerializeField] private AxieFigureController _axieFigureController;
+    [SerializeField] public AxieFigureController _axieFigureController;
     [SerializeField] public HeroHUD _heroHUD;
     [SerializeField] public HeroVFXController _heroVFXController;
     [SerializeField] public HeroBT _heroBT;
@@ -42,6 +44,7 @@ public class Hero : MonoBehaviour
         TeamID = teamID;
         HeroID = heroID;
         Level = level;
+        IsFaceRight = teamID == TeamID.Blue; 
         _axieSpawner.Init(this);
         _heroHUD.SetLevel(Level);
 
@@ -64,6 +67,8 @@ public class Hero : MonoBehaviour
         {
             Dead();
         }
+
+        CurrentMana += 10;
     }
     
     private void Dead()
@@ -106,6 +111,7 @@ public struct HeroStats
     
     [SerializeField] public float Dmg;
     [SerializeField] public float Hp;
+    [SerializeField] public int MaxMana;
     [SerializeField] public float AtkSpeed;
     [SerializeField] public int AtkRange;
     [SerializeField] public float MoveSpeed;

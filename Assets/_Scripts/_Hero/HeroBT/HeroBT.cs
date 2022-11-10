@@ -15,6 +15,19 @@ public class HeroBT : Tree
             new TaskFindTarget(hero),
             new Selector( new List<Node>
             {
+                
+                new Sequence(new List<Node>
+                {
+                    new IsNotFaceTarget(hero),
+                    new TaskFaceTarget(hero)
+                }),
+                
+                new Sequence(new List<Node>
+                {
+                    new IsUltimateReady(hero),
+                    new TaskUseUltimate(hero)
+                }),
+                
                 new Sequence(new List<Node>
                 {
                     new IsAttackInRange(hero),

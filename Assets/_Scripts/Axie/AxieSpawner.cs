@@ -29,13 +29,13 @@ public class AxieSpawner : MonoBehaviour
         //axieId = _heroProfileConfigMap.GetValueFromKey(heroID).AxieId;
         axieProfile = _heroProfileConfigMap.GetValueFromKey(heroID).axieProfile;
 
-        axieFigureController.SetGenes(axieProfile, TeamID.Blue);
+        axieFigureController.SetGenes(axieProfile, true);
     }
 
     public void Init(Hero hero)
     {
         axieProfile = _heroProfileConfigMap.GetValueFromKey(hero.HeroID).axieProfile;
-        axieFigureController.SetGenes(axieProfile, hero.TeamID);
+        axieFigureController.SetGenes(axieProfile, hero.IsFaceRight);
     }
 
     

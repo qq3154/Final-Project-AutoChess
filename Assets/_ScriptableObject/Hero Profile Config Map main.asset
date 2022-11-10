@@ -22,6 +22,7 @@ MonoBehaviour:
         Species: Human
         Dmg: 1
         Hp: 100
+        MaxMana: 100
         AtkSpeed: 1
         AtkRange: 2
         MoveSpeed: 2
@@ -39,6 +40,7 @@ MonoBehaviour:
         Species: Druild
         Dmg: 1
         Hp: 100
+        MaxMana: 100
         AtkSpeed: 2
         AtkRange: 5
         MoveSpeed: 1
@@ -56,6 +58,7 @@ MonoBehaviour:
         Species: Human
         Dmg: 1
         Hp: 100
+        MaxMana: 100
         AtkSpeed: 2
         AtkRange: 1
         MoveSpeed: 2
@@ -73,6 +76,7 @@ MonoBehaviour:
         Species: Shaman
         Dmg: 1
         Hp: 100
+        MaxMana: 100
         AtkSpeed: 1
         AtkRange: 1
         MoveSpeed: 1

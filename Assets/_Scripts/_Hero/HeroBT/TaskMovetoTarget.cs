@@ -96,7 +96,7 @@ public class TaskMovetoTarget : Node
 
     private void DoOnStartMove()
     {
-        _hero.GetComponent<AxieFigureController>().SetRun(_hero.HeroStats.MoveSpeed);
+        _hero._axieFigureController.SetRun(_hero.HeroStats.MoveSpeed);
     }
 
     private void DoOnFinishMove(int nextX, int nextY)
