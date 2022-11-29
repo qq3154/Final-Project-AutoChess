@@ -85,3 +85,39 @@ MonoBehaviour:
         body: body-spiky
         classIdx: 1
         classValue: 6
+  - id: E
+    heroConfig:
+      HeroStats:
+        Name: D
+        Description: D
+        Class: Kinght
+        Species: Shaman
+        Dmg: 1
+        Hp: 100
+        MaxMana: 100
+        AtkSpeed: 1
+        AtkRange: 1
+        MoveSpeed: 1
+      axieProfile:
+        key: beast-02
+        body: body-spiky
+        classIdx: 3
+        classValue: 7
+  - id: F
+    heroConfig:
+      HeroStats:
+        Name: D
+        Description: D
+        Class: Kinght
+        Species: Shaman
+        Dmg: 1
+        Hp: 100
+        MaxMana: 100
+        AtkSpeed: 1
+        AtkRange: 1
+        MoveSpeed: 1
+      axieProfile:
+        key: beast-04
+        body: body-spiky
+        classIdx: 2
+        classValue: 6

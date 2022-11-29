@@ -21,7 +21,7 @@ public class AxieFigureController : MonoBehaviour
     
     Axie2dBuilder builder => Mixer.Builder;
     
-    public void SetGenes(AxieProfile axieProfile, bool isFaceRight)
+    public void SetGenes(AxieProfile axieProfile, bool isFaceRight, bool isMenu)
     {
         // var (key, body, classIdx, classValue) = ("beast-04", "body-bigyak", 0, 4);
 
@@ -72,6 +72,10 @@ public class AxieFigureController : MonoBehaviour
         _skeletonAnimation.GetComponent<MeshRenderer>().sortingLayerID = SortingLayer.NameToID(_layerName);
         _skeletonAnimation.GetComponent<MeshRenderer>().sortingOrder = _layerOrder;
 
+        if (isMenu)
+        {
+            _skeletonAnimation.state.SetAnimation(0, "activity/sleep", true);
+        }
 
     }
 
