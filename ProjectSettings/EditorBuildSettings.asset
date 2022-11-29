@@ -12,6 +12,18 @@ EditorBuildSettings:
     path: Assets/_Scenes/Home.unity
     guid: 2d847f9f2fddbed42958f32f7e727e5a
   - enabled: 1
-    path: Assets/_Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/_Scenes/Cards.unity
+    guid: dd247ec933d4ccf46877089de667000c
+  - enabled: 1
+    path: Assets/_Scenes/History.unity
+    guid: fd4e140b8fabf734baad0448650818d2
+  - enabled: 1
+    path: Assets/_Scenes/Gameplay.unity
+    guid: df761781c2b6794469bd91978e7c658c
+  - enabled: 1
+    path: Assets/_Scenes/Lose.unity
+    guid: 4c92bd430663d3848a5c6d4113493bfa
+  - enabled: 1
+    path: Assets/_Scenes/Win.unity
+    guid: 6d99002b6ae83a6458d302faa7829420
   m_configObjects: {}
