@@ -7,16 +7,7 @@ public class HeroProfileConfigMap : ScriptableObject
 {
     #region Data
     public List<KeyValue> list;
-
-    [System.Serializable]
-    public class HeroConfig
-    {
-        [Header("Stats")]
-        [SerializeField] public HeroStats HeroStats;
-        
-        [Header("Axie")]
-        [SerializeField] public AxieProfile axieProfile;
-    }
+    
 
     [System.Serializable]
     public class KeyValue
@@ -60,4 +51,14 @@ public class HeroProfileConfigMap : ScriptableObject
 
     #endregion //Public - get data
 
+}
+
+[System.Serializable]
+public class HeroConfig
+{
+    [Header("Stats")]
+    [SerializeField] public HeroStats HeroStats;
+        
+    [Header("Axie")]
+    [SerializeField] public AxieProfile axieProfile;
 }

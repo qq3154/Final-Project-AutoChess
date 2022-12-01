@@ -23,6 +23,7 @@ public class AxieFigureController : MonoBehaviour
     
     public void SetGenes(AxieProfile axieProfile, bool isFaceRight, bool isMenu)
     {
+        Mixer.Init();
         // var (key, body, classIdx, classValue) = ("beast-04", "body-bigyak", 0, 4);
 
         var key = axieProfile.key;

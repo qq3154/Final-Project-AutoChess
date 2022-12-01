@@ -106,6 +106,10 @@ public struct HeroStats
     [SerializeField] public string Name;
     [SerializeField] public string Description;
     
+    [SerializeField] public int Rarity;
+    [SerializeField] public int Level;
+    [SerializeField] public int MaxLevel;
+    
     [SerializeField] public string Class;
     [SerializeField] public string Species;
     
