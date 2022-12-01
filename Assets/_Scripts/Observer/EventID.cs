@@ -13,5 +13,8 @@ public enum EventID
     
     OnAddHeroToBoard,
     OnRemoveHeroFromBoard,
+    
+    //
+    OnLogin,
 	
 }
