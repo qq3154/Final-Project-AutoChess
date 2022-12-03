@@ -2012,7 +2012,7 @@ MonoBehaviour:
   m_Text: quannguyen
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 5
-  m_ReadOnly: 0
+  m_ReadOnly: 1
   m_RichText: 1
   m_GlobalFontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_OnFocusSelectAll: 1
@@ -2465,6 +2465,8 @@ MonoBehaviour:
   _heroProfileConfigMap: {fileID: 11400000, guid: ec275fa2a9e3a794bb5489573e9ee6f9, type: 2}
   _scrollviewHolder: {fileID: 1680211038}
   _cardMenuItemPref: {fileID: 6869082756128267644}
+  _userFullnameTxT: {fileID: 1363514371}
+  _userGoldTxt: {fileID: 1111754224}
 --- !u!1 &1631427860
 GameObject:
   m_ObjectHideFlags: 0

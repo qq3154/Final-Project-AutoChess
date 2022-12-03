@@ -11,29 +11,10 @@ using Observer;
 
 public class ApiRequest : MonoSingleton<ApiRequest>
 {
-    [SerializeField] private string baseUrl = "https://axie-tactic-back-end.herokuapp.com";
+    //[SerializeField] private string baseUrl = "https://axie-tactic-back-end.herokuapp.com";
+    [SerializeField] private string baseUrl = "http://localhost:5000";
 
-    public void SendLoginRequest(string username, string password)
-    {
-        StartCoroutine( IE_SendLoginRequest(username, password));
-    }
-    
-    public void SendRegisterRequest(string username, string password, string fullName, string email)
-    {
-        StartCoroutine( IE_SendRegisterRequest(username, password, fullName, email));
-    }
-    
-    public void SendGetUserProfileRequest()
-    {
-        StartCoroutine( IE_SendGetUserProfileRequest());
-    }
-    
-    public void SendUpdateProfileRequest(string username, string fullName, string email)
-    {
-        StartCoroutine( IE_SendUpdateProfileRequest(username, fullName, email));
-    }
-    
-    IEnumerator  IE_SendLoginRequest(string username, string password)
+    public async Task<ResponseHandler> SendLoginRequest(string username, string password)
     {
         string url = baseUrl + "/api/auth/login/";
         
@@ -41,30 +22,13 @@ public class ApiRequest : MonoSingleton<ApiRequest>
         param.username = username;
         param.password = password;
         string json = JsonConvert.SerializeObject(param);
+       
         
-        UnityWebRequest request= new UnityWebRequest(url, UnityWebRequest.kHttpVerbPOST);
-        byte[] bytes= Encoding.UTF8.GetBytes(json);
-        UploadHandlerRaw uH= new UploadHandlerRaw(bytes);
-        uH.contentType= "application/json";
-        request.uploadHandler= uH;
-        request.downloadHandler = new DownloadHandlerBuffer();
-        
-        Toast.instance.SetWaiting();
-        yield return request.SendWebRequest();
-        var response = JsonConvert.DeserializeObject<ResponseHandler>(request.downloadHandler.text);
-        if (response.success)
-        {
-            this.PostEvent(EventID.OnLogin, response.accessToken);
-            SceneManager.LoadScene("Home");
-            Toast.instance.DisableAll();
-        }
-        else
-        {
-            Toast.instance.SetFail();
-        }
+        var result = await SendRequestAsync(url, json, UnityWebRequest.kHttpVerbPOST, false );
+        return result;
     }
     
-    IEnumerator  IE_SendRegisterRequest(string username, string password, string fullName, string email)
+    public async Task<ResponseHandler> SendRegisterRequest(string username, string password, string fullName, string email)
     {
         string url = baseUrl + "/api/auth/register/";
         
@@ -76,56 +40,23 @@ public class ApiRequest : MonoSingleton<ApiRequest>
         param.role = 1;
         param.gold = 0;
         string json = JsonConvert.SerializeObject(param);
+       
         
-        UnityWebRequest request= new UnityWebRequest(url, UnityWebRequest.kHttpVerbPOST);
-        byte[] bytes= Encoding.UTF8.GetBytes(json);
-        UploadHandlerRaw uH= new UploadHandlerRaw(bytes);
-        uH.contentType= "application/json";
-        request.uploadHandler= uH;
-        request.downloadHandler = new DownloadHandlerBuffer();
-        
-        Toast.instance.SetWaiting();
-        yield return request.SendWebRequest();
-        var response = JsonConvert.DeserializeObject<ResponseHandler>(request.downloadHandler.text);
-        if (response.success)
-        {
-            //SceneManager.LoadScene("Home");
-            Toast.instance.DisableAll();
-        }
-        else
-        {
-            Toast.instance.SetFail();
-        }
+        var result = await SendRequestAsync(url, json, UnityWebRequest.kHttpVerbPOST, false );
+        return result;
     }
     
-    IEnumerator  IE_SendGetUserProfileRequest()
+    public async Task<ResponseHandler>  SendGetUserProfileRequest()
     {
         string url = baseUrl + "/api/user/";
-        string auth = UserManager.instance.auth;
 
-        UnityWebRequest request= new UnityWebRequest(url, UnityWebRequest.kHttpVerbGET);
-        request.downloadHandler = new DownloadHandlerBuffer();
-        request.SetRequestHeader("Authorization", "Bearer " + auth);
-        
-        Toast.instance.SetWaiting();
-        yield return request.SendWebRequest();
-        var response = JsonConvert.DeserializeObject<ResponseHandler>(request.downloadHandler.text);
-        if (response.success)
-        {
-            //SceneManager.LoadScene("Home");
-            Toast.instance.DisableAll();
-            UserManager.instance.SetUserProfile(response.user._id, response.user.username, response.user.password, response.user.fullName, response.user.email, response.user.gold);
-        }
-        else
-        {
-            Toast.instance.SetFail();
-        }
+        var result = await SendRequestAsync(url, null, UnityWebRequest.kHttpVerbGET, true );
+        return result;
     }
     
-    IEnumerator  IE_SendUpdateProfileRequest(string username, string fullName, string email)
+    public async Task<ResponseHandler>  SendUpdateProfileRequest(string username, string fullName, string email)
     {
         string url = baseUrl + "/api/user/update/";
-        string auth = UserManager.instance.auth;
         
         ParamRequest param = new ParamRequest();
         param.username = username;
@@ -133,27 +64,50 @@ public class ApiRequest : MonoSingleton<ApiRequest>
         param.email = email;
         string json = JsonConvert.SerializeObject(param);
         
-        UnityWebRequest request= new UnityWebRequest(url, UnityWebRequest.kHttpVerbPUT);
-        byte[] bytes= Encoding.UTF8.GetBytes(json);
-        UploadHandlerRaw uH= new UploadHandlerRaw(bytes);
-        uH.contentType= "application/json";
-        request.uploadHandler= uH;
-        request.downloadHandler = new DownloadHandlerBuffer();
-        request.SetRequestHeader("Authorization", "Bearer " + auth);
-        
-        Toast.instance.SetWaiting();
-        yield return request.SendWebRequest();
-        var response = JsonConvert.DeserializeObject<ResponseHandler>(request.downloadHandler.text);
-        if (response.success)
-        {
-            Toast.instance.DisableAll();
-        }
-        else
-        {
-            Toast.instance.SetFail();
-        }
+        var result = await SendRequestAsync(url, json, UnityWebRequest.kHttpVerbPUT, true );
+        return result;
     }
- 
+    
+    public async Task<ResponseHandler>  SendGetMatchesRequest()
+    {
+        string url = baseUrl + "/api/match/";
+        
+        
+        var result = await SendRequestAsync(url, null, UnityWebRequest.kHttpVerbGET, true );
+        return result;
+    }
+    
+    private async Task<ResponseHandler> SendRequestAsync(string url, string param, string requestType, bool isAuthentication )
+    {
+
+        UnityWebRequest request= new UnityWebRequest(url, requestType);
+
+
+        if (param != null)
+        {
+            byte[] bytes= Encoding.UTF8.GetBytes(param);
+            UploadHandlerRaw uH= new UploadHandlerRaw(bytes);
+            uH.contentType= "application/json";
+            request.uploadHandler= uH;
+        }
+       
+        
+        request.downloadHandler = new DownloadHandlerBuffer();
+
+        if (isAuthentication)
+        {
+            string auth = UserManager.instance.auth;
+            request.SetRequestHeader("Authorization", "Bearer " + auth);
+        }
+        
+        request.SendWebRequest();
+        while (!request.isDone)
+        {
+            await Task.Yield();
+        }
+        var response = JsonConvert.DeserializeObject<ResponseHandler>(request.downloadHandler.text);
+        return response;
+    }
     
     public struct ParamRequest
     {
@@ -171,6 +125,7 @@ public class ApiRequest : MonoSingleton<ApiRequest>
         public string message;
         public string accessToken;
         public UserResponseHandler user;
+        public List<MatchesResponseHandler> matches;
     }
     
     public struct UserResponseHandler
@@ -181,8 +136,18 @@ public class ApiRequest : MonoSingleton<ApiRequest>
         public string fullName;
         public string email;
         public int gold;
-            
     }
+    
+    public struct MatchesResponseHandler
+    {
+        public string _id;
+        public UserResponseHandler winner;
+        public UserResponseHandler loser;
+        public int round;
+        public string createAt;
+    }
+    
+    
 }
 
 

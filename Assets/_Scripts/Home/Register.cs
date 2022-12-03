@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Observer;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Register : MonoBehaviour
@@ -25,10 +27,28 @@ public class Register : MonoBehaviour
 
     public void OnRegister()
     {
+        SendRegisterRequest();
+    }
+
+    private async void SendRegisterRequest()
+    {   
         string usernameStr = username.text;
         string passwordStr = password.text;
         string fullnameStr = fullname.text;
         string emailStr = email.text;
-        ApiRequest.instance.SendRegisterRequest(usernameStr, passwordStr, fullnameStr, emailStr);
+        
+        Toast.instance.SetWaiting();
+        
+        var response = await ApiRequest.instance.SendRegisterRequest(usernameStr, passwordStr, fullnameStr, emailStr);
+        
+        if (response.success)
+        {
+            Toast.instance.SetSuccess();
+        }
+        else
+        {
+            Toast.instance.SetFail();
+        }
     }
+
 }

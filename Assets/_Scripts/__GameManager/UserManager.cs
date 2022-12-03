@@ -22,7 +22,21 @@ public class UserManager : MonoSingleton<UserManager>
     private void DoOnLogin( string auth)
     {
         this.auth = auth;
-        ApiRequest.instance.SendGetUserProfileRequest();
+        SendLoginRequest();
+    }
+    
+    private async void SendLoginRequest()
+    {
+        var response = await ApiRequest.instance.SendGetUserProfileRequest();
+        
+        if (response.success)
+        {
+            SetUserProfile(response.user._id, response.user.username, response.user.password, response.user.fullName, response.user.email, response.user.gold);
+        }
+        else
+        {
+            Debug.LogError("Get user profile fail");
+        }
     }
 
     public void SetUserProfile(string id, string username, string password, string fullName, string email, int gold )

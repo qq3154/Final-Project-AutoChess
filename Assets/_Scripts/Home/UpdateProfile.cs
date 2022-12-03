@@ -30,9 +30,28 @@ public class UpdateProfile : MonoBehaviour
 
     public void OnUpdateProfile()
     {
+        SendUpdateProfileRequest();
+    }
+
+    async void SendUpdateProfileRequest()
+    {
         string usernameStr = username.text;
         string fullnameStr = fullname.text;
         string emailStr = email.text;
-        ApiRequest.instance.SendUpdateProfileRequest(usernameStr, fullnameStr, emailStr);
+        
+        Toast.instance.SetWaiting();
+        var response = await ApiRequest.instance.SendUpdateProfileRequest(usernameStr, fullnameStr, emailStr);
+        
+        if (response.success)
+        { 
+            UserManager.instance.username = username.text;
+            UserManager.instance.fullName =  fullname.text;
+            UserManager.instance.email =  email.text;
+            Toast.instance.SetSuccess();
+        }
+        else
+        {
+            Toast.instance.SetFail();
+        }
     }
 }
