@@ -5,8 +5,9 @@ using UnityEngine.Serialization;
 
 public class GameFlowManager : MonoSingleton<GameFlowManager>
 {
+    public bool isConnect =false;
     public GameState gameState;
-    [FormerlySerializedAs("GamePlayState")] public GamePlayState gamePlayState;
+    public GamePlayState gamePlayState;
 
     public int waveID;
 
