@@ -6,7 +6,7 @@ public enum EventID
 {
     None = 0,
     OnGamePlayStart,
-    OnWaveStart,
+  
     OnSelectCardPhaseStart,
     OnSelectPositionPhaseStart,
     OnFightStart,
@@ -17,4 +17,13 @@ public enum EventID
     //
     OnLogin,
 	
+}
+
+public static class PhotonEvent
+{
+	public static byte OnGameplayStart = 1;
+	public static byte OnSetOpponentName = 2;
+	public static byte OnSelectCardPhaseStart = 3;
+	public static byte OnInitCards = 4;
+	public static byte OnSelectCard = 5;
 }

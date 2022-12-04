@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using Observer;
+using Photon.Pun;
 using Spine.Unity.Examples;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -66,9 +67,9 @@ public class BoardManager : MonoSingleton<BoardManager>
 
     public void AddHero(TeamID teamID, string heroID, Card card)
     {
-        List<BenchSlot> benchSlots = PlayerBenchSlot();
-        List<Hero> heroOnBoards = PlayerOnBoard();
-        List<Hero> heroOnBenchs = PlayerBench();
+        List<BenchSlot> benchSlots = PlayerBenchSlot(teamID);
+        List<Hero> heroOnBoards = PlayerOnBoard(teamID);
+        List<Hero> heroOnBenchs = PlayerBench(teamID);
 
         List<Hero> oneStarHeros = new List<Hero>();
         List<Hero> twoStarHeros = new List<Hero>();
@@ -399,24 +400,46 @@ public class BoardManager : MonoSingleton<BoardManager>
         return (GameFlowManager.instance.playerTeam == TeamID.Blue) ? _onBoardA : _onBoardB;
     }
     
+    public List<Hero> PlayerOnBoard(TeamID teamID)
+    {
+        return (teamID == TeamID.Blue) ? _onBoardA : _onBoardB;
+    }
+    
     public List<Hero> PlayerBench()
     {
         return (GameFlowManager.instance.playerTeam == TeamID.Blue) ? _benchA : _benchB;
+    }
+    public List<Hero> PlayerBench(TeamID teamID)
+    {
+        return (teamID == TeamID.Blue) ? _benchA : _benchB;
     }
     
     public List<BenchSlot> PlayerBenchSlot()
     {
         return (GameFlowManager.instance.playerTeam == TeamID.Blue) ? _benchSlotA : _benchSlotB;
     }
+    public List<BenchSlot> PlayerBenchSlot(TeamID teamID)
+    {
+        return (teamID == TeamID.Blue) ? _benchSlotA : _benchSlotB;
+    }
+    
 
     public Dictionary<string, int> PlayerStrategies()
     {
         return (GameFlowManager.instance.playerTeam == TeamID.Blue) ? _strategiesA : _strategiesB;
     }
+    public Dictionary<string, int> PlayerStrategies(TeamID teamID)
+    {
+        return (teamID == TeamID.Blue) ? _strategiesA : _strategiesB;
+    }
 
     public Hero PlayerCurrentSelect()
     {
         return (GameFlowManager.instance.playerTeam == TeamID.Blue) ? _currentSelectA : _currentSelectB;
+    }
+    public Hero PlayerCurrentSelect(TeamID teamID)
+    {
+        return (teamID == TeamID.Blue) ? _currentSelectA : _currentSelectB;
     }
 
     public void SetPlayerCurrentSelect(Hero hero)

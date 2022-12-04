@@ -1,12 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ExitGames.Client.Photon;
 using Observer;
+using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-public class SelectCardBoard : MonoBehaviour
+public class SelectCardBoard : MonoBehaviour, IOnEventCallback
 {
    
     [SerializeField] private GameObject _root;
@@ -16,17 +19,15 @@ public class SelectCardBoard : MonoBehaviour
     [SerializeField] private List<string> _heroPool;
     [SerializeField] private int _maxCardToSelect = 5;
     [SerializeField] private GameObject _cardPref;
-    private void Awake()
+    
+    private void OnEnable()
     {
-        this.RegisterListener(EventID.OnWaveStart, (param) => DoOnWaveStart());
-        this.RegisterListener(EventID.OnSelectCardPhaseStart, (param) => Show());
+        PhotonNetwork.AddCallbackTarget(this);
     }
 
-
-    private void DoOnWaveStart()
+    private void OnDisable()
     {
-        //Hide();
-        //this.PostEvent(EventID.OnSelectCardPhaseStart);
+        PhotonNetwork.RemoveCallbackTarget(this);
     }
 
     private void Hide()
@@ -46,24 +47,23 @@ public class SelectCardBoard : MonoBehaviour
     private void Show()
     {
         _root.SetActive(true);
-        InitRandomCard();
     }
 
     private void InitRandomCard()
     {
-        _randomCards.Clear();
+        // _randomCards.Clear();
+        List<string> cardIds = new List<string>();
         for (int i = 0; i < _maxCardToSelect; i++)
         {
             int index = Random.Range(0,_heroPool.Count);
             string heroID = _heroPool[index];
-            //_heroPool.RemoveAt(index);
-            
-            var instantiate = Instantiate(_cardPref, _cardHolder.transform);
-
-            Card myCard= instantiate.GetComponent<Card>();
-            myCard.InitCard(heroID);
-            _randomCards.Add(myCard);
+            cardIds.Add(heroID);
         }
+
+        string[] arr = cardIds.ToArray();
+        object[] content = new object[] {arr};
+        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All }; 
+        PhotonNetwork.RaiseEvent(PhotonEvent.OnInitCards, content, raiseEventOptions, SendOptions.SendReliable);
     }
 
     #region Debug function
@@ -82,4 +82,41 @@ public class SelectCardBoard : MonoBehaviour
 
     #endregion
 
+    public void OnEvent(EventData photonEvent)
+    {
+        byte eventCode = photonEvent.Code;
+        if (eventCode == PhotonEvent.OnSelectCardPhaseStart)
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                InitRandomCard();
+            }
+            
+            
+        }
+
+        if (eventCode == PhotonEvent.OnInitCards)
+        {
+            InitCard(photonEvent);
+            Show();
+        }
+    }
+
+    void InitCard(EventData photonEvent)
+    {
+        object[] data = (object[])photonEvent.CustomData;
+        string[] arr = (string[])data[0];
+        List<string> cardIds = new List<string>(arr);
+        
+        _randomCards.Clear();
+        for (int i = 0; i < cardIds.Count; i++)
+        {
+            var instantiate = Instantiate(_cardPref, _cardHolder.transform);
+
+            Card myCard= instantiate.GetComponent<Card>();
+            myCard.InitCard(i, cardIds[i]);
+            _randomCards.Add(myCard);
+        }
+
+    }
 }

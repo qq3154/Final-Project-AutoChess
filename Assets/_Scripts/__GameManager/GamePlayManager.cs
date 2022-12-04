@@ -1,25 +1,55 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using ExitGames.Client.Photon;
 using Observer;
+using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 
-public class GamePlayManager : MonoBehaviour
+public class GamePlayManager : MonoBehaviour, IOnEventCallback
 {
     // Start is called before the first frame update
     void Start()
     {
-        this.PostEvent(EventID.OnGamePlayStart);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            SendOngameStart();
+        }
+    }
+    private void OnEnable()
+    {
+        PhotonNetwork.AddCallbackTarget(this);
+    }
+    private void OnDisable()
+    {
+        PhotonNetwork.RemoveCallbackTarget(this);
+    }
+    
+    private void SendOngameStart()
+    {
+        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All }; // You would have to set the Receivers to All in order to receive this event on the local client as well
+        PhotonNetwork.RaiseEvent(PhotonEvent.OnGameplayStart, null, raiseEventOptions, SendOptions.SendReliable);
+    }
+  
+    IEnumerator IE_Delay()
+    {
+        yield return new WaitForSeconds(1);
+        //this.PostEvent(EventID.OnSelectCardPhaseStart);
+        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.RaiseEvent(PhotonEvent.OnSelectCardPhaseStart, null, raiseEventOptions, SendOptions.SendReliable);
+        }
         
-        //Play intro or something then start wave
-        
-        
-        
-        this.PostEvent(EventID.OnWaveStart);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnEvent(EventData photonEvent)
     {
-        
+        byte eventCode = photonEvent.Code;
+        if (eventCode == PhotonEvent.OnGameplayStart)
+        {
+            StartCoroutine(IE_Delay());
+        }
     }
 }
