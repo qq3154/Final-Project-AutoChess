@@ -28,5 +28,12 @@ public static class PhotonEvent
 	public static byte OnSelectCard = 5;
 	public static byte OnMoveHeroToBench = 6;
 	public static byte OnMoveHeroToBoard = 7;
+	public static byte OnHeroMove = 8;
+	public static byte OnHeroFindTarget = 9;
+	public static byte OnHeroFaceTarget = 10;
+	public static byte OnHeroNormalAttack = 11;
+	public static byte OnHeroUseUltimate = 12;
+	
+	
 	
 }

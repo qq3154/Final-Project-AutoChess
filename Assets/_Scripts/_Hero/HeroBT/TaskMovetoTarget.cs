@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using BehaviorTree;
 using DG.Tweening;
+using ExitGames.Client.Photon;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class TaskMovetoTarget : Node
 {
@@ -73,6 +76,11 @@ public class TaskMovetoTarget : Node
             findPath2.Setup(_hero.PosX, _hero.PosY, _hero.TargetPosX, _hero.TargetPosY);
             if (findPath2.distance >1)
             {
+                
+                object[] content = new object[] {_hero.PosX, _hero.PosY, findPath2.nextMoveX, findPath2.nextMoveY}; 
+                RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };  
+                PhotonNetwork.RaiseEvent(PhotonEvent.OnHeroMove, content, raiseEventOptions, SendOptions.SendReliable);
+                
                 BoardManager.instance.Pos[_hero.PosX, _hero.PosY] = false;
                 BoardManager.instance.Pos[findPath2.nextMoveX, findPath2.nextMoveY] = true;
                 

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using BehaviorTree;
+using ExitGames.Client.Photon;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class TaskNormalAttack : Node
 {
@@ -37,6 +40,10 @@ public class TaskNormalAttack : Node
                 bullet.Init(_hero, _hero.Target, _hero.HeroStats.Dmg);
             }
             Debug.Log( _hero.name + " attack " + _hero.Target.name);
+            
+            object[] content = new object[] {_hero.PosX, _hero.PosY, _hero.Target.PosX, _hero.Target.PosY}; 
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };  
+            PhotonNetwork.RaiseEvent(PhotonEvent.OnHeroNormalAttack, content, raiseEventOptions, SendOptions.SendReliable);
         }
         
         _attackCounter += Time.deltaTime;
