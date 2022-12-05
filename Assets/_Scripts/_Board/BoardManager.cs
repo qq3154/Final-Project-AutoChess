@@ -2,14 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using ExitGames.Client.Photon;
 using JetBrains.Annotations;
 using Observer;
 using Photon.Pun;
+using Photon.Pun.UtilityScripts;
+using Photon.Realtime;
 using Spine.Unity.Examples;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class BoardManager : MonoSingleton<BoardManager>
+public class BoardManager : MonoSingleton<BoardManager>, IOnEventCallback
 {
     #region Field
     public int _X;
@@ -35,6 +38,16 @@ public class BoardManager : MonoSingleton<BoardManager>
     [SerializeField] private GameObject _heroPref;
     
     #endregion
+    
+    private void OnEnable()
+    {
+        PhotonNetwork.AddCallbackTarget(this);
+    }
+
+    private void OnDisable()
+    {
+        PhotonNetwork.RemoveCallbackTarget(this);
+    }
 
     #region Unity function
     protected override void DoOnAwake()
@@ -240,7 +253,8 @@ public class BoardManager : MonoSingleton<BoardManager>
             return;
 
         }
-
+        
+        int i = 0;
         //add to bench
         foreach (var slot in benchSlots)
         {
@@ -251,11 +265,22 @@ public class BoardManager : MonoSingleton<BoardManager>
                 Hero myHero = instantiate.GetComponent<Hero>();
                 myHero.InitHero(teamID, heroID, 1);
                 myHero.name = myHero.HeroStats.Name;
+                if (teamID == TeamID.Blue)
+                {
+                    myHero.PosX = -1;
+                    myHero.PosY = i;
+                }
+                else
+                {
+                    myHero.PosX = -2;
+                    myHero.PosY = i;
+                }
                 card.SetInteractable(false);
                 slot.SetHero(myHero);
                 heroOnBenchs.Add(myHero);
                 return;
             }
+            i++;
         }
         //noti bench is full
         Debug.Log(teamID + " bench full");
@@ -294,7 +319,7 @@ public class BoardManager : MonoSingleton<BoardManager>
         hero.PosX = x;
         hero.PosY = y;
 
-        foreach (var benchSlot in PlayerBenchSlot())
+        foreach (var benchSlot in PlayerBenchSlot(teamID))
         {
             if (benchSlot.isUse)
             {
@@ -305,41 +330,66 @@ public class BoardManager : MonoSingleton<BoardManager>
             }
         }
         
-        if (PlayerBench().Contains(hero))
+        if (PlayerBench(teamID).Contains(hero))
         {
-            PlayerBench().Remove(hero);
+            PlayerBench(teamID).Remove(hero);
         }
         
-        if (!PlayerOnBoard().Contains(hero))
+        if (!PlayerOnBoard(teamID).Contains(hero))
         {
-            PlayerOnBoard().Add(hero);
+            PlayerOnBoard(teamID).Add(hero);
         }
-      
-        PlayerCurrentSelect()._heroVFXController.SetSelectVFXEnable(false);
-        SetPlayerCurrentSelect(null);
+        
+        if (teamID == GameFlowManager.instance.playerTeam)
+        {
+            PlayerCurrentSelect()._heroVFXController.SetSelectVFXEnable(false);
+            SetPlayerCurrentSelect(null);
+        }
         
         this.PostEvent(EventID.OnAddHeroToBoard, hero);
     }
     
     void MoveHeroToBench(TeamID teamID, Hero hero, int index)
     {
-        hero.transform.SetParent( PlayerBenchSlot()[index].transform);
+        foreach (var benchSlot in PlayerBenchSlot(teamID))
+        {
+            if (benchSlot.GetHero() == hero)
+            {
+                benchSlot.RemoveHero();
+            }
+        }
+        hero.transform.SetParent( PlayerBenchSlot(teamID)[index].transform);
         hero.transform.localPosition = Vector2.zero;
         
-        PlayerBenchSlot()[index].SetHero(hero);
+        PlayerBenchSlot(teamID)[index].SetHero(hero);
         
-        if (!PlayerBench().Contains(hero))
+        if (!PlayerBench(teamID).Contains(hero))
         {
-            PlayerBench().Add(hero);
+            PlayerBench(teamID).Add(hero);
         }
         
-        if (PlayerOnBoard().Contains(hero))
+        if (PlayerOnBoard(teamID).Contains(hero))
         {
-            PlayerOnBoard().Remove(hero);
+            PlayerOnBoard(teamID).Remove(hero);
         }
-        
-        PlayerCurrentSelect()._heroVFXController.SetSelectVFXEnable(false);
-        SetPlayerCurrentSelect(null);
+
+        if (teamID == TeamID.Blue)
+        {
+            hero.PosX = -1;
+            hero.PosY = index;
+        }
+        else
+        {
+            hero.PosX = -2;
+            hero.PosY = index;
+        }
+
+        if (teamID == GameFlowManager.instance.playerTeam)
+        {
+            PlayerCurrentSelect()._heroVFXController.SetSelectVFXEnable(false);
+            SetPlayerCurrentSelect(null);
+        }
+       
         
         this.PostEvent(EventID.OnRemoveHeroFromBoard, hero);
     }
@@ -369,7 +419,10 @@ public class BoardManager : MonoSingleton<BoardManager>
       
         if (PlayerCurrentSelect() != null)
         {
-            MoveHeroToBoard(teamID, PlayerCurrentSelect(), x, y);
+            object[] content = new object[] {teamID, x, y, PlayerCurrentSelect().PosX, PlayerCurrentSelect().PosY}; 
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };  
+            PhotonNetwork.RaiseEvent(PhotonEvent.OnMoveHeroToBoard, content, raiseEventOptions, SendOptions.SendReliable);
+            //MoveHeroToBoard(teamID, PlayerCurrentSelect(), x, y);
         }
     }
     
@@ -377,7 +430,10 @@ public class BoardManager : MonoSingleton<BoardManager>
     {
         if (PlayerCurrentSelect() != null)
         {
-            MoveHeroToBench(teamID, PlayerCurrentSelect(), index);
+            object[] content = new object[] {teamID, index, PlayerCurrentSelect().PosX, PlayerCurrentSelect().PosY}; 
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };  
+            PhotonNetwork.RaiseEvent(PhotonEvent.OnMoveHeroToBench, content, raiseEventOptions, SendOptions.SendReliable);
+            //MoveHeroToBench(teamID, PlayerCurrentSelect(), index);
         }
     }
 
@@ -393,6 +449,28 @@ public class BoardManager : MonoSingleton<BoardManager>
         
          ans = _onBoardA.Concat(_onBoardB).ToList();
          return ans;
+    }
+
+    public Hero GetHeroByPosition(int x, int y)
+    {
+        if (x == -1)
+        {
+            return _benchSlotA[y].GetHero();
+        }
+        if (x == -2)
+        {
+            return _benchSlotB[y].GetHero();
+        }
+
+        foreach (var hero in AllHeroes())
+        {
+            if (hero.PosX == x && hero.PosY == y)
+            {
+                return hero;
+            }
+        }
+
+        return null;
     }
     
     public List<Hero> PlayerOnBoard()
@@ -456,4 +534,37 @@ public class BoardManager : MonoSingleton<BoardManager>
     
 
     #endregion
+
+    public void OnEvent(EventData photonEvent)
+    {
+        byte eventCode = photonEvent.Code;
+        if (eventCode == PhotonEvent.OnMoveHeroToBench)
+        {
+            object[] data = (object[])photonEvent.CustomData;
+            TeamID teamId = (TeamID)data[0];
+            int index = (int)data[1];
+            int posX = (int)data[2];
+            int posY = (int)data[3];
+            
+            MoveHeroToBench(teamId, GetHeroByPosition(posX, posY), index);
+            
+            Debug.Log("on move hero to bench");
+        }
+        
+        if (eventCode == PhotonEvent.OnMoveHeroToBoard)
+        {
+            object[] data = (object[])photonEvent.CustomData;
+            TeamID teamId = (TeamID)data[0];
+            int indexX = (int)data[1];
+            int indexY = (int)data[2];
+            int posX = (int)data[3];
+            int posY = (int)data[4];
+            
+            MoveHeroToBoard(teamId, GetHeroByPosition(posX, posY), indexX, indexY);
+            
+            Debug.Log("on move hero to bench");
+        }
+        
+        
+    }
 }
