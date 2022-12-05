@@ -1,6 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ExitGames.Client.Photon;
+using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -84,6 +87,30 @@ public class Hero : MonoBehaviour
         }
 
         BoardManager.instance.Pos[PosX, PosY] = false;
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            if ( BoardManager.instance._onBoardA.Count == 0)
+            {
+                Debug.Log("Red win round");
+                
+                object[] content = new object[] { TeamID.Red ,5}; 
+                RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };  
+                PhotonNetwork.RaiseEvent(PhotonEvent.OnRoundEnd, content, raiseEventOptions, SendOptions.SendReliable);
+            }
+
+            if ( BoardManager.instance._onBoardB.Count == 0)
+            {
+                Debug.Log("Blue win round");
+                
+                object[] content = new object[] { TeamID.Blue ,5}; 
+                RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };  
+                PhotonNetwork.RaiseEvent(PhotonEvent.OnRoundEnd, content, raiseEventOptions, SendOptions.SendReliable);
+            }
+          
+        }
+        
+       
       
         Destroy(this.gameObject);
        

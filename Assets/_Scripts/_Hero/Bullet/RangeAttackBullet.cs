@@ -2,10 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using ExitGames.Client.Photon;
+using Photon.Pun;
+using Photon.Realtime;
 using UnityEditor;
 using UnityEngine;
 
-public class RangeAttackBullet : MonoBehaviour
+public class RangeAttackBullet : MonoBehaviour, IOnEventCallback
 {
     [SerializeField] private float speed = 20;
     private Hero _target;
@@ -40,5 +43,25 @@ public class RangeAttackBullet : MonoBehaviour
         }
         
        
+    }
+
+    public void OnEvent(EventData photonEvent)
+    {
+        byte eventCode = photonEvent.Code;
+        if (eventCode == PhotonEvent.OnRoundEnd)
+        {  
+            Destroy(gameObject);
+            
+        }
+    }
+    
+    private void OnEnable()
+    {
+        PhotonNetwork.AddCallbackTarget(this);
+    }
+
+    private void OnDisable()
+    {
+        PhotonNetwork.RemoveCallbackTarget(this);
     }
 }

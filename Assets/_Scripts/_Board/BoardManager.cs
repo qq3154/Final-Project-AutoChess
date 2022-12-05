@@ -27,6 +27,8 @@ public class BoardManager : MonoSingleton<BoardManager>, IOnEventCallback
     public List<Hero> _benchB;
     public List<BenchSlot> _benchSlotA;
     public List<BenchSlot> _benchSlotB;
+    
+    public List<HeroRecord> _HeroRecords = new List<HeroRecord>();
 
     public Dictionary<string, int> _strategiesA = new Dictionary<string, int>();
     public Dictionary<string, int> _strategiesB = new Dictionary<string, int>();
@@ -73,10 +75,83 @@ public class BoardManager : MonoSingleton<BoardManager>, IOnEventCallback
             hero._heroBT.enabled = true;
         }
     }
-    
+
+    public void SaveHeroRecords()
+    {
+        _HeroRecords.Clear();
+        foreach (var hero in AllHeroes())
+        {
+            HeroRecord heroRecord = new HeroRecord();
+            heroRecord.teamID = hero.TeamID;
+            heroRecord.heroID = hero.HeroID;
+            heroRecord.level = hero.Level;
+            heroRecord.posX = hero.PosX;
+            heroRecord.posY = hero.PosY;
+            _HeroRecords.Add(heroRecord);
+            
+            
+            
+        }
+    }
+
+    public void SetupBoard()
+    {
+        foreach (var heroRecord in _HeroRecords)
+        {
+            var instantiate= Instantiate(_heroPref);
+            instantiate.transform.SetParent(_fightBoardRoot.transform);
+            Hero hero = instantiate.GetComponent<Hero>();
+            hero.InitHero(heroRecord.teamID, heroRecord.heroID, heroRecord.level);
+            hero.name = hero.HeroStats.Name;
+            
+            hero.transform.position = new Vector2(heroRecord.posX, heroRecord.posY);
+            hero.PosX = heroRecord.posX;
+            hero.PosY = heroRecord.posY;
+            
+        
+            if (!PlayerOnBoard(heroRecord.teamID).Contains(hero))
+            {
+                PlayerOnBoard(heroRecord.teamID).Add(hero);
+            }
+        }
+        
+    }
+
+    public void ClearBoard()
+    {
+        foreach (var hero in AllHeroes())
+        {
+            if (hero.TeamID == TeamID.Blue)
+            {  
+                BoardManager.instance._onBoardA.Remove(hero);
+            }
+            else
+            {
+                BoardManager.instance._onBoardB.Remove(hero);
+            }
+            
+            BoardManager.instance.Pos[hero.PosX, hero.PosY] = false;
+            AllHeroes().Remove(hero);
+            Destroy(hero.gameObject);
+            
+        }
+    }
+
+    [Serializable]
+    public struct HeroRecord
+    {
+        public TeamID teamID;
+        public string heroID;
+        public int level;
+        public int posX;
+        public int posY;
+    }
+
     #endregion
 
     #region Hero function
+    
+    
 
     public void AddHero(TeamID teamID, string heroID, Card card)
     {

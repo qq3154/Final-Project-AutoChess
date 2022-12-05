@@ -5,8 +5,10 @@ using ExitGames.Client.Photon;
 using Observer;
 using Photon.Pun;
 using Photon.Realtime;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class SelectCardBoard : MonoBehaviour, IOnEventCallback
@@ -19,6 +21,9 @@ public class SelectCardBoard : MonoBehaviour, IOnEventCallback
     [SerializeField] private List<string> _heroPool;
     [SerializeField] private int _maxCardToSelect = 5;
     [SerializeField] private GameObject _cardPref;
+
+    [SerializeField] private TMP_Text _cooldown;
+    [SerializeField] private Button _openBtn;
     
     private void OnEnable()
     {
@@ -91,8 +96,11 @@ public class SelectCardBoard : MonoBehaviour, IOnEventCallback
             {
                 InitRandomCard();
             }
-            
-            
+
+            StartCoroutine(IE_Cooldown());
+
+            //cooldown 15s select phase
+
         }
 
         if (eventCode == PhotonEvent.OnInitCards)
@@ -118,5 +126,29 @@ public class SelectCardBoard : MonoBehaviour, IOnEventCallback
             _randomCards.Add(myCard);
         }
 
+    }
+
+    IEnumerator IE_Cooldown()
+    {
+        _cooldown.gameObject.SetActive(true);
+        for (int i = 15; i >= 0; i--)
+        {
+            _cooldown.SetText(i.ToString());
+            yield return new WaitForSeconds(1); 
+           
+        }
+        _root.SetActive(false);
+        _openBtn.gameObject.SetActive(false);
+        _cooldown.SetText("Fight!");
+        yield return new WaitForSeconds(1); 
+        _cooldown.SetText("");
+        _cooldown.gameObject.SetActive(false);
+        
+        BoardManager.instance.SaveHeroRecords();
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            BoardManager.instance.StartFight();
+        }
     }
 }

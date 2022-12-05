@@ -34,6 +34,8 @@ public static class PhotonEvent
 	public static byte OnHeroNormalAttack = 11;
 	public static byte OnHeroUseUltimate = 12;
 	
+	public static byte OnRoundEnd = 13;
+	
 	
 	
 }

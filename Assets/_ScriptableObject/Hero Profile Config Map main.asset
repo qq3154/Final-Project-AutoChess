@@ -23,7 +23,7 @@ MonoBehaviour:
         MaxLevel: 5
         Class: Assassin
         Species: Human
-        Dmg: 1
+        Dmg: 25
         Hp: 100
         MaxMana: 100
         AtkSpeed: 1
@@ -44,7 +44,7 @@ MonoBehaviour:
         MaxLevel: 5
         Class: Warrior
         Species: Druild
-        Dmg: 1
+        Dmg: 25
         Hp: 100
         MaxMana: 100
         AtkSpeed: 2
@@ -65,7 +65,7 @@ MonoBehaviour:
         MaxLevel: 5
         Class: Hunter
         Species: Human
-        Dmg: 1
+        Dmg: 25
         Hp: 100
         MaxMana: 100
         AtkSpeed: 2
@@ -86,7 +86,7 @@ MonoBehaviour:
         MaxLevel: 5
         Class: Kinght
         Species: Shaman
-        Dmg: 1
+        Dmg: 30
         Hp: 100
         MaxMana: 100
         AtkSpeed: 1
@@ -107,7 +107,7 @@ MonoBehaviour:
         MaxLevel: 5
         Class: Kinght
         Species: Shaman
-        Dmg: 1
+        Dmg: 20
         Hp: 100
         MaxMana: 100
         AtkSpeed: 1
@@ -128,7 +128,7 @@ MonoBehaviour:
         MaxLevel: 5
         Class: Kinght
         Species: Shaman
-        Dmg: 1
+        Dmg: 15
         Hp: 100
         MaxMana: 100
         AtkSpeed: 1
