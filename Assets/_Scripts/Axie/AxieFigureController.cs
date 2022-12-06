@@ -108,5 +108,24 @@ public class AxieFigureController : MonoBehaviour
         _skeletonAnimation.state.SetAnimation(0, "attack/ranged/cast-tail", false).TimeScale = 1;
     }
 
+    public void SetOnWin()
+    {
+        int index = Random.Range(0, 3);
+        switch (index)
+        {
+            case 0:
+                _skeletonAnimation.state.SetAnimation(0, "activity/appear", false).TimeScale = 1;
+                break;
+            case 1:
+                _skeletonAnimation.state.SetAnimation(0, "activity/victory-pose-back-flip", false).TimeScale = 1;
+                break;
+            case 2:
+                _skeletonAnimation.state.SetAnimation(0, "activity/entrance", false).TimeScale = 1;
+                break;
+            default:
+                return;
+        }
+    }
+
 }
 

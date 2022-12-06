@@ -17,6 +17,9 @@ public class BoardManager : MonoSingleton<BoardManager>, IOnEventCallback
     #region Field
     public int _X;
     public int _Y;
+
+    public bool _IsLock;
+    public bool _IsEnd;
     
     public bool[,] Pos;
     
@@ -70,8 +73,17 @@ public class BoardManager : MonoSingleton<BoardManager>, IOnEventCallback
     #region Board function
     public void StartFight()
     {
+        _IsEnd = false;
+        for (int i = 0; i < _X; i++)
+        {
+            for (int j = 0; j < _Y; j++)
+            {
+                Pos[i, j] = false;
+            }
+        }
         foreach (var hero in AllHeroes())
         {
+            Pos[hero.PosX, hero.PosY] = true;
             hero._heroBT.enabled = true;
         }
     }
@@ -389,6 +401,13 @@ public class BoardManager : MonoSingleton<BoardManager>, IOnEventCallback
 
     void MoveHeroToBoard(TeamID teamID, Hero hero, int x, int y)
     {
+        if (PlayerOnBoard(teamID).Count == GameFlowManager.instance.heroOnBoard &&
+            !PlayerOnBoard(teamID).Contains(hero))
+        {
+            Debug.Log("Board full");
+            return;
+        }
+        
         hero.transform.SetParent(_fightBoardRoot.transform);
         hero.transform.position = new Vector2(x, y);
         hero.PosX = x;

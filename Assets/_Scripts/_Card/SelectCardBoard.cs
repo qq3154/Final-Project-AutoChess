@@ -97,6 +97,8 @@ public class SelectCardBoard : MonoBehaviour, IOnEventCallback
                 InitRandomCard();
             }
 
+            BoardManager.instance._IsLock = false;
+
             StartCoroutine(IE_Cooldown());
 
             //cooldown 15s select phase
@@ -105,6 +107,9 @@ public class SelectCardBoard : MonoBehaviour, IOnEventCallback
 
         if (eventCode == PhotonEvent.OnInitCards)
         {
+            foreach (Transform child in _cardHolder.transform) {
+                Destroy(child.gameObject);
+            }
             InitCard(photonEvent);
             Show();
         }
@@ -131,7 +136,7 @@ public class SelectCardBoard : MonoBehaviour, IOnEventCallback
     IEnumerator IE_Cooldown()
     {
         _cooldown.gameObject.SetActive(true);
-        for (int i = 15; i >= 0; i--)
+        for (int i = GameFlowManager.instance.selectPhaseTime; i >= 0; i--)
         {
             _cooldown.SetText(i.ToString());
             yield return new WaitForSeconds(1); 
@@ -145,6 +150,7 @@ public class SelectCardBoard : MonoBehaviour, IOnEventCallback
         _cooldown.gameObject.SetActive(false);
         
         BoardManager.instance.SaveHeroRecords();
+        BoardManager.instance._IsLock = true;
 
         if (PhotonNetwork.IsMasterClient)
         {

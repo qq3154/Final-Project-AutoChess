@@ -87,33 +87,49 @@ public class Hero : MonoBehaviour
         }
 
         BoardManager.instance.Pos[PosX, PosY] = false;
+        
+        Destroy(this.gameObject);
+
 
         if (PhotonNetwork.IsMasterClient)
         {
-            if ( BoardManager.instance._onBoardA.Count == 0)
+            if (!BoardManager.instance._IsEnd)
             {
-                Debug.Log("Red win round");
+                if ( BoardManager.instance._onBoardA.Count == 0)
+                {
+                    BoardManager.instance._IsEnd = true;
+                    Debug.Log("Red win round");
                 
-                object[] content = new object[] { TeamID.Red ,5}; 
-                RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };  
-                PhotonNetwork.RaiseEvent(PhotonEvent.OnRoundEnd, content, raiseEventOptions, SendOptions.SendReliable);
-            }
-
-            if ( BoardManager.instance._onBoardB.Count == 0)
-            {
-                Debug.Log("Blue win round");
+                    foreach (var hero in BoardManager.instance.AllHeroes())
+                    {
+                        hero._heroBT.enabled = false;
+                    }
                 
-                object[] content = new object[] { TeamID.Blue ,5}; 
-                RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };  
-                PhotonNetwork.RaiseEvent(PhotonEvent.OnRoundEnd, content, raiseEventOptions, SendOptions.SendReliable);
+                    object[] content = new object[] { TeamID.Red ,5}; 
+                    RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };  
+                    PhotonNetwork.RaiseEvent(PhotonEvent.OnRoundEnd, content, raiseEventOptions, SendOptions.SendReliable);
+                }
+                else
+                if ( BoardManager.instance._onBoardB.Count == 0)
+                {
+                    Debug.Log("Blue win round");
+                    foreach (var hero in BoardManager.instance.AllHeroes())
+                    {
+                        hero._heroBT.enabled = false;
+                    }
+                
+                    object[] content = new object[] { TeamID.Blue ,5}; 
+                    RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };  
+                    PhotonNetwork.RaiseEvent(PhotonEvent.OnRoundEnd, content, raiseEventOptions, SendOptions.SendReliable);
+                }
             }
+            
           
         }
         
        
       
-        Destroy(this.gameObject);
-       
+        
        
         
     }

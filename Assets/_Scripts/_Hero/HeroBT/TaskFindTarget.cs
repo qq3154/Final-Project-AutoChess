@@ -121,6 +121,8 @@ public class TaskFindTarget : Node
                 
                 
             }
+            
+            if(distance == BoardManager.instance._X * BoardManager.instance._Y) Debug.Log("not found target"); 
         }
        
 

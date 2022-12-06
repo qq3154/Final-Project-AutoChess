@@ -36,9 +36,10 @@ public class GamePlayManager : MonoBehaviour, IOnEventCallback
     {
         yield return new WaitForSeconds(1);
         //this.PostEvent(EventID.OnSelectCardPhaseStart);
-        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
+       
         if (PhotonNetwork.IsMasterClient)
         {
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
             PhotonNetwork.RaiseEvent(PhotonEvent.OnSelectCardPhaseStart, null, raiseEventOptions, SendOptions.SendReliable);
         }
         

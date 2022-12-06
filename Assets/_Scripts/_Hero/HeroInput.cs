@@ -8,9 +8,15 @@ public class HeroInput : MonoBehaviour
     
     private void OnMouseDown()
     {
-        Debug.Log("select hero");
+       
+        if (BoardManager.instance._IsLock)
+        {
+            return;
+        }
+        
         if (hero.TeamID == GameFlowManager.instance.playerTeam)
         {
+            Debug.Log("select hero");
             BoardManager.instance.SelectHero(hero);
         }
     }

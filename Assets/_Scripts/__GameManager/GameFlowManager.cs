@@ -9,7 +9,10 @@ public class GameFlowManager : MonoSingleton<GameFlowManager>
     public GameState gameState;
     public GamePlayState gamePlayState;
 
-    public int waveID;
+    public int round;
+    public int heroOnBoard;
+    public int maxHeroOnBoard = 5;
+    public int selectPhaseTime = 15;
 
     public TeamID playerTeam;
 

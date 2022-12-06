@@ -34,6 +34,8 @@ public class HeroPhotonEvent : MonoBehaviour, IOnEventCallback
             // MoveHeroToBench(teamId, GetHeroByPosition(posX, posY), index);
 
             var hero = BoardManager.instance.GetHeroByPosition(posX, posY);
+            if(hero == null) return;
+            
             hero.PosX = nextPosX;
             hero.PosY = nextPosY;
                 
@@ -53,6 +55,7 @@ public class HeroPhotonEvent : MonoBehaviour, IOnEventCallback
           
 
             var hero = BoardManager.instance.GetHeroByPosition(posX, posY);
+            if(hero == null) return;
             
             hero.IsFaceRight = !hero.IsFaceRight;
             hero._axieFigureController.SwitchFace(hero.IsFaceRight);
@@ -72,7 +75,10 @@ public class HeroPhotonEvent : MonoBehaviour, IOnEventCallback
             
             var hero = BoardManager.instance.GetHeroByPosition(posX, posY);
             var target =  BoardManager.instance.GetHeroByPosition(targetPosX, targetPosY);
-            
+
+            if (hero == null) return;
+            if (target == null) return;
+
             hero._axieFigureController.SetAttack();
             
             //melee attack
