@@ -228,6 +228,7 @@ GameObject:
   - component: {fileID: 200309375}
   - component: {fileID: 200309374}
   - component: {fileID: 200309373}
+  - component: {fileID: 200309377}
   m_Layer: 0
   m_Name: Exit
   m_TagString: Untagged
@@ -314,7 +315,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 200309375}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 200309377}
+        m_TargetAssemblyTypeName: ButtonHandle, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Home
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &200309375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,6 +366,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 200309371}
   m_CullTransparentMesh: 0
+--- !u!114 &200309377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200309371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa058cbc20af01444919d0c84b9ffa74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &229047694
 GameObject:
   m_ObjectHideFlags: 0

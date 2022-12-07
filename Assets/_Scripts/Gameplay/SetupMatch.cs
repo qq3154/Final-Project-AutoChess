@@ -8,7 +8,7 @@ using Photon.Realtime;
 using TMPro;
 using UnityEngine;
 
-public class SetupUI : MonoBehaviour, IOnEventCallback
+public class SetupMatch : MonoBehaviour, IOnEventCallback
 {
     [SerializeField] private TMP_Text _blueFullnameTxt;
     [SerializeField] private TMP_Text _redFullnameTxt;
@@ -22,42 +22,48 @@ public class SetupUI : MonoBehaviour, IOnEventCallback
         PhotonNetwork.RemoveCallbackTarget(this);
     }
 
-    private void SetUpUI()
+    private void SetUpMatchInfomation()
     {
         if (PhotonNetwork.IsMasterClient)
         {
             GameFlowManager.instance.playerTeam = TeamID.Blue;
             _blueFullnameTxt.text = UserManager.instance.fullName;
-            SendUIInformation(TeamID.Blue, UserManager.instance.fullName);
+            SendPlayerInformation(TeamID.Blue, UserManager.instance.fullName, UserManager.instance.id);
         }
         else
         {
             GameFlowManager.instance.playerTeam = TeamID.Red;
             _redFullnameTxt.text = UserManager.instance.fullName;
-            SendUIInformation(TeamID.Red, UserManager.instance.fullName);
+            SendPlayerInformation(TeamID.Red, UserManager.instance.fullName, UserManager.instance.id);
         }
     }
     
-    void OnSetName(EventData photonEvent)
+    void OnSetPlayerInfomation(EventData photonEvent)
     {
         object[] data = (object[])photonEvent.CustomData;
         TeamID teamID = (TeamID)data[0];
         string name = (string)data[1];
+        string id = (string)data[2];
+        
         if (teamID == TeamID.Blue)
         {
             _blueFullnameTxt.text = name;
+            MatchManager.instance.userBlue = id;
+          
         }
         else
         {
             _redFullnameTxt.text = name;
+            MatchManager.instance.userRed = id;
+        
         }
     }
-    
-    private void SendUIInformation(TeamID teamID, string name)
+
+    private void SendPlayerInformation(TeamID teamID, string name, string userId)
     {
-        object[] content = new object[] {teamID, name};
+        object[] content = new object[] {teamID, name, userId};
         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All }; // You would have to set the Receivers to All in order to receive this event on the local client as well
-        PhotonNetwork.RaiseEvent(PhotonEvent.OnSetOpponentName, content, raiseEventOptions, SendOptions.SendReliable);
+        PhotonNetwork.RaiseEvent(PhotonEvent.OnSetOpponentInfomation, content, raiseEventOptions, SendOptions.SendReliable);
     }
     
     public void OnEvent(EventData photonEvent)
@@ -65,11 +71,11 @@ public class SetupUI : MonoBehaviour, IOnEventCallback
         byte eventCode = photonEvent.Code;
         if (eventCode == PhotonEvent.OnGameplayStart)
         {
-            SetUpUI();
+            SetUpMatchInfomation();
         }
-        if (eventCode == PhotonEvent.OnSetOpponentName)
+        if (eventCode == PhotonEvent.OnSetOpponentInfomation)
         {
-            OnSetName(photonEvent);
+            OnSetPlayerInfomation(photonEvent);
         }
     }
 }

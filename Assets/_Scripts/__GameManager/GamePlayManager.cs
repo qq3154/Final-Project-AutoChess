@@ -28,10 +28,19 @@ public class GamePlayManager : MonoBehaviour, IOnEventCallback
     
     private void SendOngameStart()
     {
-        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All }; // You would have to set the Receivers to All in order to receive this event on the local client as well
+        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All }; 
         PhotonNetwork.RaiseEvent(PhotonEvent.OnGameplayStart, null, raiseEventOptions, SendOptions.SendReliable);
     }
-  
+
+    public void OnEvent(EventData photonEvent)
+    {
+        byte eventCode = photonEvent.Code;
+        if (eventCode == PhotonEvent.OnGameplayStart)
+        {
+            StartCoroutine(IE_Delay());
+        }
+    }
+    
     IEnumerator IE_Delay()
     {
         yield return new WaitForSeconds(1);
@@ -43,14 +52,5 @@ public class GamePlayManager : MonoBehaviour, IOnEventCallback
             PhotonNetwork.RaiseEvent(PhotonEvent.OnSelectCardPhaseStart, null, raiseEventOptions, SendOptions.SendReliable);
         }
         
-    }
-
-    public void OnEvent(EventData photonEvent)
-    {
-        byte eventCode = photonEvent.Code;
-        if (eventCode == PhotonEvent.OnGameplayStart)
-        {
-            StartCoroutine(IE_Delay());
-        }
     }
 }

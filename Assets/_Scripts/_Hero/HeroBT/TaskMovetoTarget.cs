@@ -97,7 +97,7 @@ public class TaskMovetoTarget : Node
             
             
             }
-            return NodeState.FAILURE;
+            state =  NodeState.FAILURE;
         }
 
         return state;

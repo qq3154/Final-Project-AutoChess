@@ -9,11 +9,14 @@ using Photon.Pun;
 using Photon.Pun.UtilityScripts;
 using Photon.Realtime;
 using Spine.Unity.Examples;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 public class BoardManager : MonoSingleton<BoardManager>, IOnEventCallback
 {
+    protected override bool IsDontDestroyThisObject { get; }
+
     #region Field
     public int _X;
     public int _Y;

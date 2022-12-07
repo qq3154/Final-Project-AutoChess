@@ -105,7 +105,7 @@ public class Hero : MonoBehaviour
                         hero._heroBT.enabled = false;
                     }
                 
-                    object[] content = new object[] { TeamID.Red ,5}; 
+                    object[] content = new object[] { TeamID.Red , BoardManager.instance._onBoardB.Count * GameFlowManager.instance.hpLosePerHero}; 
                     RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };  
                     PhotonNetwork.RaiseEvent(PhotonEvent.OnRoundEnd, content, raiseEventOptions, SendOptions.SendReliable);
                 }
@@ -118,7 +118,7 @@ public class Hero : MonoBehaviour
                         hero._heroBT.enabled = false;
                     }
                 
-                    object[] content = new object[] { TeamID.Blue ,5}; 
+                    object[] content = new object[] { TeamID.Blue , BoardManager.instance._onBoardA.Count * GameFlowManager.instance.hpLosePerHero}; 
                     RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };  
                     PhotonNetwork.RaiseEvent(PhotonEvent.OnRoundEnd, content, raiseEventOptions, SendOptions.SendReliable);
                 }

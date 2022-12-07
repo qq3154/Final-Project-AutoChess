@@ -7,6 +7,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ClearBoard : MonoBehaviour, IOnEventCallback
@@ -42,6 +43,27 @@ public class ClearBoard : MonoBehaviour, IOnEventCallback
             StartCoroutine(OnEndBattle(teamID, hp));
 
         }
+        
+        if (eventCode == PhotonEvent.OnMatchEnd)
+        {
+            object[] data = (object[])photonEvent.CustomData;
+            TeamID teamID = (TeamID)data[0];
+            int round = (int)data[1];
+
+            if (teamID == GameFlowManager.instance.playerTeam)
+            {
+                Destroy(BoardManager.instance.gameObject);
+                PhotonNetwork.LeaveRoom();
+                SceneManager.LoadScene("Win");
+            }
+            else
+            {
+                Destroy(BoardManager.instance.gameObject);
+                PhotonNetwork.LeaveRoom();
+                SceneManager.LoadScene("Lose");
+            }
+
+        }
     }
 
     IEnumerator OnEndBattle(TeamID teamID, int hp)
@@ -63,8 +85,6 @@ public class ClearBoard : MonoBehaviour, IOnEventCallback
             foreach (var hero in  BoardManager.instance._onBoardB)
             {
                 hero.gameObject.SetActive(false);
-                // Destroy(hero.gameObject);
-                // BoardManager.instance._onBoardB.Remove(hero);
             }
             
             foreach (var hero in  BoardManager.instance._onBoardA)
@@ -90,21 +110,34 @@ public class ClearBoard : MonoBehaviour, IOnEventCallback
 
         yield return new WaitForSeconds(2);
         
-        Debug.Log("blue hp =" + _blueHp.value);
-        Debug.Log("red hp =" + _redHp.value);
-
         
         BoardManager.instance.ClearBoard();
 
+        
+        //continue match
         if (_blueHp.value > 0 && _redHp.value > 0)
         {
             BoardManager.instance.SetupBoard();
+
+            if (PhotonNetwork.IsMasterClient)
+            {
+                RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
+                PhotonNetwork.RaiseEvent(PhotonEvent.OnSelectCardPhaseStart, null, raiseEventOptions, SendOptions.SendReliable);
+            }
+
         }
-        
-        if (PhotonNetwork.IsMasterClient)
+        else
         {
-            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
-            PhotonNetwork.RaiseEvent(PhotonEvent.OnSelectCardPhaseStart, null, raiseEventOptions, SendOptions.SendReliable);
+
+            TeamID winTeamID = (_blueHp.value <= 0) ? TeamID.Red : TeamID.Blue;
+            
+            if (PhotonNetwork.IsMasterClient)
+            {
+                object[] content = new object[] {winTeamID, GameFlowManager.instance.round};
+                RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
+                PhotonNetwork.RaiseEvent(PhotonEvent.OnMatchEnd, content, raiseEventOptions, SendOptions.SendReliable);
+            }
+            
         }
     }
     
