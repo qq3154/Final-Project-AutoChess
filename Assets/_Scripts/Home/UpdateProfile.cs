@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using WebSocketSharp;
 
 public class UpdateProfile : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class UpdateProfile : MonoBehaviour
     [SerializeField] private TMP_InputField fullname;
     [SerializeField] private TMP_InputField email;
     [SerializeField] private Button btn;
+
+    private string usernameStr;
+    private string fullnameStr;
+    private string emailStr;
     
     private void Start()
     {
@@ -30,15 +35,27 @@ public class UpdateProfile : MonoBehaviour
 
     public void OnUpdateProfile()
     {
+        usernameStr = username.text;
+        fullnameStr = fullname.text;
+        emailStr = email.text;
+
+        if (fullnameStr.IsNullOrEmpty())
+        {
+            ToastMessage.instance.Show("Please enter your full name");
+            return;
+        }
+        
+        if (emailStr.IsNullOrEmpty())
+        {
+            ToastMessage.instance.Show("Please enter your email");
+            return;
+        }
+        
         SendUpdateProfileRequest();
     }
 
     async void SendUpdateProfileRequest()
     {
-        string usernameStr = username.text;
-        string fullnameStr = fullname.text;
-        string emailStr = email.text;
-        
         Toast.instance.SetWaiting();
         var response = await ApiRequest.instance.SendUpdateProfileRequest(usernameStr, fullnameStr, emailStr);
         
@@ -47,11 +64,11 @@ public class UpdateProfile : MonoBehaviour
             UserManager.instance.username = username.text;
             UserManager.instance.fullName =  fullname.text;
             UserManager.instance.email =  email.text;
-            Toast.instance.SetSuccess();
+            Toast.instance.SetSuccess(response.message);
         }
         else
         {
-            Toast.instance.SetFail();
+            Toast.instance.SetFail("Update fail!");
         }
     }
 }

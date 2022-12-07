@@ -17,7 +17,6 @@ public class UserManager : MonoSingleton<UserManager>
 
     public void GetUserInfomation()
     {
-        this.auth = auth;
         SendLoginRequest();
     }
 

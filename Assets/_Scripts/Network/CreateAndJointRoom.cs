@@ -25,8 +25,8 @@ public class CreateAndJointRoom : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.JoinRandomRoom();
     }
-    
-    
+
+
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
         base.OnJoinRandomFailed(returnCode, message);
@@ -56,7 +56,7 @@ public class CreateAndJointRoom : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.LoadLevel("Gameplay");
         }
-        PhotonNetwork.LoadLevel("Gameplay");
+        //PhotonNetwork.LoadLevel("Gameplay");
        
     }
     
