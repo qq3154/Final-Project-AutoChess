@@ -13,18 +13,14 @@ public class UserManager : MonoSingleton<UserManager>
     public string email;
     public int gold;
     
-    protected override void DoOnAwake()
-    {
-        base.DoOnAwake();
-        this.RegisterListener(EventID.OnLogin, (param) => DoOnLogin((string) param));
-    }
+  
 
-    private void DoOnLogin( string auth)
+    public void GetUserInfomation()
     {
         this.auth = auth;
         SendLoginRequest();
     }
-    
+
     private async void SendLoginRequest()
     {
         var response = await ApiRequest.instance.SendGetUserProfileRequest();

@@ -5,15 +5,23 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using WebSocketSharp;
 
 public class Register : MonoBehaviour
 {
     
     [SerializeField] private TMP_InputField username;
     [SerializeField] private TMP_InputField password;
+    [SerializeField] private TMP_InputField passwordConfirm;
     [SerializeField] private TMP_InputField fullname;
     [SerializeField] private TMP_InputField email;
     [SerializeField] private Button btn;
+
+    private string usernameStr;
+    private string passwordStr;
+    private string passwordConfirmStr;
+    private string fullnameStr;
+    private string emailStr;
     
     private void Start()
     {
@@ -27,27 +35,66 @@ public class Register : MonoBehaviour
 
     public void OnRegister()
     {
+        usernameStr = username.text;
+        passwordStr = password.text;
+        passwordConfirmStr = passwordConfirm.text;
+        fullnameStr = fullname.text;
+        emailStr = email.text;
+        
+        //simple validate
+        if (usernameStr.IsNullOrEmpty())
+        {
+            ToastMessage.instance.Show("Please enter Username");
+            return;
+        }
+        if (usernameStr.Length < 6)
+        {
+            ToastMessage.instance.Show("Username must be at least 6 characters");
+            return;
+        }
+        
+        if (fullnameStr.IsNullOrEmpty())
+        {
+            ToastMessage.instance.Show("Please enter your full name");
+            return;
+        }
+        if (emailStr.IsNullOrEmpty())
+        {
+            ToastMessage.instance.Show("Please enter your email");
+            return;
+        }
+        if (passwordStr.IsNullOrEmpty())
+        {
+            ToastMessage.instance.Show("Please enter Password");
+            return;
+        }
+        if (passwordStr.Length < 8)
+        {
+            ToastMessage.instance.Show("Password must be at least 8 characters");
+            return;
+        }
+        if (passwordConfirmStr.IsNullOrEmpty() || passwordConfirmStr != passwordStr)
+        {
+            ToastMessage.instance.Show("Password and confirm password does not match!");
+            return;
+        }
+
         SendRegisterRequest();
     }
 
     private async void SendRegisterRequest()
-    {   
-        string usernameStr = username.text;
-        string passwordStr = password.text;
-        string fullnameStr = fullname.text;
-        string emailStr = email.text;
-        
+    {
         Toast.instance.SetWaiting();
         
         var response = await ApiRequest.instance.SendRegisterRequest(usernameStr, passwordStr, fullnameStr, emailStr);
         
         if (response.success)
         {
-            Toast.instance.SetSuccess();
+            Toast.instance.SetSuccess("Register successful!");
         }
         else
         {
-            Toast.instance.SetFail();
+            Toast.instance.SetFail(response.message);
         }
     }
 

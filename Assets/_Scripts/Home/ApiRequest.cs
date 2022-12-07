@@ -37,8 +37,6 @@ public class ApiRequest : MonoSingleton<ApiRequest>
         param.password = password;
         param.fullName = fullName;
         param.email = email;
-        param.role = 1;
-        param.gold = 0;
         string json = JsonConvert.SerializeObject(param);
        
         

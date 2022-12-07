@@ -14,9 +14,7 @@ public enum EventID
     OnAddHeroToBoard,
     OnRemoveHeroFromBoard,
     
-    //
-    OnLogin,
-	
+   
 }
 
 public static class PhotonEvent
