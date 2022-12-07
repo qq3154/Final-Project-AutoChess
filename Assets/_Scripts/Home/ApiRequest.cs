@@ -67,6 +67,18 @@ public class ApiRequest : MonoSingleton<ApiRequest>
         var result = await SendRequestAsync(url, json, UnityWebRequest.kHttpVerbPUT, true );
         return result;
     }
+
+    public async Task<ResponseHandler> SendUpdateGoldRequest(int gold)
+    {
+        string url = baseUrl + "/api/user/changegold";
+        
+        ParamRequest param = new ParamRequest();
+        param.gold = gold;
+        string json = JsonConvert.SerializeObject(param);
+        
+        var result = await SendRequestAsync(url, json, UnityWebRequest.kHttpVerbPUT, true );
+        return result;
+    }
     
     public async Task<ResponseHandler>  SendGetMatchesRequest()
     {
@@ -74,6 +86,19 @@ public class ApiRequest : MonoSingleton<ApiRequest>
         
         
         var result = await SendRequestAsync(url, null, UnityWebRequest.kHttpVerbGET, true );
+        return result;
+    }
+    
+    public async Task<ResponseHandler>  SendCreateMatchRequest(string winner, string loser, int round)
+    {
+        string url = baseUrl + "/api/match/create";
+        ParamRequest param = new ParamRequest();
+        param.winner = winner;
+        param.loser = loser;
+        param.round = round;
+        string json = JsonConvert.SerializeObject(param);
+        
+        var result = await SendRequestAsync(url, json, UnityWebRequest.kHttpVerbPOST, true );
         return result;
     }
     
@@ -118,6 +143,9 @@ public class ApiRequest : MonoSingleton<ApiRequest>
         public string email;
         public int role;
         public int gold;
+        public int round;
+        public string winner;
+        public string loser;
     }
     public struct ResponseHandler
     {

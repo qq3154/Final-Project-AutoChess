@@ -52,15 +52,17 @@ public class ClearBoard : MonoBehaviour, IOnEventCallback
 
             if (teamID == GameFlowManager.instance.playerTeam)
             {
-                Destroy(BoardManager.instance.gameObject);
+                SendplusGold(UserManager.instance.gold + 200);
                 PhotonNetwork.LeaveRoom();
                 SceneManager.LoadScene("Win");
+                Destroy(BoardManager.instance.gameObject);
             }
             else
             {
-                Destroy(BoardManager.instance.gameObject);
+                
                 PhotonNetwork.LeaveRoom();
                 SceneManager.LoadScene("Lose");
+                Destroy(BoardManager.instance.gameObject);
             }
 
         }
@@ -136,8 +138,41 @@ public class ClearBoard : MonoBehaviour, IOnEventCallback
                 object[] content = new object[] {winTeamID, GameFlowManager.instance.round};
                 RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
                 PhotonNetwork.RaiseEvent(PhotonEvent.OnMatchEnd, content, raiseEventOptions, SendOptions.SendReliable);
+
+                string winner = (winTeamID == TeamID.Blue) ? MatchManager.instance.userBlue : MatchManager.instance.userRed;
+                string loser = (winTeamID == TeamID.Red) ? MatchManager.instance.userBlue : MatchManager.instance.userRed;
+                SendMatchRequest(winner, loser);
             }
             
+        }
+    }
+
+    private async void SendMatchRequest(string winner, string loser)
+    {
+        var response = await ApiRequest.instance.SendCreateMatchRequest(winner, loser, MatchManager.instance.round);
+        
+        if (response.success)
+        {
+            Debug.Log(response);
+
+        }
+        else
+        {
+            Debug.Log(response);
+        }
+    }
+    
+    
+    private async void SendplusGold(int gold)
+    {
+        var response = await ApiRequest.instance.SendUpdateGoldRequest(gold);
+        if (response.success)
+        {
+            UserManager.instance.gold = gold;
+        }
+        else
+        {
+            Debug.Log(response.message);
         }
     }
     

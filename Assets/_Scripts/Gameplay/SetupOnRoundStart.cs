@@ -21,14 +21,17 @@ public class SetupOnRoundStart : MonoBehaviour, IOnEventCallback
     // Update is called once per frame
     void Update()
     {
-        if (GameFlowManager.instance.playerTeam == TeamID.Blue)
+        if (BoardManager.instance.gameObject != null)
         {
-            heroOnBoardTxt.text = BoardManager.instance._onBoardA.Count + "/" + GameFlowManager.instance.heroOnBoard;
-        }
+            if (GameFlowManager.instance.playerTeam == TeamID.Blue)
+            {
+                heroOnBoardTxt.text = BoardManager.instance._onBoardA.Count + "/" + GameFlowManager.instance.heroOnBoard;
+            }
         
-        if (GameFlowManager.instance.playerTeam == TeamID.Red)
-        {
-            heroOnBoardTxt.text = BoardManager.instance._onBoardB.Count + "/" + GameFlowManager.instance.heroOnBoard;
+            if (GameFlowManager.instance.playerTeam == TeamID.Red)
+            {
+                heroOnBoardTxt.text = BoardManager.instance._onBoardB.Count + "/" + GameFlowManager.instance.heroOnBoard;
+            }
         }
     }
 
