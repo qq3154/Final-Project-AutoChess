@@ -34,7 +34,8 @@ public static class PhotonEvent
 	
 	public static byte OnRoundEnd = 13;
 	public static byte OnMatchEnd = 14;
-	
-	
-	
+	public static byte OnAFK = 15;
+
+
+
 }

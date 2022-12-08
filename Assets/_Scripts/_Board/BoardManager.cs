@@ -84,6 +84,31 @@ public class BoardManager : MonoSingleton<BoardManager>, IOnEventCallback
                 Pos[i, j] = false;
             }
         }
+
+        //2 player AFK
+        if (AllHeroes().Count == 0)
+        {
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
+            PhotonNetwork.RaiseEvent(PhotonEvent.OnAFK, null, raiseEventOptions, SendOptions.SendReliable);
+            return;
+        }
+
+        if (PlayerOnBoard(TeamID.Blue).Count == 0)
+        {
+            object[] content = new object[] { TeamID.Red , BoardManager.instance._onBoardB.Count * GameFlowManager.instance.hpLosePerHero}; 
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };  
+            PhotonNetwork.RaiseEvent(PhotonEvent.OnRoundEnd, content, raiseEventOptions, SendOptions.SendReliable);
+            return;
+        }
+        
+        if (PlayerOnBoard(TeamID.Red).Count == 0)
+        {
+            object[] content = new object[] { TeamID.Blue , BoardManager.instance._onBoardA.Count * GameFlowManager.instance.hpLosePerHero}; 
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };  
+            PhotonNetwork.RaiseEvent(PhotonEvent.OnRoundEnd, content, raiseEventOptions, SendOptions.SendReliable);
+            return;
+        }
+        
         foreach (var hero in AllHeroes())
         {
             Pos[hero.PosX, hero.PosY] = true;

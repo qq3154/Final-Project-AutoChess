@@ -72,6 +72,20 @@ public class ClearBoard : MonoBehaviour, IOnEventCallback
            
 
         }
+        
+        if (eventCode == PhotonEvent.OnAFK)
+        {
+            
+            PhotonNetwork.LeaveRoom();
+            SceneManager.LoadScene("Lose");
+            Destroy(BoardManager.instance.gameObject);
+            if (PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.CurrentRoom.IsOpen = false;
+            }
+           
+
+        }
     }
 
     IEnumerator OnEndBattle(TeamID teamID, int hp)
