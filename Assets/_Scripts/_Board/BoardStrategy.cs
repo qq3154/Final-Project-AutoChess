@@ -22,7 +22,7 @@ public class BoardStrategy : MonoBehaviour
       }
       
       List<Hero> uniqueHeroes = new List<Hero>();
-      foreach (var heroOnBoard in BoardManager.instance.PlayerOnBoard())
+      foreach (var heroOnBoard in BoardManager.instance.PlayerOnBoard(_teamID))
       {
          if (!uniqueHeroes.Exists((s => s.HeroID == heroOnBoard.HeroID)))
          {
@@ -30,7 +30,7 @@ public class BoardStrategy : MonoBehaviour
          }
       }
 
-      Dictionary<string, int> strategies = BoardManager.instance.PlayerStrategies();
+      Dictionary<string, int> strategies = BoardManager.instance.PlayerStrategies(_teamID);
       strategies.Clear();
       foreach (var uniqueHero in uniqueHeroes)
       {

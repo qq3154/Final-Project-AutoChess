@@ -6,6 +6,7 @@ using Game;
 using Observer;
 using Photon.Pun;
 using Photon.Realtime;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,20 @@ public class Card : MonoBehaviour, IOnEventCallback
     [SerializeField] private AxieSpawner _axieSpawner;
 
     [SerializeField] private int _id;
+
+    [Header("UI")]
+    [SerializeField] private TMP_Text _nameTxt;
+    [SerializeField] private TMP_Text _blueLevelTxt;
+    [SerializeField] private TMP_Text _redLevelTxt;
+    [SerializeField] private List<GameObject> _stars;
+    [SerializeField] private Image _specieIcon;
+    [SerializeField] private TMP_Text _specieTxt;
+    [SerializeField] private Image _classIcon;
+    [SerializeField] private TMP_Text _classTxt;
+    
+    [Header("Ref")]
+    [SerializeField] private HeroProfileConfigMap _heroProfileConfigMap;
+    [SerializeField] private ClassesIconConfig _classesIconConfig;
 
     private void Awake()
     {
@@ -44,6 +59,28 @@ public class Card : MonoBehaviour, IOnEventCallback
         _id = id;
         _heroID = heroID;
         _axieSpawner.Init(heroID);
+        SetupUI(heroID);
+    }
+
+    private void SetupUI(string heroID)
+    {
+        HeroStats heroStats = _heroProfileConfigMap.GetValueFromKey(heroID).HeroStats;
+        _nameTxt.text = heroStats.Name;
+        _blueLevelTxt.text = "Level " + heroStats.BlueTeamLevel.ToString();
+        _redLevelTxt.text =  "Level " + heroStats.RedTeamLevel.ToString();
+        SetStar(heroStats.Rarity);
+        _specieTxt.text = heroStats.Species;
+        _classTxt.text = heroStats.Class;
+        _specieIcon.sprite = _classesIconConfig.GetIconById(heroStats.Species);
+        _classIcon.sprite = _classesIconConfig.GetIconById(heroStats.Class);
+    }
+
+    private void SetStar(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            _stars[i].SetActive(true);
+        }
     }
 
     public void OnSelectCard()

@@ -5346,10 +5346,10 @@ MonoBehaviour:
   _cardHolder: {fileID: 1753415213}
   _randomCards: []
   _heroPool:
-  - A
-  - B
-  - C
-  - D
+  - Axe
+  - Axe
+  - Juggernaut
+  - Juggernaut
   _maxCardToSelect: 5
   _cardPref: {fileID: 6869082755462373385, guid: 72e7f05132dfce241b46a1318b9803bf, type: 3}
   _cooldown: {fileID: 1690273180}
@@ -26135,7 +26135,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 0
+  m_Spacing: 20
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -31125,6 +31125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _blueFullnameTxt: {fileID: 1986866107}
   _redFullnameTxt: {fileID: 1336464081}
+  _heroProfileConfigMap: {fileID: 11400000, guid: ec275fa2a9e3a794bb5489573e9ee6f9, type: 2}
 --- !u!4 &2069952088
 Transform:
   m_ObjectHideFlags: 0

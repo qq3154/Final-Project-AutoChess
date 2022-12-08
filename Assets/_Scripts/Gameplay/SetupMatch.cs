@@ -12,6 +12,9 @@ public class SetupMatch : MonoBehaviour, IOnEventCallback
 {
     [SerializeField] private TMP_Text _blueFullnameTxt;
     [SerializeField] private TMP_Text _redFullnameTxt;
+
+    [SerializeField] private HeroProfileConfigMap _heroProfileConfigMap;
+    
     private void OnEnable()
     {
         PhotonNetwork.AddCallbackTarget(this);
@@ -44,24 +47,46 @@ public class SetupMatch : MonoBehaviour, IOnEventCallback
         TeamID teamID = (TeamID)data[0];
         string name = (string)data[1];
         string username = (string)data[2];
+        string[] ids = (string[])data[3];
+        int[] levels = (int[])data[4];
         
         if (teamID == TeamID.Blue)
         {
             _blueFullnameTxt.text = name;
             MatchManager.instance.userBlue = username;
-          
+            
+            for (int i = 0; i < ids.Length; i++)
+            {
+                _heroProfileConfigMap.GetValueFromKey(ids[i]).HeroStats.BlueTeamLevel = levels[i];
+            }
         }
         else
         {
             _redFullnameTxt.text = name;
             MatchManager.instance.userRed = username;
-        
+            
+            for (int i = 0; i < ids.Length; i++)
+            {
+                _heroProfileConfigMap.GetValueFromKey(ids[i]).HeroStats.RedTeamLevel = levels[i];
+            }
         }
     }
 
     private void SendPlayerInformation(TeamID teamID, string name, string userName)
     {
-        object[] content = new object[] {teamID, name, userName};
+        List<string> cardIds = new List<string>();
+        List<int> cardLevels = new List<int>();
+        
+        var configs = _heroProfileConfigMap.list;
+        for (int i = 0; i < configs.Count; i++)
+        {
+            cardIds.Add(configs[i].id);
+            cardLevels.Add(configs[i].heroConfig.HeroStats.Level);
+        }
+        string[] arrIds = cardIds.ToArray();
+        int[] arrLevels = cardLevels.ToArray();
+        
+        object[] content = new object[] {teamID, name, userName, arrIds, arrLevels};
         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All }; // You would have to set the Receivers to All in order to receive this event on the local client as well
         PhotonNetwork.RaiseEvent(PhotonEvent.OnSetOpponentInfomation, content, raiseEventOptions, SendOptions.SendReliable);
     }
