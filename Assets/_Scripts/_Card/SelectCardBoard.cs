@@ -17,7 +17,8 @@ public class SelectCardBoard : MonoBehaviour, IOnEventCallback
     [SerializeField] private GameObject _root;
     [SerializeField] private GameObject _cardHolder;
     [SerializeField] private List<Card> _randomCards;
-    
+
+    [SerializeField] private List<HeroPool> _heroPools;
     [SerializeField] private List<string> _heroPool;
     [SerializeField] private int _maxCardToSelect = 5;
     [SerializeField] private GameObject _cardPref;
@@ -56,6 +57,15 @@ public class SelectCardBoard : MonoBehaviour, IOnEventCallback
 
     private void InitRandomCard()
     {
+        if (_heroPools.Count <= GameFlowManager.instance.round )
+        {
+            _heroPool = _heroPools[_heroPools.Count - 1].heroId;
+        }
+        else
+        {
+            _heroPool = _heroPools[GameFlowManager.instance.round].heroId;
+        }
+        
         // _randomCards.Clear();
         List<string> cardIds = new List<string>();
         for (int i = 0; i < _maxCardToSelect; i++)
@@ -157,4 +167,12 @@ public class SelectCardBoard : MonoBehaviour, IOnEventCallback
             BoardManager.instance.StartFight();
         }
     }
+}
+
+[Serializable]
+public struct HeroPool
+{
+    public int round;
+    public List<string> heroId;
+
 }

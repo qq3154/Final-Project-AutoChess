@@ -28,9 +28,10 @@ MonoBehaviour:
         Class: Warrior
         Dmg: 25
         Hp: 500
+        SkillDmg: 100
         MaxMana: 100
         AtkSpeed: 1
-        AtkRange: 2
+        AtkRange: 1
         MoveSpeed: 2
       axieProfile:
         key: reptile-10
@@ -42,7 +43,7 @@ MonoBehaviour:
       HeroStats:
         Name: Juggernaut
         Description: Juggernaut
-        Rarity: 2
+        Rarity: 1
         Level: 1
         MaxLevel: 5
         CardId: 63919868baf972d7911ae0f5
@@ -50,11 +51,12 @@ MonoBehaviour:
         RedTeamLevel: 2
         Species: Beast
         Class: Hunter
-        Dmg: 30
+        Dmg: 35
         Hp: 300
+        SkillDmg: 100
         MaxMana: 100
         AtkSpeed: 1
-        AtkRange: 2
+        AtkRange: 1
         MoveSpeed: 2
       axieProfile:
         key: reptile-04
@@ -66,7 +68,7 @@ MonoBehaviour:
       HeroStats:
         Name: Nasus
         Description: Nasus
-        Rarity: 1
+        Rarity: 2
         Level: 1
         MaxLevel: 5
         CardId: 63919868baf972d7911ae0df
@@ -74,11 +76,12 @@ MonoBehaviour:
         RedTeamLevel: 1
         Species: Beast
         Class: Knight
-        Dmg: 25
-        Hp: 100
+        Dmg: 40
+        Hp: 500
+        SkillDmg: 100
         MaxMana: 100
         AtkSpeed: 1
-        AtkRange: 2
+        AtkRange: 1
         MoveSpeed: 2
       axieProfile:
         key: reptile-06
@@ -99,40 +102,17 @@ MonoBehaviour:
         Species: Beast
         Class: Mage
         Dmg: 25
-        Hp: 100
+        Hp: 400
+        SkillDmg: 150
         MaxMana: 100
         AtkSpeed: 1
-        AtkRange: 2
+        AtkRange: 3
         MoveSpeed: 2
       axieProfile:
         key: reptile-02
         body: body-bigyak
         classIdx: 0
         classValue: 3
-  - id: Renekton
-    heroConfig:
-      HeroStats:
-        Name: Renekton
-        Description: Renekton
-        Rarity: 1
-        Level: 2
-        MaxLevel: 5
-        CardId: 63919868baf972d7911ae0f1
-        BlueTeamLevel: 2
-        RedTeamLevel: 1
-        Species: Naga
-        Class: Warrior
-        Dmg: 25
-        Hp: 100
-        MaxMana: 100
-        AtkSpeed: 1
-        AtkRange: 2
-        MoveSpeed: 2
-      axieProfile:
-        key: aquatic-06
-        body: body-normal
-        classIdx: 0
-        classValue: 5
   - id: Sladar
     heroConfig:
       HeroStats:
@@ -146,11 +126,12 @@ MonoBehaviour:
         RedTeamLevel: 1
         Species: Naga
         Class: Knight
-        Dmg: 25
-        Hp: 100
+        Dmg: 35
+        Hp: 500
+        SkillDmg: 110
         MaxMana: 100
         AtkSpeed: 1
-        AtkRange: 2
+        AtkRange: 1
         MoveSpeed: 2
       axieProfile:
         key: aquatic-mystic-02
@@ -162,7 +143,7 @@ MonoBehaviour:
       HeroStats:
         Name: Tide
         Description: Tide
-        Rarity: 2
+        Rarity: 1
         Level: 1
         MaxLevel: 5
         CardId: 63919868baf972d7911ae0f7
@@ -171,10 +152,11 @@ MonoBehaviour:
         Species: Naga
         Class: Warrior
         Dmg: 25
-        Hp: 100
+        Hp: 380
+        SkillDmg: 150
         MaxMana: 100
         AtkSpeed: 1
-        AtkRange: 2
+        AtkRange: 1
         MoveSpeed: 2
       axieProfile:
         key: aquatic-mystic-02
@@ -186,7 +168,7 @@ MonoBehaviour:
       HeroStats:
         Name: Medusa
         Description: Medusa
-        Rarity: 4
+        Rarity: 2
         Level: 1
         MaxLevel: 5
         CardId: 63919868baf972d7911ae0e5
@@ -194,15 +176,41 @@ MonoBehaviour:
         RedTeamLevel: 1
         Species: Naga
         Class: Hunter
-        Dmg: 25
-        Hp: 100
+        Dmg: 40
+        Hp: 400
+        SkillDmg: 100
         MaxMana: 100
-        AtkSpeed: 1
-        AtkRange: 2
-        MoveSpeed: 2
+        AtkSpeed: 2
+        AtkRange: 5
+        MoveSpeed: 1
       axieProfile:
         key: aquatic-04
         body: body-fuzzy
+        classIdx: 0
+        classValue: 5
+  - id: Renekton
+    heroConfig:
+      HeroStats:
+        Name: Renekton
+        Description: Renekton
+        Rarity: 3
+        Level: 2
+        MaxLevel: 5
+        CardId: 63919868baf972d7911ae0f1
+        BlueTeamLevel: 2
+        RedTeamLevel: 1
+        Species: Naga
+        Class: Warrior
+        Dmg: 45
+        Hp: 550
+        SkillDmg: 150
+        MaxMana: 100
+        AtkSpeed: 1
+        AtkRange: 1
+        MoveSpeed: 2
+      axieProfile:
+        key: aquatic-06
+        body: body-normal
         classIdx: 0
         classValue: 5
   - id: Puck
@@ -220,9 +228,10 @@ MonoBehaviour:
         Class: Mage
         Dmg: 25
         Hp: 100
-        MaxMana: 100
+        SkillDmg: 150
+        MaxMana: 90
         AtkSpeed: 1
-        AtkRange: 2
+        AtkRange: 3
         MoveSpeed: 2
       axieProfile:
         key: bird-04
@@ -242,11 +251,12 @@ MonoBehaviour:
         RedTeamLevel: 1
         Species: Dragon
         Class: Knight
-        Dmg: 25
-        Hp: 100
+        Dmg: 40
+        Hp: 450
+        SkillDmg: 120
         MaxMana: 100
         AtkSpeed: 1
-        AtkRange: 2
+        AtkRange: 1
         MoveSpeed: 2
       axieProfile:
         key: bird-04
@@ -266,12 +276,13 @@ MonoBehaviour:
         RedTeamLevel: 1
         Species: Dragon
         Class: Warrior
-        Dmg: 25
-        Hp: 100
+        Dmg: 45
+        Hp: 500
+        SkillDmg: 130
         MaxMana: 100
-        AtkSpeed: 1
-        AtkRange: 2
-        MoveSpeed: 2
+        AtkSpeed: 2
+        AtkRange: 1
+        MoveSpeed: 1
       axieProfile:
         key: bird-06
         body: body-normal
@@ -290,11 +301,12 @@ MonoBehaviour:
         RedTeamLevel: 1
         Species: Dragon
         Class: Hunter
-        Dmg: 25
-        Hp: 100
+        Dmg: 50
+        Hp: 550
+        SkillDmg: 150
         MaxMana: 100
-        AtkSpeed: 1
-        AtkRange: 2
+        AtkSpeed: 2
+        AtkRange: 4
         MoveSpeed: 2
       axieProfile:
         key: bird-08
@@ -314,11 +326,12 @@ MonoBehaviour:
         RedTeamLevel: 1
         Species: Elf
         Class: Warrior
-        Dmg: 25
-        Hp: 100
+        Dmg: 20
+        Hp: 500
+        SkillDmg: 110
         MaxMana: 100
         AtkSpeed: 1
-        AtkRange: 2
+        AtkRange: 1
         MoveSpeed: 2
       axieProfile:
         key: plant-02
@@ -330,7 +343,7 @@ MonoBehaviour:
       HeroStats:
         Name: Mirana
         Description: Mirana
-        Rarity: 2
+        Rarity: 3
         Level: 1
         MaxLevel: 5
         CardId: 63919868baf972d7911ae0ef
@@ -338,12 +351,13 @@ MonoBehaviour:
         RedTeamLevel: 1
         Species: Elf
         Class: Hunter
-        Dmg: 25
-        Hp: 100
+        Dmg: 35
+        Hp: 450
+        SkillDmg: 150
         MaxMana: 100
-        AtkSpeed: 1
-        AtkRange: 2
-        MoveSpeed: 2
+        AtkSpeed: 2
+        AtkRange: 3
+        MoveSpeed: 1
       axieProfile:
         key: japan-03
         body: body-fuzzy
@@ -362,12 +376,13 @@ MonoBehaviour:
         RedTeamLevel: 1
         Species: Elf
         Class: Mage
-        Dmg: 25
-        Hp: 100
+        Dmg: 50
+        Hp: 600
+        SkillDmg: 200
         MaxMana: 100
         AtkSpeed: 1
-        AtkRange: 2
-        MoveSpeed: 2
+        AtkRange: 5
+        MoveSpeed: 1
       axieProfile:
         key: plant-06
         body: body-bigyak
@@ -386,11 +401,12 @@ MonoBehaviour:
         RedTeamLevel: 1
         Species: Elf
         Class: Knight
-        Dmg: 25
-        Hp: 100
+        Dmg: 40
+        Hp: 550
+        SkillDmg: 140
         MaxMana: 100
         AtkSpeed: 1
-        AtkRange: 2
+        AtkRange: 1
         MoveSpeed: 2
       axieProfile:
         key: plant-08

@@ -5345,6 +5345,92 @@ MonoBehaviour:
   _root: {fileID: 1146010265}
   _cardHolder: {fileID: 1753415213}
   _randomCards: []
+  _heroPools:
+  - round: 1
+    heroId:
+    - Axe
+    - Juggernaut
+    - Sladar
+    - Tide
+    - Visage
+    - Treant Protector
+  - round: 1
+    heroId:
+    - Axe
+    - Juggernaut
+    - Sladar
+    - Tide
+    - Visage
+    - Treant Protector
+  - round: 1
+    heroId:
+    - Axe
+    - Juggernaut
+    - Sladar
+    - Tide
+    - Visage
+    - Treant Protector
+    - Medusa
+    - Puck
+  - round: 1
+    heroId:
+    - Axe
+    - Juggernaut
+    - Sladar
+    - Tide
+    - Visage
+    - Treant Protector
+    - Medusa
+    - Puck
+  - round: 1
+    heroId:
+    - Axe
+    - Juggernaut
+    - Sladar
+    - Tide
+    - Visage
+    - Treant Protector
+    - Medusa
+    - Puck
+    - Ahri
+    - Renekton
+    - Viper
+    - Mirana
+  - round: 1
+    heroId:
+    - Axe
+    - Juggernaut
+    - Sladar
+    - Tide
+    - Visage
+    - Treant Protector
+    - Medusa
+    - Puck
+    - Ahri
+    - Renekton
+    - Viper
+    - Mirana
+    - Wyvern
+    - Groot
+    - Nasus
+  - round: 1
+    heroId:
+    - Axe
+    - Juggernaut
+    - Sladar
+    - Tide
+    - Visage
+    - Treant Protector
+    - Medusa
+    - Puck
+    - Ahri
+    - Renekton
+    - Viper
+    - Mirana
+    - Wyvern
+    - Groot
+    - Nasus
+    - Furion
   _heroPool:
   - Axe
   - Axe
