@@ -140,6 +140,15 @@ public class ApiRequest : MonoSingleton<ApiRequest>
         {
             await Task.Yield();
         }
+
+        if (request.responseCode == 0)
+        {
+            ResponseHandler responseHandler = new ResponseHandler();
+            responseHandler.success = false;
+            responseHandler.message = "Can not connect to the server";
+            return responseHandler;
+        }
+        
         var response = JsonConvert.DeserializeObject<ResponseHandler>(request.downloadHandler.text);
         return response;
     }

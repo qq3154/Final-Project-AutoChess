@@ -132,6 +132,7 @@ MonoBehaviour:
     classValue: 0
   teamID: 0
   _heroProfileConfigMap: {fileID: 11400000, guid: ec275fa2a9e3a794bb5489573e9ee6f9, type: 2}
+  _heroProfileConfigMapInMenu: {fileID: 11400000, guid: e45e7fd41f15ed041842062df8ba4688, type: 2}
   isMenu: 0
   menuId: 
 --- !u!114 &451860865575750009

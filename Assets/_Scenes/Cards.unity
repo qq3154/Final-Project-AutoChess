@@ -2669,7 +2669,7 @@ MonoBehaviour:
     m_Bottom: 0
   m_ChildAlignment: 0
   m_StartCorner: 0
-  m_StartAxis: 0
+  m_StartAxis: 1
   m_CellSize: {x: 315, y: 450}
   m_Spacing: {x: 50, y: 20}
   m_Constraint: 2
@@ -4020,6 +4020,7 @@ MonoBehaviour:
     classValue: 0
   teamID: 0
   _heroProfileConfigMap: {fileID: 11400000, guid: ec275fa2a9e3a794bb5489573e9ee6f9, type: 2}
+  _heroProfileConfigMapInMenu: {fileID: 11400000, guid: e45e7fd41f15ed041842062df8ba4688, type: 2}
   isMenu: 0
   menuId: A
 --- !u!222 &4995148339010490827
@@ -4405,7 +4406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _flipX: 1
-  _localScale: {x: 200, y: 200, z: 1}
+  _localScale: {x: 170, y: 170, z: 1}
   _position: {x: 0, y: 0, z: -1}
   _layerName: UI
   _layerOrder: 0

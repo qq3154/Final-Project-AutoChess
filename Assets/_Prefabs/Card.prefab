@@ -205,6 +205,7 @@ MonoBehaviour:
     classValue: 0
   teamID: 0
   _heroProfileConfigMap: {fileID: 11400000, guid: ec275fa2a9e3a794bb5489573e9ee6f9, type: 2}
+  _heroProfileConfigMapInMenu: {fileID: 11400000, guid: e45e7fd41f15ed041842062df8ba4688, type: 2}
   isMenu: 0
   menuId: 
 --- !u!114 &5806295089351465381
@@ -1868,6 +1869,7 @@ MonoBehaviour:
   _heroID: 0
   _btn: {fileID: -2493312902991649083}
   _axieSpawner: {fileID: 4972309968977657826}
+  _id: 0
 --- !u!1 &7134325288854147445
 GameObject:
   m_ObjectHideFlags: 0

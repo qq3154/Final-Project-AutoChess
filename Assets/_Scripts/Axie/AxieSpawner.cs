@@ -17,6 +17,7 @@ public class AxieSpawner : MonoBehaviour
     [SerializeField] private TeamID teamID;
     
     [SerializeField] private HeroProfileConfigMap _heroProfileConfigMap;
+    [SerializeField] private HeroProfileConfigMap _heroProfileConfigMapInMenu;
 
     [SerializeField] private bool isMenu = false;
     [SerializeField] private string menuId;
@@ -29,13 +30,19 @@ public class AxieSpawner : MonoBehaviour
     {
         if (isMenu)
         {
-            Init(heroID:menuId);
+            InitMenu(heroID:menuId);
         }
+    }
+    
+    public void InitMenu(string heroID)
+    {
+        axieProfile = _heroProfileConfigMapInMenu.GetValueFromKey(heroID).axieProfile;
+
+        axieFigureController.SetGenes(axieProfile, true, isMenu);
     }
 
     public void Init(string heroID)
     {
-        //axieId = _heroProfileConfigMap.GetValueFromKey(heroID).AxieId;
         axieProfile = _heroProfileConfigMap.GetValueFromKey(heroID).axieProfile;
 
         axieFigureController.SetGenes(axieProfile, true, isMenu);

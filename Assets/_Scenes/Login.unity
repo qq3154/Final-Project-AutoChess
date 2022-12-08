@@ -3577,7 +3577,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8074410213427083743, guid: c8bcbdde0954d73478b55d336d7baa08, type: 3}
       propertyPath: menuId
-      value: B
+      value: Menu
       objectReference: {fileID: 0}
     - target: {fileID: 8928035517929233448, guid: c8bcbdde0954d73478b55d336d7baa08, type: 3}
       propertyPath: m_IsActive

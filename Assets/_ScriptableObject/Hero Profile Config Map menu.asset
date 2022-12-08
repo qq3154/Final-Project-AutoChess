@@ -10,9 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 964b95f4fd24d0046b5402b52696f401, type: 3}
-  m_Name: Hero Profile Config Map main
+  m_Name: Hero Profile Config Map menu
   m_EditorClassIdentifier: 
   list:
+  - id: Menu
+    heroConfig:
+      HeroStats:
+        Name: Menu
+        Description: Menu
+        Rarity: 1
+        Level: 2
+        MaxLevel: 5
+        BlueTeamLevel: 0
+        RedTeamLevel: 0
+        Species: Elf
+        Class: Knight
+        Dmg: 25
+        Hp: 100
+        MaxMana: 100
+        AtkSpeed: 1
+        AtkRange: 2
+        MoveSpeed: 2
+      axieProfile:
+        key: beast-06
+        body: body-normal
+        classIdx: 2
+        classValue: 2
   - id: Axe
     heroConfig:
       HeroStats:
