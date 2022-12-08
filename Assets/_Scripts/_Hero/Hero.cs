@@ -60,6 +60,7 @@ public class Hero : MonoBehaviour
     {
         Level++;
         _heroHUD.SetLevel(Level);
+        _heroVFXController.PlayLevelUpVFX();
     }
 
 
