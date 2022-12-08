@@ -97,6 +97,28 @@ public class HeroPhotonEvent : MonoBehaviour, IOnEventCallback
             
             Debug.Log("on hero normal attack");
         }
+        
+        if (eventCode == PhotonEvent.OnHeroUseUltimate)
+        {
+            object[] data = (object[])photonEvent.CustomData;
+            int posX = (int)data[0];
+            int posY = (int)data[1];
+            int targetPosX = (int)data[2];
+            int targetPosY = (int)data[3];
+            float dmg = (float)data[4];
+            
+            var hero = BoardManager.instance.GetHeroByPosition(posX, posY);
+            var target =  BoardManager.instance.GetHeroByPosition(targetPosX, targetPosY);
+
+            if (hero == null) return;
+            if (target == null) return;
+
+            hero._axieFigureController.SetUseUltimate();
+            target.OnDamage(dmg);
+            
+            
+            Debug.Log("on hero use ultimate");
+        }
     }
     
     private void DoOnStartMove(Hero hero)

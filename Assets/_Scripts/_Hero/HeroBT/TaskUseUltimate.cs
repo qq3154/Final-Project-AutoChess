@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using BehaviorTree;
+using ExitGames.Client.Photon;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class TaskUseUltimate : Node
 {
@@ -20,7 +23,13 @@ public class TaskUseUltimate : Node
     {
         if (!isUseUltimate)
         {
+            
+            object[] content = new object[] {_hero.PosX, _hero.PosY, _hero.Target.PosX, _hero.Target.PosY, _hero.HeroStats.SkillDmg}; 
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };  
+            PhotonNetwork.RaiseEvent(PhotonEvent.OnHeroNormalAttack, content, raiseEventOptions, SendOptions.SendReliable);
+            
             _hero._axieFigureController.SetUseUltimate();
+            _hero.Target.OnDamage(_hero.HeroStats.SkillDmg);
             
             Debug.LogError("Use Ultimate " + _hero.name);
 
@@ -28,7 +37,7 @@ public class TaskUseUltimate : Node
         }
         
         _attackCounter += Time.deltaTime;
-        if (_attackCounter >= 2f )
+        if (_attackCounter >= 1f )
         {
             _attackCounter = 0;
             

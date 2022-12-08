@@ -164,6 +164,7 @@ public struct HeroStats
     
     [SerializeField] public float Dmg;
     [SerializeField] public float Hp;
+    [SerializeField] public float SkillDmg;
     [SerializeField] public int MaxMana;
     [SerializeField] public float AtkSpeed;
     [SerializeField] public int AtkRange;
