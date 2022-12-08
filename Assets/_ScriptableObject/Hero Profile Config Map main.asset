@@ -22,12 +22,12 @@ MonoBehaviour:
         Level: 5
         MaxLevel: 5
         CardId: 63919868baf972d7911ae0dd
-        BlueTeamLevel: 0
-        RedTeamLevel: 0
+        BlueTeamLevel: 5
+        RedTeamLevel: 3
         Species: Beast
         Class: Warrior
         Dmg: 25
-        Hp: 100
+        Hp: 500
         MaxMana: 100
         AtkSpeed: 1
         AtkRange: 2
@@ -46,12 +46,12 @@ MonoBehaviour:
         Level: 1
         MaxLevel: 5
         CardId: 63919868baf972d7911ae0f5
-        BlueTeamLevel: 0
-        RedTeamLevel: 0
+        BlueTeamLevel: 1
+        RedTeamLevel: 2
         Species: Beast
         Class: Hunter
-        Dmg: 25
-        Hp: 100
+        Dmg: 30
+        Hp: 300
         MaxMana: 100
         AtkSpeed: 1
         AtkRange: 2
@@ -70,8 +70,8 @@ MonoBehaviour:
         Level: 1
         MaxLevel: 5
         CardId: 63919868baf972d7911ae0df
-        BlueTeamLevel: 0
-        RedTeamLevel: 0
+        BlueTeamLevel: 1
+        RedTeamLevel: 1
         Species: Beast
         Class: Knight
         Dmg: 25
@@ -94,8 +94,8 @@ MonoBehaviour:
         Level: 2
         MaxLevel: 5
         CardId: 63919868baf972d7911ae0e1
-        BlueTeamLevel: 0
-        RedTeamLevel: 0
+        BlueTeamLevel: 2
+        RedTeamLevel: 1
         Species: Beast
         Class: Mage
         Dmg: 25
@@ -118,8 +118,8 @@ MonoBehaviour:
         Level: 2
         MaxLevel: 5
         CardId: 63919868baf972d7911ae0f1
-        BlueTeamLevel: 0
-        RedTeamLevel: 0
+        BlueTeamLevel: 2
+        RedTeamLevel: 1
         Species: Naga
         Class: Warrior
         Dmg: 25
@@ -142,8 +142,8 @@ MonoBehaviour:
         Level: 1
         MaxLevel: 5
         CardId: 63919868baf972d7911ae0e3
-        BlueTeamLevel: 0
-        RedTeamLevel: 0
+        BlueTeamLevel: 1
+        RedTeamLevel: 1
         Species: Naga
         Class: Knight
         Dmg: 25
@@ -166,8 +166,8 @@ MonoBehaviour:
         Level: 1
         MaxLevel: 5
         CardId: 63919868baf972d7911ae0f7
-        BlueTeamLevel: 0
-        RedTeamLevel: 0
+        BlueTeamLevel: 1
+        RedTeamLevel: 1
         Species: Naga
         Class: Warrior
         Dmg: 25
@@ -190,8 +190,8 @@ MonoBehaviour:
         Level: 1
         MaxLevel: 5
         CardId: 63919868baf972d7911ae0e5
-        BlueTeamLevel: 0
-        RedTeamLevel: 0
+        BlueTeamLevel: 1
+        RedTeamLevel: 1
         Species: Naga
         Class: Hunter
         Dmg: 25
@@ -214,8 +214,8 @@ MonoBehaviour:
         Level: 1
         MaxLevel: 5
         CardId: 63919868baf972d7911ae0e7
-        BlueTeamLevel: 0
-        RedTeamLevel: 0
+        BlueTeamLevel: 1
+        RedTeamLevel: 1
         Species: Dragon
         Class: Mage
         Dmg: 25
@@ -238,8 +238,8 @@ MonoBehaviour:
         Level: 1
         MaxLevel: 5
         CardId: 63919868baf972d7911ae0fb
-        BlueTeamLevel: 0
-        RedTeamLevel: 0
+        BlueTeamLevel: 1
+        RedTeamLevel: 1
         Species: Dragon
         Class: Knight
         Dmg: 25
@@ -262,8 +262,8 @@ MonoBehaviour:
         Level: 1
         MaxLevel: 5
         CardId: 63919868baf972d7911ae0e9
-        BlueTeamLevel: 0
-        RedTeamLevel: 0
+        BlueTeamLevel: 1
+        RedTeamLevel: 1
         Species: Dragon
         Class: Warrior
         Dmg: 25
@@ -286,8 +286,8 @@ MonoBehaviour:
         Level: 1
         MaxLevel: 5
         CardId: 63919868baf972d7911ae0eb
-        BlueTeamLevel: 0
-        RedTeamLevel: 0
+        BlueTeamLevel: 1
+        RedTeamLevel: 1
         Species: Dragon
         Class: Hunter
         Dmg: 25
@@ -310,8 +310,8 @@ MonoBehaviour:
         Level: 1
         MaxLevel: 5
         CardId: 63919868baf972d7911ae0ed
-        BlueTeamLevel: 0
-        RedTeamLevel: 0
+        BlueTeamLevel: 1
+        RedTeamLevel: 1
         Species: Elf
         Class: Warrior
         Dmg: 25
@@ -334,8 +334,8 @@ MonoBehaviour:
         Level: 1
         MaxLevel: 5
         CardId: 63919868baf972d7911ae0ef
-        BlueTeamLevel: 0
-        RedTeamLevel: 0
+        BlueTeamLevel: 1
+        RedTeamLevel: 1
         Species: Elf
         Class: Hunter
         Dmg: 25
@@ -358,8 +358,8 @@ MonoBehaviour:
         Level: 1
         MaxLevel: 5
         CardId: 63919868baf972d7911ae0f9
-        BlueTeamLevel: 0
-        RedTeamLevel: 0
+        BlueTeamLevel: 1
+        RedTeamLevel: 1
         Species: Elf
         Class: Mage
         Dmg: 25
@@ -382,8 +382,8 @@ MonoBehaviour:
         Level: 1
         MaxLevel: 5
         CardId: 63919868baf972d7911ae0f3
-        BlueTeamLevel: 0
-        RedTeamLevel: 0
+        BlueTeamLevel: 1
+        RedTeamLevel: 1
         Species: Elf
         Class: Knight
         Dmg: 25

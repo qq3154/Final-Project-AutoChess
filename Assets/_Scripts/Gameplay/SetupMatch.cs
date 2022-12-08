@@ -27,6 +27,9 @@ public class SetupMatch : MonoBehaviour, IOnEventCallback
 
     private void SetUpMatchInfomation()
     {
+        GameFlowManager.instance.round = 0;
+        GameFlowManager.instance.heroOnBoard = 0;
+        
         if (PhotonNetwork.IsMasterClient)
         {
             GameFlowManager.instance.playerTeam = TeamID.Blue;

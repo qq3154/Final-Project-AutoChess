@@ -65,6 +65,12 @@ public class ClearBoard : MonoBehaviour, IOnEventCallback
                 Destroy(BoardManager.instance.gameObject);
             }
 
+            if (PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.CurrentRoom.IsOpen = false;
+            }
+           
+
         }
     }
 

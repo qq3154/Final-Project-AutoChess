@@ -108,10 +108,11 @@ public class Hero : MonoBehaviour
                     object[] content = new object[] { TeamID.Red , BoardManager.instance._onBoardB.Count * GameFlowManager.instance.hpLosePerHero}; 
                     RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };  
                     PhotonNetwork.RaiseEvent(PhotonEvent.OnRoundEnd, content, raiseEventOptions, SendOptions.SendReliable);
+                    return;
                 }
-                else
                 if ( BoardManager.instance._onBoardB.Count == 0)
                 {
+                    BoardManager.instance._IsEnd = true;
                     Debug.Log("Blue win round");
                     foreach (var hero in BoardManager.instance.AllHeroes())
                     {

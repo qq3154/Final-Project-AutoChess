@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Game
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager2 : MonoBehaviour
     {
         [SerializeField] GameObject _startMsgGO;
         [SerializeField] Button _mixBtn;

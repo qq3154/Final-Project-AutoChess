@@ -3059,6 +3059,8 @@ MonoBehaviour:
   - D
   _maxCardToSelect: 5
   _cardPref: {fileID: 6869082755462373385, guid: 72e7f05132dfce241b46a1318b9803bf, type: 3}
+  _cooldown: {fileID: 0}
+  _openBtn: {fileID: 0}
 --- !u!1 &357165168
 GameObject:
   m_ObjectHideFlags: 0
@@ -3649,50 +3651,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1 &402177417
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 402177419}
-  - component: {fileID: 402177418}
-  m_Layer: 0
-  m_Name: StartGamePlay
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &402177418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 402177417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17b4c575b25c9804ab56a6b9375bf08a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &402177419
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 402177417}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 850703583}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &406688694
 GameObject:
   m_ObjectHideFlags: 0
@@ -7320,6 +7278,8 @@ MonoBehaviour:
   dontDestroyThisObject: 1
   _X: 8
   _Y: 8
+  _IsLock: 0
+  _IsEnd: 0
   _onBoardA: []
   _onBoardB: []
   _benchA: []
@@ -7342,6 +7302,7 @@ MonoBehaviour:
   - {fileID: 682011389}
   - {fileID: 1581746991}
   - {fileID: 1976849601}
+  _HeroRecords: []
   _currentSelectA: {fileID: 0}
   _currentSelectB: {fileID: 0}
   _fightBoardRoot: {fileID: 837900263}
@@ -7395,7 +7356,6 @@ Transform:
   m_Children:
   - {fileID: 325244166}
   - {fileID: 1880061792}
-  - {fileID: 402177419}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13476,9 +13436,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyThisObject: 1
+  isConnect: 0
   gameState: 1
   gamePlayState: 0
-  waveID: 0
+  round: 0
+  heroOnBoard: 0
+  maxHeroOnBoard: 5
+  selectPhaseTime: 15
+  hpLosePerHero: 10
   playerTeam: 0
 --- !u!4 &1880061792
 Transform:
