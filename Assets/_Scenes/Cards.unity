@@ -2664,7 +2664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding:
     m_Left: 20
-    m_Right: 0
+    m_Right: 20
     m_Top: 20
     m_Bottom: 0
   m_ChildAlignment: 0
@@ -3590,7 +3590,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!222 &1562825521925675559
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3774,7 +3774,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3190039601936930822
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4210,7 +4210,7 @@ MonoBehaviour:
   m_fontSize: 40
   m_fontSizeBase: 40
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -4297,7 +4297,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 10, y: -20}
-  m_SizeDelta: {x: 216.32, y: 50}
+  m_SizeDelta: {x: 233.05, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &5512873807830947390
 GameObject:
@@ -4435,7 +4435,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -131.99997, y: 0.000030517578}
-  m_SizeDelta: {x: 80, y: 35}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!1 &5899375068484044439
 GameObject:
@@ -4802,8 +4802,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: {fileID: 5225346701836258045}
   _level: {fileID: 6601202329460542545}
+  _stars:
+  - {fileID: 3171870049444784123}
+  - {fileID: 1453452071142489671}
+  - {fileID: 3260041981511682816}
+  - {fileID: 5512873807830947390}
+  - {fileID: 2614940166706744839}
   _axieSpawner: {fileID: 4972309969578361488}
   _upgradeBtn: {fileID: 1044498347815115388}
+  _cardId: 
+  _heroConfig:
+    HeroStats:
+      Name: 
+      Description: 
+      Rarity: 0
+      Level: 0
+      MaxLevel: 0
+      CardId: 
+      BlueTeamLevel: 0
+      RedTeamLevel: 0
+      Species: 
+      Class: 
+      Dmg: 0
+      Hp: 0
+      MaxMana: 0
+      AtkSpeed: 0
+      AtkRange: 0
+      MoveSpeed: 0
+    axieProfile:
+      key: 
+      body: 
+      classIdx: 0
+      classValue: 0
 --- !u!114 &6963179653856696449
 MonoBehaviour:
   m_ObjectHideFlags: 0

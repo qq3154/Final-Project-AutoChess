@@ -1988,6 +1988,7 @@ MonoBehaviour:
   fullname: {fileID: 425809248}
   email: {fileID: 1409481562}
   btn: {fileID: 235105746}
+  _heroProfileConfigMap: {fileID: 11400000, guid: ec275fa2a9e3a794bb5489573e9ee6f9, type: 2}
 --- !u!1 &309726494
 GameObject:
   m_ObjectHideFlags: 0

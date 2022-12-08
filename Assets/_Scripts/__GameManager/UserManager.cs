@@ -17,10 +17,10 @@ public class UserManager : MonoSingleton<UserManager>
 
     public void GetUserInfomation()
     {
-        SendLoginRequest();
+        SendGetUserProfile();
     }
 
-    private async void SendLoginRequest()
+    private async void SendGetUserProfile()
     {
         var response = await ApiRequest.instance.SendGetUserProfileRequest();
         

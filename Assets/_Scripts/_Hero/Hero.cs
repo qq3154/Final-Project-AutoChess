@@ -152,6 +152,8 @@ public struct HeroStats
     [SerializeField] public int Rarity;
     [SerializeField] public int Level;
     [SerializeField] public int MaxLevel;
+    
+    [SerializeField] public string CardId;
     [SerializeField] public int BlueTeamLevel;
     [SerializeField] public int RedTeamLevel;
     

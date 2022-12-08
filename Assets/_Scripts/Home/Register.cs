@@ -17,6 +17,8 @@ public class Register : MonoBehaviour
     [SerializeField] private TMP_InputField email;
     [SerializeField] private Button btn;
 
+    [SerializeField] private HeroProfileConfigMap _heroProfileConfigMap;
+
     private string usernameStr;
     private string passwordStr;
     private string passwordConfirmStr;
@@ -91,10 +93,43 @@ public class Register : MonoBehaviour
         if (response.success)
         {
             Toast.instance.SetSuccess("Register successful!");
+            
+            //create cards
+            UserManager.instance.auth = response.accessToken;
+            
+            var configs = _heroProfileConfigMap;
+            foreach (var config in configs.list)
+            {
+                string name = config.heroConfig.HeroStats.Name;
+                string description = config.heroConfig.HeroStats.Description;
+                int level = 1;
+                int maxLevel = config.heroConfig.HeroStats.MaxLevel;
+
+                CreateCard(name, description, level, maxLevel);
+            }
         }
         else
         {
             Toast.instance.SetFail(response.message);
+        }
+    }
+    
+    public void CreateCard(string name, string description, int level, int maxLevel)
+    {
+        CreateCardRequest(name, description, level, maxLevel);
+    }
+    
+    private async void CreateCardRequest(string name, string description, int level, int maxLevel)
+    {
+        var response = await ApiRequest.instance.SendCreateCardRequest(name, description, level, maxLevel);
+        
+        if (response.success)
+        {
+            Debug.Log("Create cards successful!");
+        }
+        else
+        {
+            Debug.LogError("Get user profile fail");
         }
     }
 

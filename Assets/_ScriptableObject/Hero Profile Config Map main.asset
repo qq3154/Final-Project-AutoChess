@@ -19,8 +19,9 @@ MonoBehaviour:
         Name: Axe
         Description: Axe
         Rarity: 1
-        Level: 2
+        Level: 5
         MaxLevel: 5
+        CardId: 63919868baf972d7911ae0dd
         BlueTeamLevel: 0
         RedTeamLevel: 0
         Species: Beast
@@ -41,9 +42,10 @@ MonoBehaviour:
       HeroStats:
         Name: Juggernaut
         Description: Juggernaut
-        Rarity: 1
-        Level: 2
+        Rarity: 2
+        Level: 1
         MaxLevel: 5
+        CardId: 63919868baf972d7911ae0f5
         BlueTeamLevel: 0
         RedTeamLevel: 0
         Species: Beast
@@ -65,8 +67,9 @@ MonoBehaviour:
         Name: Nasus
         Description: Nasus
         Rarity: 1
-        Level: 2
+        Level: 1
         MaxLevel: 5
+        CardId: 63919868baf972d7911ae0df
         BlueTeamLevel: 0
         RedTeamLevel: 0
         Species: Beast
@@ -87,9 +90,10 @@ MonoBehaviour:
       HeroStats:
         Name: Ahri
         Description: Ahri
-        Rarity: 1
+        Rarity: 3
         Level: 2
         MaxLevel: 5
+        CardId: 63919868baf972d7911ae0e1
         BlueTeamLevel: 0
         RedTeamLevel: 0
         Species: Beast
@@ -113,6 +117,7 @@ MonoBehaviour:
         Rarity: 1
         Level: 2
         MaxLevel: 5
+        CardId: 63919868baf972d7911ae0f1
         BlueTeamLevel: 0
         RedTeamLevel: 0
         Species: Naga
@@ -134,8 +139,9 @@ MonoBehaviour:
         Name: Sladar
         Description: Sladar
         Rarity: 1
-        Level: 2
+        Level: 1
         MaxLevel: 5
+        CardId: 63919868baf972d7911ae0e3
         BlueTeamLevel: 0
         RedTeamLevel: 0
         Species: Naga
@@ -156,9 +162,10 @@ MonoBehaviour:
       HeroStats:
         Name: Tide
         Description: Tide
-        Rarity: 1
-        Level: 2
+        Rarity: 2
+        Level: 1
         MaxLevel: 5
+        CardId: 63919868baf972d7911ae0f7
         BlueTeamLevel: 0
         RedTeamLevel: 0
         Species: Naga
@@ -179,9 +186,10 @@ MonoBehaviour:
       HeroStats:
         Name: Medusa
         Description: Medusa
-        Rarity: 1
-        Level: 2
+        Rarity: 4
+        Level: 1
         MaxLevel: 5
+        CardId: 63919868baf972d7911ae0e5
         BlueTeamLevel: 0
         RedTeamLevel: 0
         Species: Naga
@@ -202,9 +210,10 @@ MonoBehaviour:
       HeroStats:
         Name: Puck
         Description: Puck
-        Rarity: 1
-        Level: 2
+        Rarity: 2
+        Level: 1
         MaxLevel: 5
+        CardId: 63919868baf972d7911ae0e7
         BlueTeamLevel: 0
         RedTeamLevel: 0
         Species: Dragon
@@ -226,8 +235,9 @@ MonoBehaviour:
         Name: Visage
         Description: Visage
         Rarity: 1
-        Level: 2
+        Level: 1
         MaxLevel: 5
+        CardId: 63919868baf972d7911ae0fb
         BlueTeamLevel: 0
         RedTeamLevel: 0
         Species: Dragon
@@ -248,9 +258,10 @@ MonoBehaviour:
       HeroStats:
         Name: Viper
         Description: Viper
-        Rarity: 1
-        Level: 2
+        Rarity: 3
+        Level: 1
         MaxLevel: 5
+        CardId: 63919868baf972d7911ae0e9
         BlueTeamLevel: 0
         RedTeamLevel: 0
         Species: Dragon
@@ -271,9 +282,10 @@ MonoBehaviour:
       HeroStats:
         Name: Wyvern
         Description: Wyvern
-        Rarity: 1
-        Level: 2
+        Rarity: 4
+        Level: 1
         MaxLevel: 5
+        CardId: 63919868baf972d7911ae0eb
         BlueTeamLevel: 0
         RedTeamLevel: 0
         Species: Dragon
@@ -295,8 +307,9 @@ MonoBehaviour:
         Name: Treant Protector
         Description: Treant Protector
         Rarity: 1
-        Level: 2
+        Level: 1
         MaxLevel: 5
+        CardId: 63919868baf972d7911ae0ed
         BlueTeamLevel: 0
         RedTeamLevel: 0
         Species: Elf
@@ -317,9 +330,10 @@ MonoBehaviour:
       HeroStats:
         Name: Mirana
         Description: Mirana
-        Rarity: 1
-        Level: 2
+        Rarity: 2
+        Level: 1
         MaxLevel: 5
+        CardId: 63919868baf972d7911ae0ef
         BlueTeamLevel: 0
         RedTeamLevel: 0
         Species: Elf
@@ -340,9 +354,10 @@ MonoBehaviour:
       HeroStats:
         Name: Furion
         Description: Furion
-        Rarity: 1
-        Level: 2
+        Rarity: 5
+        Level: 1
         MaxLevel: 5
+        CardId: 63919868baf972d7911ae0f9
         BlueTeamLevel: 0
         RedTeamLevel: 0
         Species: Elf
@@ -363,9 +378,10 @@ MonoBehaviour:
       HeroStats:
         Name: Groot
         Description: Groot
-        Rarity: 1
-        Level: 2
+        Rarity: 3
+        Level: 1
         MaxLevel: 5
+        CardId: 63919868baf972d7911ae0f3
         BlueTeamLevel: 0
         RedTeamLevel: 0
         Species: Elf

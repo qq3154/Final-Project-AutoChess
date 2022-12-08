@@ -112,6 +112,41 @@ public class ApiRequest : MonoSingleton<ApiRequest>
         return result;
     }
     
+    public async Task<ResponseHandler>  SendCreateCardRequest(string name, string description, int level, int maxLevel)
+    {
+        string url = baseUrl + "/api/card/create";
+        ParamRequest param = new ParamRequest();
+        param.name = name;
+        param.description = description;
+        param.level = level;
+        param.maxlevel = maxLevel;
+        string json = JsonConvert.SerializeObject(param);
+        
+        var result = await SendRequestAsync(url, json, UnityWebRequest.kHttpVerbPOST, true );
+        return result;
+    }
+    
+    public async Task<ResponseHandler>  SendGetCardsRequest()
+    {
+        string url = baseUrl + "/api/card/";
+        
+        var result = await SendRequestAsync(url, null, UnityWebRequest.kHttpVerbGET, true );
+        return result;
+    }
+    
+    public async Task<ResponseHandler> SendUpgradeCardRequest(string id, int cost)
+    {
+        string url = baseUrl + "/api/card/levelup/";
+        
+        ParamRequest param = new ParamRequest();
+        param.id = id;
+        param.cost = cost;
+        string json = JsonConvert.SerializeObject(param);
+        
+        var result = await SendRequestAsync(url, json, UnityWebRequest.kHttpVerbPUT, true );
+        return result;
+    }
+    
     private async Task<ResponseHandler> SendRequestAsync(string url, string param, string requestType, bool isAuthentication )
     {
 
@@ -165,6 +200,12 @@ public class ApiRequest : MonoSingleton<ApiRequest>
         public int round;
         public string winner;
         public string loser;
+        public string name;
+        public string description;
+        public int level;
+        public int maxlevel;
+        public string id;
+        public int cost;
     }
     public struct ResponseHandler
     {
@@ -172,7 +213,8 @@ public class ApiRequest : MonoSingleton<ApiRequest>
         public string message;
         public string accessToken;
         public UserResponseHandler user;
-        public List<MatchesResponseHandler> matches;
+        public List<MatchResponseHandler> matches;
+        public List<CardResponseHandler> cards;
     }
     
     public struct UserResponseHandler
@@ -185,7 +227,7 @@ public class ApiRequest : MonoSingleton<ApiRequest>
         public int gold;
     }
     
-    public struct MatchesResponseHandler
+    public struct MatchResponseHandler
     {
         public string _id;
         public UserResponseHandler winner;
@@ -193,7 +235,16 @@ public class ApiRequest : MonoSingleton<ApiRequest>
         public int round;
         public string createAt;
     }
-    
+
+    public struct CardResponseHandler
+    {
+        public string _id;
+        public string name;
+        public string description;
+        public int level;
+        public int maxlevel;
+        public UserResponseHandler user;
+    }
     
 }
 
