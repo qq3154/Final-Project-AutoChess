@@ -29,6 +29,7 @@ public class Card : MonoBehaviour, IOnEventCallback
     [SerializeField] private TMP_Text _specieTxt;
     [SerializeField] private Image _classIcon;
     [SerializeField] private TMP_Text _classTxt;
+    [SerializeField] private Image _darkBG;
     
     [Header("Ref")]
     [SerializeField] private HeroProfileConfigMap _heroProfileConfigMap;
@@ -97,6 +98,7 @@ public class Card : MonoBehaviour, IOnEventCallback
     public void SetInteractable(bool isInteractable)
     {
         _btn.interactable = false;
+        _darkBG.gameObject.SetActive(true);
     }
 
     public void OnEvent(EventData photonEvent)
