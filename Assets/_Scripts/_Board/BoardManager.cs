@@ -74,6 +74,41 @@ public class BoardManager : MonoSingleton<BoardManager>, IOnEventCallback
     #endregion
 
     #region Board function
+
+    public void CalculateHeroStat()
+    {
+        foreach (var hero in AllHeroes())
+        {
+            TeamID teamID = hero.TeamID;
+            int cardLevel = (teamID == TeamID.Blue) ? hero.HeroStats.BlueTeamLevel : hero.HeroStats.RedTeamLevel;
+
+            //card bonus
+            hero.HeroStats.Hp = hero.HeroStats.Hp + (cardLevel - 1) * 10;
+            hero.HeroStats.Dmg = hero.HeroStats.Dmg + (cardLevel - 1) * 2;
+            hero.HeroStats.SkillDmg = hero.HeroStats.SkillDmg + (cardLevel - 1) * 3;
+
+            //level bonus
+            if (hero.Level == 2)
+            {
+                hero.HeroStats.Hp = hero.HeroStats.Hp * 1.8f;
+                hero.HeroStats.Dmg = hero.HeroStats.Dmg * 1.8f;
+                hero.HeroStats.SkillDmg = hero.HeroStats.SkillDmg * 1.5f;
+            }
+            
+            if (hero.Level == 3)
+            {
+                hero.HeroStats.Hp = hero.HeroStats.Hp * 2.5f;
+                hero.HeroStats.Dmg = hero.HeroStats.Dmg * 2.5f;
+                hero.HeroStats.SkillDmg = hero.HeroStats.SkillDmg * 2f;
+            }
+            
+            
+            //set init HUD
+            hero._heroHUD.SetSliderInitValue( hero.HeroStats.Hp , hero.HeroStats.MaxMana);
+        }
+    }
+    
+    
     public void StartFight()
     {
         _IsEnd = false;

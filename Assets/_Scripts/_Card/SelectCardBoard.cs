@@ -161,6 +161,8 @@ public class SelectCardBoard : MonoBehaviour, IOnEventCallback
         
         BoardManager.instance.SaveHeroRecords();
         BoardManager.instance._IsLock = true;
+        
+        BoardManager.instance.CalculateHeroStat();
 
         if (PhotonNetwork.IsMasterClient)
         {

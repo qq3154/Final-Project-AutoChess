@@ -50,6 +50,7 @@ public class Hero : MonoBehaviour
         IsFaceRight = teamID == TeamID.Blue; 
         _axieSpawner.Init(this);
         _heroHUD.SetLevel(Level);
+        _heroHUD.SetSliderBar(teamID);
 
         var config = _heroProfileConfigMap.GetValueFromKey(heroID);
 
@@ -73,6 +74,10 @@ public class Hero : MonoBehaviour
         }
 
         CurrentMana += 10;
+        Debug.LogWarning(HeroStats.Hp);
+        _heroHUD.SetHpValue(HeroStats.Hp);
+        _heroHUD.SetManaValue(CurrentMana);
+        
     }
     
     private void Dead()
