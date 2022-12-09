@@ -739,6 +739,7 @@ GameObject:
   - component: {fileID: 776126609}
   - component: {fileID: 776126608}
   - component: {fileID: 776126612}
+  - component: {fileID: 776126613}
   m_Layer: 0
   m_Name: Button_Back
   m_TagString: Untagged
@@ -888,6 +889,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa058cbc20af01444919d0c84b9ffa74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &776126613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776126606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6d34e67590a51a479d93ccc8fdfbc22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioClip: {fileID: 8300000, guid: aec844c77b542a140bb9a3e65f080122, type: 3}
+  _btn: {fileID: 776126609}
 --- !u!1 &808966948
 GameObject:
   m_ObjectHideFlags: 0
@@ -3393,6 +3408,7 @@ GameObject:
   - component: {fileID: 6298994794147211090}
   - component: {fileID: 1044498347815115388}
   - component: {fileID: 3606133116427780863}
+  - component: {fileID: 7345902309326399167}
   m_Layer: 0
   m_Name: UpgradeBtn
   m_TagString: Untagged
@@ -4825,6 +4841,7 @@ MonoBehaviour:
       Class: 
       Dmg: 0
       Hp: 0
+      SkillDmg: 0
       MaxMana: 0
       AtkSpeed: 0
       AtkRange: 0
@@ -4941,6 +4958,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 344426730149720589}
   m_CullTransparentMesh: 0
+--- !u!114 &7345902309326399167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344426730149720589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6d34e67590a51a479d93ccc8fdfbc22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioClip: {fileID: 8300000, guid: aec844c77b542a140bb9a3e65f080122, type: 3}
+  _btn: {fileID: 1044498347815115388}
 --- !u!1 &7460853590006947817
 GameObject:
   m_ObjectHideFlags: 0
