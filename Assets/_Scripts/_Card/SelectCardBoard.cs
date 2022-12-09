@@ -156,12 +156,13 @@ public class SelectCardBoard : MonoBehaviour, IOnEventCallback
         _openBtn.gameObject.SetActive(false);
         _cooldown.SetText("Fight!");
         BoardManager.instance._IsLock = true;
-        yield return new WaitForSeconds(3); 
+        yield return new WaitForSeconds(2); 
         _cooldown.SetText("");
         _cooldown.gameObject.SetActive(false);
         
         BoardManager.instance.SaveHeroRecords();
         
+        yield return new WaitForSeconds(2); 
         
         BoardManager.instance.CalculateHeroStat();
 

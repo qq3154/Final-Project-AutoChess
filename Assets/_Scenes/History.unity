@@ -660,7 +660,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 345}
+  m_AnchoredPosition: {x: 0, y: 748}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &321135692
@@ -1002,7 +1002,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1080, y: 1920}
+  m_ReferenceResolution: {x: 1080, y: 2400}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
@@ -2948,8 +2948,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 67.20001}
-  m_SizeDelta: {x: -7.3599854, y: -360.31995}
+  m_AnchoredPosition: {x: 0, y: -29}
+  m_SizeDelta: {x: -7.4, y: -168}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &880326568
 MonoBehaviour:
@@ -3957,7 +3957,7 @@ GameObject:
   - component: {fileID: 1229237131}
   - component: {fileID: 1229237130}
   m_Layer: 5
-  m_Name: Scroll View
+  m_Name: t
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3981,8 +3981,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00068665, y: -295.53003}
-  m_SizeDelta: {x: 1035.4, y: 968.62}
+  m_AnchoredPosition: {x: 0.00068665, y: -235.2}
+  m_SizeDelta: {x: 1035.4, y: 1670}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1229237130
 MonoBehaviour:
@@ -6452,7 +6452,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -460, y: -880}
+  m_AnchoredPosition: {x: -460, y: -880.0001}
   m_SizeDelta: {x: 105, y: 105}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1795791264
