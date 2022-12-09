@@ -74,7 +74,7 @@ public class Hero : MonoBehaviour
         }
 
         CurrentMana += 10;
-        Debug.LogWarning(HeroStats.Hp);
+        
         _heroHUD.SetHpValue(HeroStats.Hp);
         _heroHUD.SetManaValue(CurrentMana);
         

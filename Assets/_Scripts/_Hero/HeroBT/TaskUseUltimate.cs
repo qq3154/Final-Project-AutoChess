@@ -31,7 +31,7 @@ public class TaskUseUltimate : Node
             _hero._axieFigureController.SetUseUltimate();
             _hero.Target.OnDamage(_hero.HeroStats.SkillDmg);
             
-            Debug.LogError("Use Ultimate " + _hero.name);
+            Debug.LogWarning("Use Ultimate " + _hero.name);
 
             isUseUltimate = true;
         }

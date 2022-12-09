@@ -11,8 +11,14 @@ using Observer;
 
 public class ApiRequest : MonoSingleton<ApiRequest>
 {
+    //Heroku but it down
     //[SerializeField] private string baseUrl = "https://axie-tactic-back-end.herokuapp.com";
-    [SerializeField] private string baseUrl = "http://localhost:5000";
+    
+    //Vercel hope it will not down
+    [SerializeField] private string baseUrl = "https://axie-tactic-back-izul2gjs7-qq3154.vercel.app";
+    
+    //Local 
+    //[SerializeField] private string baseUrl = "http://localhost:5000";
 
     public async Task<ResponseHandler> SendLoginRequest(string username, string password)
     {
