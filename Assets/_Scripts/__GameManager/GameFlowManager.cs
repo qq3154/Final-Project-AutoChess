@@ -12,7 +12,7 @@ public class GameFlowManager : MonoSingleton<GameFlowManager>
     public int round;
     public int heroOnBoard;
     public int maxHeroOnBoard = 5;
-    public int selectPhaseTime = 15;
+    public int selectPhaseTime = 30;
     public int hpLosePerHero = 10;
 
     public TeamID playerTeam;
