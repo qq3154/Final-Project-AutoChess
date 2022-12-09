@@ -26,7 +26,7 @@ public class TaskUseUltimate : Node
             
             object[] content = new object[] {_hero.PosX, _hero.PosY, _hero.Target.PosX, _hero.Target.PosY, _hero.HeroStats.SkillDmg}; 
             RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };  
-            PhotonNetwork.RaiseEvent(PhotonEvent.OnHeroNormalAttack, content, raiseEventOptions, SendOptions.SendReliable);
+            PhotonNetwork.RaiseEvent(PhotonEvent.OnHeroUseUltimate, content, raiseEventOptions, SendOptions.SendReliable);
             
             _hero._axieFigureController.SetUseUltimate();
             _hero.Target.OnDamage(_hero.HeroStats.SkillDmg);

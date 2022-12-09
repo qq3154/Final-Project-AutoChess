@@ -13,7 +13,7 @@ public class Resign : MonoBehaviour
             
       string winner = (winTeamID == TeamID.Blue) ? MatchManager.instance.userBlue : MatchManager.instance.userRed;
       string loser = (winTeamID == TeamID.Red) ? MatchManager.instance.userBlue : MatchManager.instance.userRed;
-      SendMatchRequest(winner, loser,  MatchManager.instance.round);
+      SendMatchRequest(winner, loser,  GameFlowManager.instance.round);
       GameFlowManager.instance.round = 0;
      
       object[] content = new object[] {winTeamID, GameFlowManager.instance.round};

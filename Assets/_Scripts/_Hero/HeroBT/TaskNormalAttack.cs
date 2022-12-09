@@ -23,7 +23,8 @@ public class TaskNormalAttack : Node
         if (!isAttack)
         {
             isAttack = true;
-            
+            _hero.CurrentMana += 5;
+            _hero._heroHUD.SetManaValue(_hero.CurrentMana);
             _hero._axieFigureController.SetAttack();
             
             //melee attack
@@ -41,7 +42,7 @@ public class TaskNormalAttack : Node
             }
             Debug.Log( _hero.name + " attack " + _hero.Target.name);
             
-            object[] content = new object[] {_hero.PosX, _hero.PosY, _hero.Target.PosX, _hero.Target.PosY}; 
+            object[] content = new object[] {_hero.PosX, _hero.PosY, _hero.Target.PosX, _hero.Target.PosY, _hero.HeroStats.Dmg}; 
             RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };  
             PhotonNetwork.RaiseEvent(PhotonEvent.OnHeroNormalAttack, content, raiseEventOptions, SendOptions.SendReliable);
         }

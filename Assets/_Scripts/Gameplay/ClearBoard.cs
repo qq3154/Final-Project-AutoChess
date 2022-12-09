@@ -169,7 +169,7 @@ public class ClearBoard : MonoBehaviour, IOnEventCallback
 
     private async void SendMatchRequest(string winner, string loser)
     {
-        var response = await ApiRequest.instance.SendCreateMatchRequest(winner, loser, MatchManager.instance.round);
+        var response = await ApiRequest.instance.SendCreateMatchRequest(winner, loser, GameFlowManager.instance.round);
         
         if (response.success)
         {

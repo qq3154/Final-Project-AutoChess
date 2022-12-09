@@ -72,13 +72,16 @@ public class HeroPhotonEvent : MonoBehaviour, IOnEventCallback
             int posY = (int)data[1];
             int targetPosX = (int)data[2];
             int targetPosY = (int)data[3];
+            float dmg = (float)data[4];
             
             var hero = BoardManager.instance.GetHeroByPosition(posX, posY);
             var target =  BoardManager.instance.GetHeroByPosition(targetPosX, targetPosY);
 
             if (hero == null) return;
             if (target == null) return;
-
+            
+            hero.CurrentMana += 5;
+            hero._heroHUD.SetManaValue(hero.CurrentMana);
             hero._axieFigureController.SetAttack();
             
             //melee attack
@@ -86,13 +89,13 @@ public class HeroPhotonEvent : MonoBehaviour, IOnEventCallback
             {
                 if (target != null)
                 {
-                    target.OnDamage(hero.HeroStats.Dmg);
+                    target.OnDamage(dmg);
                 }
             }
             else
             {
                 RangeAttackBullet bullet = GameObject.Instantiate(hero._rangeAttackBulletPref);
-                bullet.Init(hero, target, hero.HeroStats.Dmg);
+                bullet.Init(hero, target, dmg);
             }
             
             Debug.Log("on hero normal attack");

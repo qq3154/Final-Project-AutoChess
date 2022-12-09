@@ -101,6 +101,52 @@ public class BoardManager : MonoSingleton<BoardManager>, IOnEventCallback
                 hero.HeroStats.Dmg = hero.HeroStats.Dmg * 2.5f;
                 hero.HeroStats.SkillDmg = hero.HeroStats.SkillDmg * 2f;
             }
+
+            if (PlayerStrategies(teamID).ContainsKey(hero.HeroStats.Class))
+            {
+                var classCount = PlayerStrategies(teamID)[hero.HeroStats.Class];
+                switch (hero.HeroStats.Class)
+                {
+                    case "Warrior":
+                        hero.HeroStats.Hp += classCount * 50;
+                        break;
+                    case "Knight":
+                        hero.HeroStats.Hp += classCount * (hero.HeroStats.Hp / 20);
+                        break;
+                    case "Mage":
+                        hero.HeroStats.MaxMana -= classCount * 10;
+                        break;
+                    case "Hunter":
+                        hero.HeroStats.Dmg += classCount * 20;
+                        break;
+                    default:
+                        Debug.LogWarning("Not Found Class" + hero.HeroStats.Class);
+                        break;
+                }
+            } 
+            
+            if (PlayerStrategies(teamID).ContainsKey(hero.HeroStats.Species))
+            {
+                var speciesCount = PlayerStrategies(teamID)[hero.HeroStats.Species];
+                switch (hero.HeroStats.Species)
+                {
+                    case "Dragon":
+                        hero.HeroStats.Dmg += speciesCount * 25;
+                        break;
+                    case "Elf":
+                        hero.HeroStats.SkillDmg += speciesCount * 50;
+                        break;
+                    case "Beast":
+                        hero.HeroStats.AtkSpeed += speciesCount * 0.3f;
+                        break;
+                    case "Naga":
+                        hero.HeroStats.Hp += speciesCount * 70;
+                        break;
+                    default:
+                        Debug.LogWarning("Not Found Species" + hero.HeroStats.Species);
+                        break;
+                }
+            } 
             
             
             //set init HUD
@@ -577,7 +623,7 @@ public class BoardManager : MonoSingleton<BoardManager>, IOnEventCallback
         if (PlayerCurrentSelect() != null)
         {
             object[] content = new object[] {teamID, x, y, PlayerCurrentSelect().PosX, PlayerCurrentSelect().PosY}; 
-            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };  
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All, };  
             PhotonNetwork.RaiseEvent(PhotonEvent.OnMoveHeroToBoard, content, raiseEventOptions, SendOptions.SendReliable);
             //MoveHeroToBoard(teamID, PlayerCurrentSelect(), x, y);
         }
@@ -702,8 +748,17 @@ public class BoardManager : MonoSingleton<BoardManager>, IOnEventCallback
             int index = (int)data[1];
             int posX = (int)data[2];
             int posY = (int)data[3];
+
+            Hero hero  = GetHeroByPosition(posX, posY);
+            if (!hero)
+            {
+               //todo
+               //hanlde missing event
+               Debug.LogError("move hero to bench fail");
+               return;
+            }
             
-            MoveHeroToBench(teamId, GetHeroByPosition(posX, posY), index);
+            MoveHeroToBench(teamId, hero, index);
             
             Debug.Log("on move hero to bench");
         }
@@ -716,8 +771,17 @@ public class BoardManager : MonoSingleton<BoardManager>, IOnEventCallback
             int indexY = (int)data[2];
             int posX = (int)data[3];
             int posY = (int)data[4];
+
+            Hero hero  = GetHeroByPosition(posX, posY);
+            if (!hero)
+            {
+                //todo
+                //hanlde missing event
+                Debug.LogError("move hero to board fail");
+                return;
+            }
             
-            MoveHeroToBoard(teamId, GetHeroByPosition(posX, posY), indexX, indexY);
+            MoveHeroToBoard(teamId, hero, indexX, indexY);
             
             Debug.Log("on move hero to bench");
         }
