@@ -120,7 +120,7 @@ public class AxieFigureController : MonoBehaviour
                 _skeletonAnimation.state.SetAnimation(0, "activity/victory-pose-back-flip", false).TimeScale = 1;
                 break;
             case 2:
-                _skeletonAnimation.state.SetAnimation(0, "activity/entrance", false).TimeScale = 1;
+                _skeletonAnimation.state.SetAnimation(0, "attack/ranged/cast-multi", false).TimeScale = 1;
                 break;
             default:
                 return;

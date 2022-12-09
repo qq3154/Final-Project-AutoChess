@@ -18,8 +18,7 @@ public class HistoryMenuItem : MonoBehaviour
 
     public void InitData(bool isWin, string username, int round, string date)
     {
-        var myDate = date.Substring(0, date.Length-5);
-        myDate.Replace("T", " ");
+        string myDate = date.Substring(0, date.Length-5).Replace('T', ' ');
         
         _winIcon.SetActive(isWin);
         _loseIcon.SetActive(!isWin);
